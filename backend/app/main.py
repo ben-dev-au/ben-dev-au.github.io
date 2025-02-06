@@ -1,30 +1,50 @@
-import os
-from fastapi import FastAPI, Request
+from pathlib import Path
+from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse
 
-# from fastapi.staticfiles import StaticFiles
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.orm import Session
+from . import models, database
+
+models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
 
 # Get the absolute path to the directory containing main.py
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 # Define the templates directory relative to main.py
-# Since main.py is in backend/app/, and frontend/templates is in the project root,
-# the relative path is ../../frontend/templates
-templates_dir = os.path.abspath(os.path.join(BASE_DIR, "../../frontend/templates"))
+templates = Jinja2Templates(directory=str(PROJECT_ROOT / "frontend" / "templates"))
+
 
 # Initialize Jinja2Templates with the correct directory
-templates = Jinja2Templates(directory=templates_dir)
+app.mount(
+    "/static",
+    StaticFiles(directory=str(PROJECT_ROOT / "frontend" / "static")),
+    name="static",
+)
+
+
+def get_db():
+    db = database.SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request):
-    context = {"request": request}
-    return templates.TemplateResponse("index.html", context)
+async def index(request: Request, db: Session = Depends(get_db)):
+    projects = db.query(models.Project).all()
+
+    context = {"request": request, "projects": projects}
+    return templates.TemplateResponse("homepage/index.html", context)
 
 
-# @app.get("/test")
-# def test_route():
-#     return {"message": "Test route is working!"}
+@app.get("/index2", response_class=HTMLResponse)
+async def index2(request: Request, db: Session = Depends(get_db)):
+    projects = db.query(models.Project).all()
+
+    context = {"request": request, "projects": projects}
+    return templates.TemplateResponse("homepage/index2.html", context)

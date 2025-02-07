@@ -48,3 +48,12 @@ async def index2(request: Request, db: Session = Depends(get_db)):
 
     context = {"request": request, "projects": projects}
     return templates.TemplateResponse("homepage/index2.html", context)
+
+
+@app.get("/resume", response_class=HTMLResponse)  # for testing purposes
+async def read_resume(request: Request):
+    """
+    Renders the resume.html template, passing data to it.  Separate route.
+    """
+    context = {"request": request, "resume_title": "My Resume"}
+    return templates.TemplateResponse("resume/resume.html", context)

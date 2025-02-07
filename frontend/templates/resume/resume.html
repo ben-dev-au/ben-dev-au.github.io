@@ -1,0 +1,727 @@
+<style>
+    /* Global Styles */
+    #resume-section * {
+        vertical-align: top;
+        box-sizing: border-box;
+        background-color: #f2f2e9;
+        color: #24260f;
+        font-family: lato, sans-serif;
+        font-weight: 300;
+        line-height: 36px;
+        transition-duration: 0.5s;
+    }
+
+    #resume-section html,
+    #resume-section body {
+        margin: 0;
+        padding: 0;
+        width: auto;
+        height: 100%;
+    }
+
+    /* Top Section Background */
+    #resume-section .top {
+        height: 300px;
+        background-color: #24260f;
+    }
+
+    #resume-section .top-content {
+        width: 1027px;
+        height: 300px;
+        background-color: #24260f;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    /* Photo Section */
+    #resume-section .photo {
+        width: 200px;
+        height: 275px;
+        display: inline-block;
+        margin-top: 20px;
+        margin-left: 300px;
+        background-color: #24260f;
+    }
+
+    #resume-section .photo h1 {
+        text-align: center;
+        font-weight: 500;
+        font-size: 30px;
+        position: relative;
+        bottom: 15px;
+        background-color: #24260f;
+        color: #f2f2e9;
+        margin-top: 30px;
+    }
+
+    #resume-section img {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+    }
+
+    /* Contact Information Section */
+    #resume-section .info {
+        width: 450px;
+        height: 275px;
+        margin-top: 20px;
+        background-color: #24260f;
+    }
+
+    #resume-section .photo,
+    #resume-section .info {
+        display: inline-block;
+    }
+
+    #resume-section .title {
+        width: 350px;
+        height: 80px;
+        margin-left: 50px;
+        padding-top: 15px;
+        text-align: center;
+        font-size: 26px;
+        line-height: 80px;
+        border-bottom: solid 3px #90a955;
+        background-color: #24260f;
+        color: #f2f2e9;
+    }
+
+    #resume-section .contact {
+        display: inline-block;
+        margin-left: 50px;
+        margin-top: 20px;
+    }
+
+    #resume-section .url {
+        padding-left: 10px;
+        padding-top: 10px;
+        background-color: #24260f;
+        color: #f2f2e9;
+    }
+
+    #resume-section .url span {
+        line-height: 36px;
+        font-family: karla, sans-serif;
+        padding-left: 10px;
+        background-color: #24260f;
+        color: #f2f2e9;
+    }
+
+    /* Main Content Layout */
+    #resume-section .max-width {
+        width: 1027px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #resume-section .left,
+    #resume-section .right {
+        display: inline-block;
+        width: 49%;
+        height: 700px;
+    }
+
+    /* Experience Section */
+    #resume-section .con-title {
+        width: 450px;
+        height: 50px;
+        font-weight: 900;
+        font-size: 20px;
+        color: #90a955;
+        margin-left: 30px;
+        margin-top: 30px;
+        padding-top: 15px;
+        border-bottom: solid 1px #24260f;
+    }
+
+    #resume-section .ex-con-left {
+        display: inline-block;
+        width: 50px;
+        height: 250px;
+        margin-left: 30px;
+    }
+
+    #resume-section .ex-con-left .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background-color: #24260f;
+        margin-left: 20px;
+        margin-top: 30px;
+    }
+
+    #resume-section .ex-con-left .vertical-line {
+        width: 3px;
+        height: 170px;
+        border-radius: 10%;
+        background-color: #90a955;
+        margin-left: 24px;
+        margin-top: 5px;
+    }
+
+    #resume-section .ex-con-left .vertical-line-short {
+        width: 3px;
+        height: 100px;
+        border-radius: 10%;
+        background-color: #90a955;
+        margin-left: 24px;
+        margin-top: 5px;
+    }
+
+    #resume-section .ex-con-left .vertical-line-long {
+        width: 3px;
+        height: 270px;
+        border-radius: 10%;
+        background-color: #90a955;
+        margin-left: 24px;
+        margin-top: 5px;
+    }
+
+    #resume-section .ex-con-right {
+        display: inline-block;
+        width: 400px;
+        height: 250px;
+    }
+
+    #resume-section .ex-con-right h3 {
+        margin: 10px;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 20px;
+    }
+
+    #resume-section .ex-con-right h5 {
+        margin: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #90a955;
+    }
+
+    #resume-section .ex-con-right span {
+        font-size: 16px;
+        color: #24260f;
+        margin: 10px;
+    }
+
+    #resume-section .ex-con-right p {
+        margin: 10px 10px 0 10px;
+        line-height: 20px;
+        font-size: 16px;
+    }
+
+    #resume-section .ex-con-right br {
+        line-height: 26px;
+    }
+
+    /* Education Section */
+    #resume-section .ed-con-left {
+        display: inline-block;
+        width: 50px;
+        height: 100px;
+        margin-left: 30px;
+    }
+
+    #resume-section .ed-con-left .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background-color: #24260f;
+        margin-left: 20px;
+        margin-top: 30px;
+    }
+
+    #resume-section .ed-con-left .vertical-line-short {
+        width: 3px;
+        height: 50px;
+        border-radius: 10%;
+        background-color: #90a955;
+        margin-left: 24px;
+        margin-top: 5px;
+    }
+
+    #resume-section .ed-con-left .vertical-line {
+        width: 3px;
+        height: 170px;
+        border-radius: 10%;
+        background-color: #90a955;
+        margin-left: 24px;
+        margin-top: 5px;
+    }
+
+    #resume-section .ed-con-right {
+        display: inline-block;
+        width: 400px;
+        height: 100px;
+    }
+
+    #resume-section .ed-con-right h3 {
+        margin: 10px;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 20px;
+    }
+
+    #resume-section .ed-con-right h5 {
+        margin: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #90a955;
+    }
+
+    #resume-section .ed-con-right span {
+        font-size: 16px;
+        color: #24260f;
+        margin: 10px;
+    }
+
+    #resume-section .ed-con-right p {
+        margin: 10px 10px 0 10px;
+        line-height: 20px;
+        font-size: 16px;
+    }
+
+    #resume-section .ed-con-right br {
+        line-height: 26px;
+    }
+
+    /* Languages Section */
+    #resume-section .languages {
+        height: 250px;
+    }
+
+    #resume-section .la-title {
+        margin-left: 10px;
+    }
+
+    #resume-section .chinese {
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        border-radius: 100%;
+        overflow: hidden;
+        margin: 30px 15px 0 10px;
+        border: solid 5px #90a955;
+    }
+
+    #resume-section .chinese h3 {
+        text-align: center;
+        margin-top: 40px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #resume-section .chinese h4 {
+        text-align: center;
+        margin-top: -20px;
+        color: #90a955;
+    }
+
+    #resume-section .outer-jp {
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        background: #c1d7ae;
+        border-radius: 100%;
+        position: relative;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
+    #resume-section .sq1-jp {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        left: 75px;
+        background-color: #90a955;
+    }
+
+    #resume-section .sq2-jp {
+        width: 75px;
+        height: 75px;
+        position: absolute;
+        top: 75px;
+        background-color: #90a955;
+    }
+
+    #resume-section .sq3-jp {
+        width: 75px;
+        height: 75px;
+        background-color: #90a955;
+        transform-origin: bottom;
+        transform: skewX(36deg);
+    }
+
+    #resume-section .inner-jp {
+        width: 140px;
+        height: 140px;
+        position: absolute;
+        border-radius: 100%;
+        top: 5px;
+        left: 5px;
+        background-color: #f2f2e9;
+        overflow: hidden;
+    }
+
+    #resume-section .inner-jp h3 {
+        text-align: center;
+        margin-top: 40px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #resume-section .inner-jp h4 {
+        text-align: center;
+        margin-top: -20px;
+        color: #90a955;
+    }
+
+    #resume-section .outer-eng {
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        background: #c1d7ae;
+        border-radius: 100%;
+        position: relative;
+        overflow: hidden;
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    #resume-section .sq1-eng {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        left: 75px;
+        background-color: #90a955;
+    }
+
+    #resume-section .sq2-eng {
+        width: 75px;
+        height: 75px;
+        position: absolute;
+        top: 75px;
+        background-color: #90a955;
+    }
+
+    #resume-section .inner-eng {
+        width: 140px;
+        height: 140px;
+        position: absolute;
+        border-radius: 100%;
+        top: 5px;
+        left: 5px;
+        background-color: #f2f2e9;
+        overflow: hidden;
+    }
+
+    #resume-section .inner-eng h3 {
+        text-align: center;
+        margin-top: 40px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #resume-section .inner-eng h4 {
+        text-align: center;
+        margin-top: -20px;
+        color: #90a955;
+    }
+
+    /* Skills Section */
+    #resume-section .skills {
+        height: 220px;
+    }
+
+    #resume-section .sk-title {
+        margin-left: 10px;
+        margin-top: 0;
+    }
+
+    #resume-section .skill-con-left,
+    #resume-section .skill-con-right {
+        display: inline-block;
+        width: 240px;
+        height: 130px;
+        margin-top: 20px;
+    }
+
+    #resume-section .skill-bar span {
+        display: inline-block;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 110px;
+    }
+
+    #resume-section .skill-level {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    #resume-section .yes {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background-color: #90a955;
+        margin-top: 10px;
+        margin-right: 2px;
+    }
+
+    #resume-section .no {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background-color: #c1d7ae;
+        margin-top: 10px;
+        margin-right: 2px;
+    }
+
+    /* Portfolio Section */
+    #resume-section .portfolio {
+        height: 200px;
+    }
+
+    #resume-section .po-con-right,
+    #resume-section .po-con-middle,
+    #resume-section .po-con-left {
+        display: inline-block;
+        transition-duration: 0.5s;
+        width: 150px;
+        height: 160px;
+        margin-left: 10px;
+        padding-top: 10px;
+        opacity: 0.5;
+        position: relative;
+        top: 0;
+    }
+
+    #resume-section .po-con-right span,
+    #resume-section .po-con-middle span,
+    #resume-section .po-con-left span {
+        display: inline-block;
+        font-weight: bold;
+        width: 100px;
+        text-align: center;
+    }
+
+    #resume-section .po-con-right:hover,
+    #resume-section .po-con-middle:hover,
+    #resume-section .po-con-left:hover {
+        opacity: 1;
+    }
+
+    #resume-section .po-con-right:active,
+    #resume-section .po-con-middle:active,
+    #resume-section .po-con-left:active {
+        top: 10px;
+    }
+</style>
+
+<!-- Other parts of index.html -->
+
+<div id="resume-section">
+    <!-- Main Content Section -->
+    <div class="content">
+        <div class="max-width">
+            <!-- Left Column: Experience & Education -->
+            <div class="left">
+                <!-- Experience Section -->
+                <div class="experience">
+                    <div class="con-title ex-title">EXPERIENCE</div>
+                    <div class="ex-content">
+                        <div class="ex-con-left">
+                            <div class="dot"></div>
+                            <div class="vertical-line-long"></div>
+                        </div>
+                        <div class="ex-con-right">
+                            <h3>General Manager for Wine Retailer</h3>
+                            <h5>Adelaide<span>｜2020 ~ 2023</span></h5>
+                            <p>- Responsible for overhauling and rebuilding an insolvent wine business, successfully
+                                returning it to profitability.<br>
+                                - Developed ecommerce store using wordpress and custom css/javascript, critically
+                                increasing visibility, sales and profitability.<br>
+                                - More details and achievements best versed in person.
+                            </p>
+                        </div>
+                        <div class="ex-con-left">
+                            <div class="dot"></div>
+                            <div class="vertical-line"></div>
+                        </div>
+                        <div class="ex-con-right">
+                            <h3>3-Hat Sommelier</h3>
+                            <h5>All Around Australia & Overseas<span>|2007 ~ 2015</span></h5>
+                            <p>- 3 time winner of Australian Wine List of the Year<br>
+                                - Rated in the worlds top 100 wine lists multiple times
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Section -->
+                <div class="education">
+                    <div class="con-title ed-title">EDUCATION</div>
+                    <div class="ed-content">
+                        <div class="ed-con-left">
+                            <div class="dot"></div>
+                            <div class="vertical-line-short"></div>
+                        </div>
+                        <div class="ed-con-right">
+                            <h3>Bachelor of Software Engineering</h3>
+                            <h5>University of South Australia<span>|2024 ~ 2027</span></h5>
+                        </div>
+                        <div class="ed-con-left">
+                            <div class="dot"></div>
+                            <div class="vertical-line-short"></div>
+                        </div>
+                        <div class="ed-con-right">
+                            <h3>Bachelor of Viticulture & Oenology</h3>
+                            <h5>University of Adelaide<span>|2015 ~ 2017</span></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Languages, Skills & Portfolio -->
+            <div class="right">
+                <!-- Languages Section -->
+                <div class="languagues">
+                    <div class="con-title la-title">LANGUAGES</div>
+                    <div class="la-content">
+                        <div class="chinese">
+                            <h3>English</h3>
+                            <h4>native</h4>
+                        </div>
+                        <div class="outer-jp">
+                            <div class="sq1-jp"></div>
+                            <div class="sq2-jp"></div>
+                            <div class="sq3-jp"></div>
+                            <div class="inner-jp">
+                                <h3>JAPANESE</h3>
+                                <h4>JLPT N1</h4>
+                            </div>
+                        </div>
+                        <div class="outer-eng">
+                            <div class="sq1-eng"></div>
+                            <div class="sq2-eng"></div>
+                            <div class="inner-eng">
+                                <h3>ENGLISH</h3>
+                                <h4>TOEIC 830</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="skills">
+                    <div class="con-title sk-title">SKILLS</div>
+                    <div class="skill-content">
+                        <div class="skill-con-left">
+                            <div class="skill-bar"><span>Python</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="no"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar"><span>HTML/CSS</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="no"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar"><span>JavaScript</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="no"></div>
+                                    <div class="no"></div>
+                                    <div class="no"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar"><span>Bootstrap</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="no"></div>
+                                    <div class="no"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-con-right">
+                            <div class="skill-level"><span>Leadership</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="no"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar"><span>Bookkeeping</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="no"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar"><span>Team Work</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar"><span>Troubleshooting</span>
+                                <div class="skill-level">
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                    <div class="yes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Section -->
+                <div class="portfolio">
+                    <div class="con-title sk-title">PORTFOLIO</div>
+                    <div class="po-content">
+                        <div class="po-con-right">
+                            <a href="https://www.linkedin.com/in/ben-davidson-au" target="_blank">
+                                <i class="fa-brands fa-linkedin" style="font-size:100px;"></i>
+                            </a>
+                            <span>LINKEDIN</span>
+                        </div>
+                        <div class="po-con-middle">
+                            <a href="https://ben-dev.au" target="_blank">
+                                <i class="fa-brands fa-wordpress" style="font-size:100px;"></i>
+                            </a>
+                            <span>WEBSITE</span>
+                        </div>
+                        <div class="po-con-left">
+                            <a href="https://github.com/ben-dev-au" target="_blank">
+                                <i class="fa-brands fa-github" style="font-size:100px;"></i>
+                            </a>
+                            <span>GITHUB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

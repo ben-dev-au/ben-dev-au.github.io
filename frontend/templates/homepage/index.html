@@ -9,6 +9,8 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}"> -->
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+
 
     <style>
         body {
@@ -74,12 +76,7 @@
 
         /* Underline and contrast for the active/current page in unscrolled state */
         .custom-navbar .nav-link.active {
-            /* text-decoration: underline; */
             color: white !important;
-        }
-
-        /* Change underline on hover to a bottom border */
-        .custom-navbar .nav-link.active {
             text-decoration: none;
             border-bottom: 2px solid currentColor;
             /* text-decoration: none;
@@ -181,34 +178,323 @@
         .text-block:hover .custom-button-shadow {
             box-shadow: 4px 4px 0px 0px #fffafa;
         }
+
+        /* ===== Buttons Css ===== */
+        .contact-form .single-form .input-form .primary-btn {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow-2);
+        }
+
+        .contact-form .single-form .input-form .active.primary-btn,
+        .contact-form .single-form .input-form .primary-btn:hover,
+        .contact-form .single-form .input-form .primary-btn:focus {
+            background: var(--primary-dark);
+            color: var(--white);
+            box-shadow: var(--shadow-4);
+        }
+
+        .contact-form .single-form .input-form .deactive.primary-btn {
+            background: var(--gray-4);
+            color: var(--dark-3);
+            pointer-events: none;
+        }
+
+        /*===========================
+    contact-01 css
+===========================*/
+        .contact-area {
+            padding-top: 50px;
+            padding-bottom: 100px;
+        }
+
+        .contact-area .mt-15 {
+            margin-top: 15px;
+        }
+
+        .contact-area .section-title .title {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 55px;
+        }
+
+        @media (max-width: 767px) {
+            .contact-area .section-title .title {
+                font-size: 24px;
+                line-height: 35px;
+            }
+        }
+
+        .contact-form .single-form label {
+            font-size: 12px;
+            color: var(--dark-2);
+            line-height: 18px;
+            margin-left: 44px;
+        }
+
+        .contact-form .single-form .input-form {
+            position: relative;
+        }
+
+        .contact-form .single-form .input-form i {
+            font-size: 24px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--dark-3);
+        }
+
+        .contact-form .single-form .input-form textarea,
+        .contact-form .single-form .input-form input {
+            width: 100%;
+            height: 44px;
+            padding-left: 45px;
+            padding-right: 30px;
+            color: var(--dark-3);
+            font-size: 16px;
+            border: 0;
+            border-bottom: 1px solid var(--gray-4);
+            font-weight: 500;
+        }
+
+
+        .contact-form .single-form .input-form textarea::placeholder,
+        .contact-form .single-form .input-form input::placeholder {
+            opacity: 1;
+            color: var(--dark-3);
+        }
+
+        .contact-form .single-form .input-form textarea {
+            padding-top: 10px;
+        }
+
+        .form-input .help-block {
+            margin-top: 2px;
+        }
+
+        .form-input .help-block .list-unstyled li {
+            font-size: 12px;
+            line-height: 16px;
+            color: var(--error);
+        }
+
+        .form-input label {
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--dark-3);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .form-input .input-items {
+            position: relative;
+        }
+
+        .form-input .input-items input,
+        .form-input .input-items textarea {
+            width: 100%;
+            height: 44px;
+            border: 2px solid;
+            padding-left: 44px;
+            padding-right: 12px;
+            position: relative;
+            font-size: 16px;
+            background-color: transparent;
+        }
+
+        .form-input .input-items textarea {
+            padding-top: 8px;
+            height: 130px;
+            resize: none;
+        }
+
+        .form-input .input-items i {
+            position: absolute;
+            top: 11px;
+            left: 13px;
+            font-size: 20px;
+            z-index: 9;
+        }
+
+        .form-input .input-items.default input,
+        .form-input .input-items.default textarea {
+            border-color: var(--gray-4);
+            color: var(--dark-3);
+        }
+
+        .form-input .input-items.default input:focus,
+        .form-input .input-items.default textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .form-input .input-items.default input::placeholder,
+        .form-input .input-items.default textarea::placeholder {
+            color: var(--dark-3);
+            opacity: 1;
+        }
+
+        .form-input .input-items.default i {
+            color: var(--dark-3);
+        }
+
+        .form-input .input-items.active input,
+        .form-input .input-items.active textarea {
+            border-color: var(--primary-dark);
+            color: var(--black);
+        }
+
+        .form-input .input-items.active input::placeholder,
+        .form-input .input-items.active textarea::placeholder {
+            color: var(--black);
+            opacity: 1;
+        }
+
+        .form-input .input-items.active i {
+            color: var(--primary-dark);
+        }
+
+        .form-input .input-items.error input,
+        .form-input .input-items.error textarea {
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .form-input .input-items.error input::placeholder,
+        .form-input .input-items.error textarea::placeholder {
+            color: var(--error);
+            opacity: 1;
+        }
+
+        .form-input .input-items.error i {
+            color: var(--error);
+        }
+
+        .form-input .input-items.success input,
+        .form-input .input-items.success textarea {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .form-input .input-items.success input::placeholder,
+        .form-input .input-items.success textarea::placeholder {
+            color: var(--success);
+            opacity: 1;
+        }
+
+        .form-input .input-items.success i {
+            color: var(--success);
+        }
+
+        .form-input .input-items.disabled input,
+        .form-input .input-items.disabled textarea {
+            border-color: var(--dark-2);
+            color: var(--dark-3);
+            background: none;
+        }
+
+        .form-input .input-items.disabled input::placeholder,
+        .form-input .input-items.disabled textarea::placeholder {
+            color: var(--dark-3);
+            opacity: 1;
+        }
+
+        .form-input .input-items.disabled i {
+            color: var(--dark-3);
+        }
+
+        .form-style-four .form-input label {
+            padding-left: 44px;
+            margin-bottom: 0;
+        }
+
+        .form-style-four .form-input .input-items input,
+        .form-style-four .form-input .input-items textarea {
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+
+        .contact-info ul li .single-info {
+            position: relative;
+            margin-top: 19px;
+        }
+
+        .contact-info ul li .single-info .info-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .contact-info ul li .single-info .info-icon i {
+            color: var(--dark-3);
+            font-size: 18px;
+            line-height: 24px;
+        }
+
+        .contact-info ul li .single-info .info-content {
+            padding-left: 30px;
+        }
+
+        .contact-info ul li .single-info .info-content .text {
+            font-size: 16px;
+            line-height: 24px;
+            color: var(--dark-3);
+            font-weight: 500;
+        }
+
+        .contact-info .social li {
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        .contact-info .social li a {
+            font-size: 20px;
+            height: 40px;
+            width: 40px;
+            line-height: 38px;
+            border: 1px solid rgba(0, 0, 0, 0.096);
+            text-align: center;
+            border-radius: 5px;
+            color: var(--dark-3);
+            -webkit-transition: all 0.3s ease-out 0s;
+            -moz-transition: all 0.3s ease-out 0s;
+            -ms-transition: all 0.3s ease-out 0s;
+            -o-transition: all 0.3s ease-out 0s;
+            transition: all 0.3s ease-out 0s;
+        }
+
+        .contact-info .social li a:hover {
+            color: var(--white);
+            background-color: var(--primary);
+            border-color: transparent;
+        }
+
+        @media (max-width: 767.98px) {
+
+            /* Make the intro text box follow the image on mobile */
+            #intro .text-block {
+                position: static !important;
+                transform: none !important;
+                margin-top: 1rem;
+            }
+
+            /* When mobile navbar is open and unscrolled, apply a black background */
+            .custom-navbar:not(.scrolled) .navbar-collapse.show {
+                background-color: black;
+            }
+        }
+
+        /* Ensure the intro image never overflows its container */
+        #intro {
+            overflow: hidden;
+        }
     </style>
 </head>
-<style>
-    @media (max-width: 767.98px) {
-
-        /* Make the intro text box follow the image on mobile */
-        #intro .text-block {
-            position: static !important;
-            transform: none !important;
-            margin-top: 1rem;
-        }
-
-        /* When mobile navbar is open and unscrolled, apply a black background */
-        .custom-navbar:not(.scrolled) .navbar-collapse.show {
-            background-color: black;
-        }
-    }
-
-    /* Ensure the intro image never overflows its container */
-    #intro {
-        overflow: hidden;
-    }
-</style>
 
 
 <body class="container-fluid p-0">
 
-    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar" id="mainNav">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -216,15 +502,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav fs-4">
-                    <a class="nav-link active pe-4" aria-current="page" href="#">Home</a>
-                    <a class="nav-link pe-4" href="#">Experience</a>
-                    <a class="nav-link pe-4" href="#">Projects</a>
+                    <a class="nav-link pe-4" aria-current="page" href="#intro">Home</a>
+                    <a class="nav-link pe-4" href="#about-section">About</a>
+                    <a class="nav-link pe-4" href="#resume-section">Resume</a>
+                    <a class="nav-link pe-4" href="#career-history">Career</a>
+                    <a class="nav-link pe-4" href="#footer">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- <div class="mondrian-container"> -->
 
     <!-- Intro Section -->
     <section id="intro" class="col-12 bg-black vh-100 mb-0 d-flex align-items-center">
@@ -234,10 +520,37 @@
                     <img src="/static/images/somm_laptop_cellar.jpeg" alt="Sommelier on a laptop"
                         class="img-fluid rounded w-100" style="object-fit: cover; max-height: 80vh;">
                 </div>
-                <div class="col-md-3 text-white position-absolute custom-constainer-shadow text-block"
-                    style="top: 50%; right: 5%; transform: translateY(-50%);">
-                    <h2>Hi, I'm Ben.</h2>
-                    <p class="lead">A Software Engineering student based in Adelaide.</p>
+                <!-- Desktop version: positioned over the image -->
+                <div class="text-white position-absolute custom-constainer-shadow text-block d-none d-md-block" style="
+                    top: 50%;
+                    right: 5%;
+                    transform: translateY(-50%);
+                    padding: 1rem;
+                    max-width: 27vw;
+                    font-size: calc(0.8em + 0.5vw);
+                    ">
+                    <h2 style="font-size: calc(1.5em + 1vw);">Hi, I'm Ben.</h2>
+                    <p class="lead" style="font-size: calc(1em + 0.5vw);">
+                        A Software Engineering student based in Adelaide.
+                    </p>
+                    <p style="font-size: calc(0.3em + 0.5vw);">
+                        Previous Career: <br>
+                        3 Hat Sommelier | Business General Manager
+                    </p>
+                </div>
+
+                <!-- Mobile version: placed in its own row under the image -->
+                <div class="d-block d-md-none col-12 mt-3">
+                    <div class="text-white custom-constainer-shadow text-block p-3" style="font-size: 1rem;">
+                        <h2 style="font-size: 1.5rem;">Hi, I'm Ben.</h2>
+                        <p class="lead">
+                            A Software Engineering student based in Adelaide.
+                        </p>
+                        <p>
+                            Previous Career: <br>
+                            3 Hat Sommelier | Business General Manager
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -252,37 +565,54 @@
 
 
     <!-- Duplicate scroll button removed to prevent jump behavior -->
-    <section id="about-section" class="d-flex vh-100 align-items-center bg-white justify-content-center">
+    <section id="about-section" class="d-flex vh-100 align-items-center justify-content-center position-relative"
+        style="background-color: #f2f2e9;">
         <div class="container">
-            <div class="row m-0 d-flex align-items-center bg-white justify-content-center">
+            <div class="row m-0 d-flex align-items-center bg-transparent justify-content-center">
                 <div class="col-12 col-md-10">
                     <div class="text-white custom-constainer-shadow text-block mx-auto p-4"
                         style="background-color: #95C7F2; border-radius: 24px; box-shadow: 4px 4px 0px 0px #1a1a1a;"
                         onmouseover="this.style.boxShadow='10px 10px 0px 0px #1a1a1a'"
                         onmouseout="this.style.boxShadow='4px 4px 0px 0px #1a1a1a'">
                         <h2>A little about me</h2>
-                        <p class="lead">A Software Engineering student based in Adelaide.</p>
+                        <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla quaerat possimus
+                            quibusdam et aliquid recusandae.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <div class="position-relative">
-        <div class="position-absolute" style="bottom: 20px; left: 50%; transform: translateX(-50%);">
-            <a href="#career-history" class="scroll-button-light" id="scrollToCareer">
+
+        <div class="position-absolute" style="bottom: 60px; left: 50%; transform: translateX(-50%);">
+            <a href="#resume-section" class="scroll-button-light" id="scrollToResume">
                 &#x2193;
             </a>
         </div>
-    </div>
 
+    </section>
 
-    <!-- <p spellcheck="false">I've previously worked in thebusiness general manager, I'm passionate about
-    finding pragmatic, technology driven solutions to inefficiencies and obstructions in business
-    and life.</p> -->
+    <section id="resume-section" class="" style="background-color: #f2f2e9;">
+        <div class="container pt-5">
+            <div class="row m-0 p-0 d-flex min-vh-100 justify-content-center">
+                {% include 'resume/resume.html' %}
+            </div>
+
+            <div class="position-relative">
+                <div class="position-absolute" style="bottom: 60px; left: 50%; transform: translateX(-50%);">
+                    <a href="#career-history" class="scroll-button-light" id="scrollToCareer">
+                        &#x2193;
+                    </a>
+                </div>
+            </div>
+    </section>
+
+    <!-- <p spellcheck=" false">I've previously worked in thebusiness general manager, I'm passionate about
+                    finding pragmatic, technology driven solutions to inefficiencies and obstructions in business
+                    and life.</p> -->
 
     <!-- Duplicate scroll button removed to prevent jump behavior -->
     <section id="career-history" class="d-flex vh-100 align-items-center justify-content-center"
-        style="background-color: rgb(253, 233, 104);">
+        style="background-color: #f2f2e9;">
+        <!-- style="background-color: rgb(253, 233, 104);"> -->
         <div class="container">
             <div class="row m-0 d-flex align-items-center justify-content-center">
                 <div class="col-12 col-md-10">
@@ -291,13 +621,126 @@
                         onmouseover="this.style.boxShadow='10px 10px 0px 0px #1a1a1a'"
                         onmouseout="this.style.boxShadow='4px 4px 0px 0px #1a1a1a'">
                         <h2>Career History</h2>
-                        <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla quaerat possimus
+                        <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla
+                            quaerat possimus
                             quibusdam et aliquid recusandae.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-muted">© 2025 Ben Davidson</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="text-muted" href="mailto:example@example.com">
+                        <svg class="bi fa-envelope" width="24" height="24">
+                            <use xlink:href="#email"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://github.com/yourusername" target="_blank" rel="noopener">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#github"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="text-muted" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#linkedin"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div> -->
+
+    <!--====== CONTACT ONE PART START ======-->
+    <section id="footer" class="contact-area pt-5 pb-5" style="background-color: #f2f2e9;">
+        <div class="container">
+            <div class="row g-3 d-flex align-content-around"></div>
+            <!-- Changed parent column to span full width -->
+            <div class="col-12">
+                <div class="section-title mt-45">
+                    <h3 class="title">Get in touch</h3>
+                </div>
+                <div class="contact-form form-style-four mt-15">
+                    <form action="#">
+                        <div class="row d-flex justify-content-lg-evenly">
+                            <!-- Left Column: Basic Inputs -->
+                            <div class="col-md-5">
+                                <div class="form-input mt-15">
+                                    <label>Full Name</label>
+                                    <div class="input-items default">
+                                        <i class="lni lni-user"></i>
+                                        <input type="text" placeholder="" />
+                                    </div>
+                                </div>
+                                <div class="form-input mt-15">
+                                    <label>Email Address</label>
+                                    <div class="input-items default">
+                                        <i class="lni lni-envelope"></i>
+                                        <input type="text" placeholder="" />
+                                    </div>
+                                </div>
+                                <div class="form-input mt-15">
+                                    <label>Phone Number</label>
+                                    <div class="input-items default">
+                                        <i class="lni lni-phone"></i>
+                                        <input type="text" placeholder="" />
+                                    </div>
+                                </div>
+                                <div class="form-input mt-15">
+                                    <label>Subject</label>
+                                    <div class="input-items default">
+                                        <i class="lni lni-bubble"></i>
+                                        <input type="text" placeholder="Type here" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Right Column: Message and Submit -->
+                            <div class="col-md-5">
+                                <div class="form-input mt-15">
+                                    <label>Your Message</label>
+                                    <div class="input-items default">
+                                        <i class="lni lni-pencil-alt"></i>
+                                        <textarea placeholder="Type your message here"
+                                            style="border: 1px solid black; height: 100px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="single-form mt-15">
+                                    <div class="input-form rounded-buttons">
+                                        <button class="btn primary-btn rounded-full" type="submit">
+                                            SEND MESSAGE
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- row -->
+                    </form>
+                </div>
+                <!-- contact form -->
+            </div>
+        </div>
+        <!-- row -->
+        </div>
+        <!-- container -->
+    </section>
+    <!--====== CONTACT ONE PART ENDS ======-->
 
     <button type="button" class="scroll-button-light" id="scrollTopBtn"
         style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none;">
@@ -327,6 +770,14 @@
                 });
             }
 
+            // Scroll to Resume Section
+            const scrollToResumeBtn = document.getElementById("scrollToResume");
+            if (scrollToResumeBtn) {
+                scrollToResumeBtn.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    document.querySelector("#resume-section").scrollIntoView({ behavior: "smooth" });
+                });
+            }
             // Scroll to Career History Section
             const scrollToCareerBtn = document.getElementById("scrollToCareer");
             if (scrollToCareerBtn) {
@@ -381,7 +832,26 @@
                 }
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Update the navbar with links to all page sections
+            const navbarNav = document.querySelector('.custom-navbar .navbar-nav');
+            navbarNav.innerHTML = `
+                    <a class="nav-link pe-4" href="#intro">Home</a>
+                    <a class="nav-link pe-4" href="#about-section">About</a>
+                    <a class="nav-link pe-4" href="#resume-section">Resume</a>
+                    <a class="nav-link pe-4" href="#career-history">Career</a>
+                    <a class="nav-link pe-4" href="#footer">Contact</a>
+                `;
+
+            // Initialize Bootstrap 5 ScrollSpy on the body
+            new bootstrap.ScrollSpy(document.body, {
+                target: '.custom-navbar',
+                offset: 100
+            });
+        });
     </script>
+    <script src="https://kit.fontawesome.com/bee45db777.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

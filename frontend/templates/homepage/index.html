@@ -9,12 +9,12 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}"> -->
-    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+    <!-- <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet"> -->
     <!-- Updated Font Awesome CDN Link -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-yHscjsL0GFrIz0LqUgDRG6lH7Cb8LjCM7x5uQVvJ6r6/OYT1PWCfa77n7t6aer2d34hHm6ZG8Nov+T6tvsJvXw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <script src="https://kit.fontawesome.com/bee45db777.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script src="https://kit.fontawesome.com/bee45db777.js" crossorigin="anonymous"></script> -->
 
 
     <style>
@@ -487,7 +487,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             /* 50% opaque black overlay */
             z-index: 2;
             /* Positioned above the background image */
@@ -524,7 +524,7 @@
         .scroll-button-container {
             position: absolute;
             /* Absolute positioning within the section */
-            bottom: 20px;
+            bottom: 40px;
             /* 20px from the bottom */
             left: 50%;
             /* Center horizontally */
@@ -601,7 +601,7 @@
                     <a class="nav-link pe-4" aria-current="page" href="#intro">Home</a>
                     <a class="nav-link pe-4" href="#about-section">About</a>
                     <a class="nav-link pe-4" href="#resume-section">Resume</a>
-                    <a class="nav-link pe-4" href="#career-history">Career</a>
+                    <a class="nav-link pe-4" href="#projects">Projects</a>
                     <a class="nav-link pe-4" href="#footer">Contact</a>
                 </div>
             </div>
@@ -614,7 +614,7 @@
         <div class="overlay"></div>
 
         <!-- Content Wrapper -->
-        <div class="container content-wrapper p-0 position-relative">
+        <div class="container content-wrapper p-0">
             <div class="row align-items-center g-0">
                 <div class="col-md-4">
                     <!-- Text Box -->
@@ -628,15 +628,16 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Scroll Button -->
-            <div class="scroll-button-container">
-                <a href="#about-section" id="scrollToAbout" class="scroll-button-dark">
-                    <i class="fas fa-chevron-down"></i>
-                </a>
-            </div>
+        <!-- Scroll Button Positioned Absolutely Relative to the Section -->
+        <div class="scroll-button-container">
+            <a href="#about-section" id="scrollToAbout" class="scroll-button-dark" aria-label="Scroll to About Section">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </section>
+
 
     <!-- Duplicate scroll button removed to prevent jump behavior -->
     <section id="about-section" class="d-flex vh-100 align-items-center justify-content-center position-relative"
@@ -663,19 +664,21 @@
         </div>
     </section>
 
-    <section id="resume-section" class="" style="background-color: #f2f2e9;">
+    <section id="resume-section" class="position-relative" style="background-color: #f2f2e9;">
         <div class="container pt-5">
             <div class="row m-0 p-0 d-flex min-vh-100 justify-content-center">
                 {% include 'resume/resume.html' %}
             </div>
+        </div>
 
-            <div class="position-relative">
-                <div class="scroll-button-container">
-                    <a href="#career-history" class="scroll-button-light" id="scrollToCareer">
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                </div>
-            </div>
+        <!-- <div class="position-relative"> -->
+        <div class="scroll-button-container">
+            <a href="#projects" class="scroll-button-light" id="scrollToProjects"
+                aria-label="Scroll to Projects Section">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+        <!-- </div> -->
     </section>
 
     <!-- <p spellcheck=" false">I've previously worked in thebusiness general manager, I'm passionate about
@@ -683,7 +686,7 @@
                     and life.</p> -->
 
     <!-- Duplicate scroll button removed to prevent jump behavior -->
-    <section id="career-history" class="d-flex vh-100 align-items-center justify-content-center"
+    <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
         style="background-color: #f2f2e9;">
         <!-- style="background-color: rgb(253, 233, 104);"> -->
         <div class="container">
@@ -693,7 +696,7 @@
                         style="background-color: #95C7F2; border-radius: 24px; box-shadow: 4px 4px 0px 0px #1a1a1a;"
                         onmouseover="this.style.boxShadow='10px 10px 0px 0px #1a1a1a'"
                         onmouseout="this.style.boxShadow='4px 4px 0px 0px #1a1a1a'">
-                        <h2>Career History</h2>
+                        <h2>Projects</h2>
                         <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla
                             quaerat possimus
                             quibusdam et aliquid recusandae.</p>
@@ -702,14 +705,19 @@
             </div>
         </div>
         <!-- Scroll Button -->
+        <!-- <div class="position-relative"> -->
+
         <div class="scroll-button-container">
             <a href="#footer" class="scroll-button-light" id="scrollToFooter">
                 <i class="fas fa-chevron-down"></i>
             </a>
         </div>
-
+        <!-- </div> -->
+        <!-- <button class="scroll-button-light d-flex align-items-center justify-content-center" id="scrollToFooter"
+            style="position: relative; top: 40%; right:50%; z-index: 3; display: none; padding: 0;">
+            <i class="fas fa-chevron-down" style="font-size: 1.5rem;"></i>
+        </button> -->
     </section>
-
     <!-- Footer
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -821,18 +829,19 @@
         <!-- container -->
 
         <!-- Scroll Button -->
-        <div class="scroll-button-container">
-            <a href="#intro" class="scroll-button-light" id="scrollToIntro">
-                <i class="fas fa-chevron-up"></i>
-            </a>
-        </div>
+        <!-- <div class="scroll-button-container"> -->
+        <button class="scroll-button-light d-flex align-items-center justify-content-center" id="scrollTopBtn"
+            style="position: fixed; bottom: 40px; right: 40px; z-index: 1000; display: none; padding: 0;">
+            <i class="fas fa-chevron-up" style="font-size: 1.5rem;"></i>
+        </button>
+        <!-- </div> -->
     </section>
     <!--====== CONTACT ONE PART ENDS ======-->
 
-    <button type="button" class="scroll-button-light" id="scrollTopBtn"
+    <!-- <button type="button" class="scroll-button-light" id="scrollTopBtn"
         style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none;">
         &#x2191;
-    </button>
+    </button> -->
 
     <script>
         // // Intercept link clicks and smoothly scroll to the target section.
@@ -841,9 +850,9 @@
         //     document.querySelector("#about-section").scrollIntoView({ behavior: "smooth" });
         // });
         // // Intercept link clicks and smoothly scroll to the target section.
-        // document.getElementById("scrollToCareer").addEventListener("click", function (event) {
+        // document.getElementById("scrollToProjects").addEventListener("click", function (event) {
         //     event.preventDefault();
-        //     document.querySelector("#career-history").scrollIntoView({ behavior: "smooth" });
+        //     document.querySelector("#projects").scrollIntoView({ behavior: "smooth" });
         // });
 
 
@@ -866,11 +875,11 @@
                 });
             }
             // Scroll to Career History Section
-            const scrollToCareerBtn = document.getElementById("scrollToCareer");
-            if (scrollToCareerBtn) {
-                scrollToCareerBtn.addEventListener("click", function (event) {
+            const scrollToProjectsBtn = document.getElementById("scrollToProjects");
+            if (scrollToProjectsBtn) {
+                scrollToProjectsBtn.addEventListener("click", function (event) {
                     event.preventDefault();
-                    document.querySelector("#career-history").scrollIntoView({ behavior: "smooth" });
+                    document.querySelector("#projects").scrollIntoView({ behavior: "smooth" });
                 });
             }
 
@@ -944,7 +953,7 @@
                     <a class="nav-link pe-4" href="#intro">Home</a>
                     <a class="nav-link pe-4" href="#about-section">About</a>
                     <a class="nav-link pe-4" href="#resume-section">Resume</a>
-                    <a class="nav-link pe-4" href="#career-history">Career</a>
+                    <a class="nav-link pe-4" href="#projects">Career</a>
                     <a class="nav-link pe-4" href="#footer">Contact</a>
                 `;
 

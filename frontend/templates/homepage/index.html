@@ -7,6 +7,8 @@
     <title>Ben Davidson's Dev Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}"> -->
     <!-- <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet"> -->
@@ -77,21 +79,78 @@
 
         .custom-navbar .nav-link {
             color: white;
-            transition: color 0.3s;
+            display: inline-block;
+            align-items: center;
+            text-align: center;
+            white-space: nowrap;
+            padding: 0px 0px;
+            margin-top: 10px;
+            tab-size: 4;
+            border: 0 solid #000000;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition-duration: 0.3s;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Different background colors for each menu item using nth-child */
+        .custom-navbar .nav-link:hover:nth-child(1),
+        .custom-navbar .nav-link.active:nth-child(1) {
+            box-shadow: 10px 10px 0px 0px #df3c18;
+            /* reddish */
+        }
+
+        .custom-navbar .nav-link:hover:nth-child(2),
+        .custom-navbar .nav-link.active:nth-child(2) {
+            box-shadow: 10px 10px 0px 0px #33FF57;
+            /* greenish */
+        }
+
+        .custom-navbar .nav-link:hover:nth-child(3),
+        .custom-navbar .nav-link.active:nth-child(3) {
+            box-shadow: 10px 10px 0px 0px #33adff;
+            /* blueish */
+        }
+
+        .custom-navbar .nav-link:hover:nth-child(4),
+        .custom-navbar .nav-link.active:nth-child(4) {
+            box-shadow: 10px 10px 0px 0px #F1C40F;
+            /* yellowish */
+        }
+
+        .custom-navbar .nav-link:hover:nth-child(5),
+        .custom-navbar .nav-link.active:nth-child(5) {
+            box-shadow: 10px 10px 0px 0px #9B59B6;
+            /* purple-ish */
         }
 
         /* Underline and contrast for the active/current page in unscrolled state */
-        .custom-navbar .nav-link.active {
-            color: white !important;
+        /* .custom-navbar .nav-link.active {
+            color: rgb(225, 11, 11) !important;
             text-decoration: none;
             border-bottom: 2px solid currentColor;
-            /* text-decoration: none;
-            border-bottom: 2px solid currentColor; */
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+
+        } */
+
+        .custom-navbar .nav-link:hover {
+            background-color: #fff;
+            border: 2px solid #000000;
+            color: #000;
+        }
+
+        .custom-navbar .nav-link.active {
+            background-color: #fff;
+            border: 2px solid #000000;
+            color: #000;
         }
 
         /* Navbar scrolled state: white background with black text */
         .custom-navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.801);
+            background-color: #f2f2e9df;
+            padding-bottom: 20px;
         }
 
         .custom-navbar.scrolled .nav-link {
@@ -113,7 +172,7 @@
         }
 
         /* Overall text container shadow (used by the text block) */
-        .custom-constainer-shadow {
+        .intro-constainer-shadow {
             /* Bootstrap Classes */
             padding: 0.75rem 1.25rem;
             /*  py-3 px-5 */
@@ -131,7 +190,7 @@
             transition: box-shadow 0.15s ease-in-out;
         }
 
-        .custom-constainer-shadow:hover {
+        .intro-constainer-shadow:hover {
             /* A deeper shadow on hover for text blocks */
             box-shadow: 10px 10px 0px 0px #fffafa;
         }
@@ -464,7 +523,7 @@
             /* Establishes a new stacking context */
             background-image: url('/static/images/somm_laptop_cellar.jpeg');
             /* Your background image */
-            background-size: 60% auto;
+            background-size: 70% auto;
             /* Reduce the image size to 50% of the container's width */
             background-repeat: no-repeat;
             /* Prevent the image from repeating */
@@ -487,7 +546,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.1);
             /* 50% opaque black overlay */
             z-index: 2;
             /* Positioned above the background image */
@@ -584,11 +643,112 @@
         .scroll-button-dark i {
             pointer-events: none;
         }
+
+        /* Project Drop Shadow Classes */
+
+        .custom-constainer-shadow {
+            /* Bootstrap Classes */
+            padding: 0.75rem 1.25rem;
+            /* py-3 px-5 */
+            border: 1px solid #f7f8fa;
+            /* Light border */
+            background-color: #ffffff;
+            /* White background */
+            color: #000000;
+            /* Black text */
+            min-height: 200px;
+
+            /* Custom Shadow (Base Shadow) */
+            box-shadow: 4px 4px 0px 0px #e0e0e0;
+
+            /* Transition for smoothness */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .custom-constainer-shadow:hover {
+            /* Optional: Slight shadow on general hover */
+            box-shadow: 10px 10px 0px 0px #e0e0e0;
+        }
+
+        /* Project Drop Shadow Classes */
+
+        /* 1. Red Shadow */
+        .project-shadow-red {
+            box-shadow: 4px 4px 0px 0px rgb(255, 182, 193);
+            /* Base shadow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .project-shadow-red:hover {
+            box-shadow: 10px 10px 0px 0px rgb(255, 182, 193);
+            /* Red shadow on hover */
+        }
+
+        /* 2. Blue Shadow */
+        .project-shadow-blue {
+            box-shadow: 5px 5px 0px 0px rgb(173, 216, 230);
+            /* Base shadow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .project-shadow-blue:hover {
+            box-shadow: 10px 10px 0px 0px rgb(173, 216, 230);
+            /* Blue shadow on hover */
+        }
+
+        /* 3. Green Shadow */
+        .project-shadow-green {
+            box-shadow: 4px 4px 0px 0px rgb(144, 238, 144);
+            /* Base shadow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .project-shadow-green:hover {
+            box-shadow: 10px 10px 0px 0px rgb(144, 238, 144);
+            /* Green shadow on hover */
+        }
+
+        /* 4. Yellow Shadow */
+        .project-shadow-yellow {
+            box-shadow: 4px 4px 0px 0px rgb(255, 255, 224);
+            /* Base shadow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .project-shadow-yellow:hover {
+            box-shadow: 10px 10px 0px 0px rgb(255, 255, 224);
+            /* Yellow shadow on hover */
+        }
+
+        /* 5. Purple Shadow */
+        .project-shadow-purple {
+            box-shadow: 4px 4px 0px 0px rgb(216, 191, 216);
+            /* Base shadow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .project-shadow-purple:hover {
+            box-shadow: 10px 10px 0px 0px rgb(216, 191, 216);
+            /* Purple shadow on hover */
+        }
+
+        /* 6. Orange Shadow */
+        .project-shadow-orange {
+            box-shadow: 4px 4px 0px 0px rgb(255, 218, 185);
+            /* Base shadow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .project-shadow-orange:hover {
+            box-shadow: 10px 10px 0px 0px rgb(255, 218, 185);
+            /* Orange shadow on hover */
+        }
     </style>
 </head>
 
 
-<body class="container-fluid p-0">
+<body class="container-fluid p-0" data-bs-spy="scroll" data-bs-target="#navbarNavAltMarkup" data-bs-offset="100"
+    tabindex="0">
 
     <nav class="navbar navbar-expand-lg fixed-top custom-navbar" id="mainNav">
         <div class="container">
@@ -598,13 +758,25 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav fs-4">
-                    <a class="nav-link pe-4" aria-current="page" href="#intro">Home</a>
-                    <a class="nav-link pe-4" href="#about-section">About</a>
-                    <a class="nav-link pe-4" href="#resume-section">Resume</a>
-                    <a class="nav-link pe-4" href="#projects">Projects</a>
-                    <a class="nav-link pe-4" href="#footer">Contact</a>
+                    <a class="nav-link mx-3 scrollLink" href="#intro">Home</a>
+                    <a class="nav-link mx-3 scrollLink" href="#about-section">About</a>
+                    <a class="nav-link mx-3 scrollLink" href="#resume-section">Resume</a>
+                    <a class="nav-link mx-3 scrollLink" href="#projects">Projects</a>
+                    <a class="nav-link mx-3 scrollLink" href="#footer">Contact</a>
                 </div>
             </div>
+            <script>
+                document.querySelectorAll('.scrollLink').forEach(link => {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+            </script>
+        </div>
         </div>
     </nav>
 
@@ -618,7 +790,9 @@
             <div class="row align-items-center g-0">
                 <div class="col-md-4">
                     <!-- Text Box -->
-                    <div class="custom-constainer-shadow text-block">
+
+                    <div class="custom-constainer-shadow text-block"
+                        style="background-color: rgba(0, 0, 0, 0.8); color: #fff; position: relative;">
                         <h2>Hi, I'm Ben.</h2>
                         <p class="lead">A Software Engineering student based in Adelaide.</p>
                         <p>
@@ -629,7 +803,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Scroll Button Positioned Absolutely Relative to the Section -->
         <div class="scroll-button-container">
             <a href="#about-section" id="scrollToAbout" class="scroll-button-dark" aria-label="Scroll to About Section">
@@ -681,14 +854,10 @@
         <!-- </div> -->
     </section>
 
-    <!-- <p spellcheck=" false">I've previously worked in thebusiness general manager, I'm passionate about
-                    finding pragmatic, technology driven solutions to inefficiencies and obstructions in business
-                    and life.</p> -->
-
     <!-- Duplicate scroll button removed to prevent jump behavior -->
-    <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
+    <!-- <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
         style="background-color: #f2f2e9;">
-        <!-- style="background-color: rgb(253, 233, 104);"> -->
+        style="background-color: rgb(253, 233, 104);">
         <div class="container">
             <div class="row m-0 d-flex align-items-center justify-content-center">
                 <div class="col-12 col-md-10">
@@ -703,21 +872,78 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Scroll Button -->
-        <!-- <div class="position-relative"> -->
+        </div> -->
 
+    <!-- Projects Section -->
+    <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
+        style="
+        position: relative; background-image: url('/static/images/soft_light_blurred_background.jpg'); background-attachment: fixed; z-index: 1;">
+        <div class="container py-5">
+            <!-- Projects Header -->
+            <!-- <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <div class="custom-constainer-shadow text-block bg-white p-4 rounded-4">
+                        <h2>Projects</h2>
+                        <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla quaerat possimus
+                            quibusdam et aliquid recusandae.</p>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Projects Grid -->
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-12 col-md-4 mb-5">
+                    <div class="custom-constainer-shadow text-block project-shadow-red p-3 rounded-4">
+                        <h3>Ecommerce Wine Store</h3>
+                        <p>Built with:</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="col-12 col-md-4 mb-5">
+                    <div class="custom-constainer-shadow text-block project-shadow-blue p-3 rounded-4">
+                        <h3>Project Coming Soon.</h3>
+                        <p>Project Details.</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="col-12 col-md-4 mb-5">
+                    <div class="custom-constainer-shadow text-block project-shadow-green p-3 rounded-4">
+                        <h3>Project Coming Soon.</h3>
+                        <p>Project Details.</p>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="custom-constainer-shadow text-block project-shadow-yellow p-3 rounded-4">
+                        <h3>Project Coming Soon.</h3>
+                        <p>Project Details.</p>
+                    </div>
+                </div>
+                <!-- Project 5 -->
+                <div class="col-12 col-md-4 mb-5">
+                    <div class="custom-constainer-shadow text-block project-shadow-purple p-3 rounded-4">
+                        <h3>Project Coming Soon.</h3>
+                        <p>Project Details.</p>
+                    </div>
+                </div>
+                <!-- Project 6 -->
+                <div class="col-12 col-md-4 mb-5">
+                    <div class="custom-constainer-shadow text-block project-shadow-orange p-3 rounded-4">
+                        <h3>Project Coming Soon.</h3>
+                        <p>Project Details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Button Positioned at the Bottom Center of the Projects Section -->
         <div class="scroll-button-container">
-            <a href="#footer" class="scroll-button-light" id="scrollToFooter">
-                <i class="fas fa-chevron-down"></i>
+            <a href="#footer" class="scroll-button-light" id="scrollToFooter" aria-label="Scroll to Contact Section">
+                <i class="fas fa-chevron-down fa-lg"></i>
             </a>
         </div>
-        <!-- </div> -->
-        <!-- <button class="scroll-button-light d-flex align-items-center justify-content-center" id="scrollToFooter"
-            style="position: relative; top: 40%; right:50%; z-index: 3; display: none; padding: 0;">
-            <i class="fas fa-chevron-down" style="font-size: 1.5rem;"></i>
-        </button> -->
     </section>
+
     <!-- Footer
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -838,24 +1064,7 @@
     </section>
     <!--====== CONTACT ONE PART ENDS ======-->
 
-    <!-- <button type="button" class="scroll-button-light" id="scrollTopBtn"
-        style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none;">
-        &#x2191;
-    </button> -->
-
     <script>
-        // // Intercept link clicks and smoothly scroll to the target section.
-        // document.getElementById("scrollToAbout").addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     document.querySelector("#about-section").scrollIntoView({ behavior: "smooth" });
-        // });
-        // // Intercept link clicks and smoothly scroll to the target section.
-        // document.getElementById("scrollToProjects").addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     document.querySelector("#projects").scrollIntoView({ behavior: "smooth" });
-        // });
-
-
         document.addEventListener("DOMContentLoaded", function () {
             // Scroll to About Section
             const scrollToAboutBtn = document.getElementById("scrollToAbout");
@@ -945,26 +1154,8 @@
                 }
             }
         });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Update the navbar with links to all page sections
-            const navbarNav = document.querySelector('.custom-navbar .navbar-nav');
-            navbarNav.innerHTML = `
-                    <a class="nav-link pe-4" href="#intro">Home</a>
-                    <a class="nav-link pe-4" href="#about-section">About</a>
-                    <a class="nav-link pe-4" href="#resume-section">Resume</a>
-                    <a class="nav-link pe-4" href="#projects">Career</a>
-                    <a class="nav-link pe-4" href="#footer">Contact</a>
-                `;
-
-            // Initialize Bootstrap 5 ScrollSpy on the body
-            new bootstrap.ScrollSpy(document.body, {
-                target: '.custom-navbar',
-                offset: 100
-            });
-        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

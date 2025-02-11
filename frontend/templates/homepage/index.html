@@ -10,21 +10,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}"> -->
-    <!-- <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet"> -->
-    <!-- Updated Font Awesome CDN Link -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <script src="https://kit.fontawesome.com/bee45db777.js" crossorigin="anonymous"></script> -->
-
-
     <style>
+        :root {
+            --bs-body-font-family: 'Nunito', sans-serif;
+        }
+
         body {
             background-color: #f8f9fa;
             /* font-family: 'Roboto', sans-serif; */
             /*  font-family: 'Roboto Mono';*/
-            font-family: 'Nunito', sans-serif;
+            /* font-family: 'Nunito', sans-serif;
+    */
             /* Light gray background */
         }
 
@@ -95,10 +95,16 @@
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        @media (max-width: 767px) {
+            .custom-navbar .nav-link {
+                font-size: 2rem;
+            }
+        }
+
         /* Different background colors for each menu item using nth-child */
         .custom-navbar .nav-link:hover:nth-child(1),
         .custom-navbar .nav-link.active:nth-child(1) {
-            box-shadow: 10px 10px 0px 0px #df3c18;
+            box-shadow: 10px 10px 0px 0px #DC3545;
             /* reddish */
         }
 
@@ -126,15 +132,6 @@
             /* purple-ish */
         }
 
-        /* Underline and contrast for the active/current page in unscrolled state */
-        /* .custom-navbar .nav-link.active {
-            color: rgb(225, 11, 11) !important;
-            text-decoration: none;
-            border-bottom: 2px solid currentColor;
-            transition: color 0.3s ease, border-bottom 0.3s ease;
-
-        } */
-
         .custom-navbar .nav-link:hover {
             background-color: #fff;
             border: 2px solid #000000;
@@ -149,8 +146,32 @@
 
         /* Navbar scrolled state: white background with black text */
         .custom-navbar.scrolled {
-            background-color: #f2f2e9df;
+            background-color: #ededf1d3;
             padding-bottom: 20px;
+        }
+
+        @media (max-width: 767px) {
+
+            /* When mobile navbar is open and unscrolled, apply a black background */
+            .custom-navbar:not(.scrolled) .navbar-collapse.show {
+                background-color: black;
+            }
+
+            .navbar-toggler.scrolled {
+                background-color: #ffffff;
+                border-color: #000000;
+            }
+
+            button.navbar-toggler:not(.scrolled) {
+                background-color: #000000;
+                border-color: #FFFEFE;
+            }
+
+        }
+
+        .custom-navbar.scrolled {
+            background-color: #ededf1d3;
+            min-height: 65px;
         }
 
         .custom-navbar.scrolled .nav-link {
@@ -158,47 +179,57 @@
         }
 
         .custom-navbar.scrolled .nav-link.active {
-            /* text-decoration: underline; */
             color: black !important;
         }
 
-        .custom-navbar .navbar-toggler-icon {
-            filter: invert(1);
-            transition: filter 0.3s;
+        /* Mobile nav menu full screen */
+        @media (max-width: 767px) {
+
+            /* Mobile nav menu styling */
+            .custom-navbar .navbar-collapse {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: #ededf1fa;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+                z-index: 9999;
+            }
+
+            .custom-navbar .navbar-collapse.show {
+                display: flex;
+            }
+
+            /* Always show the nav toggler (menu button) with black icon lines when not scrolled */
+            .custom-navbar .navbar-toggler {
+                display: block !important;
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 10000;
+                border-radius: 0.5rem;
+                background-color: rgb(255, 255, 255);
+                box-shadow: 4px 4px 0px 0px #161616;
+                transition: box-shadow 0.15s ease-in-out;
+            }
         }
 
-        .custom-navbar.scrolled .navbar-toggler-icon {
-            filter: invert(0);
-        }
 
-        /* Overall text container shadow (used by the text block) */
-        .intro-constainer-shadow {
-            /* Bootstrap Classes */
-            padding: 0.75rem 1.25rem;
-            /*  py-3 px-5 */
-            border: 1px solid rgb(255, 246, 246);
-            /*  border-1 border-black */
-            border-radius: 0.5rem;
-            /*  rounded-lg */
-            background-color: rgba(1, 1, 1, 0.7);
-            /* bg-pgreen (kept as is, since it is custom)*/
-
-            /* Custom Shadow (More concise) */
-            box-shadow: 4px 4px 0px 0px #fcf8f8;
-
-            /* Transition for smoothness */
-            transition: box-shadow 0.15s ease-in-out;
-        }
 
         .intro-constainer-shadow:hover {
             /* A deeper shadow on hover for text blocks */
-            box-shadow: 10px 10px 0px 0px #fffafa;
+            box-shadow: 10px 10px 0px 0px #ffffff;
         }
 
         /* Additionally, trigger the hover effect when the parent text block is hovered */
         .text-block:hover .scroll-button-light,
         .text-block:hover .scroll-button-dark {
-            box-shadow: 4px 4px 0px 0px rgba(255, 250, 250, 1);
+            box-shadow: 4px 4px 0px 0px rgb(255, 254, 254);
         }
 
         /* Trigger the button hover effect when the entire text block is hovered */
@@ -229,7 +260,7 @@
 
         /*===========================
     contact-01 css
-===========================*/
+    ===========================*/
         .contact-area {
             padding-top: 50px;
             padding-bottom: 100px;
@@ -502,12 +533,8 @@
             #intro .text-block {
                 position: static !important;
                 transform: none !important;
-                margin-top: 1rem;
-            }
+                margin: 1rem 1rem 0 1rem;
 
-            /* When mobile navbar is open and unscrolled, apply a black background */
-            .custom-navbar:not(.scrolled) .navbar-collapse.show {
-                background-color: black;
             }
         }
 
@@ -540,7 +567,7 @@
         }
 
         /* Overlay Styling */
-        .fixed-background-overlay .overlay {
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -583,7 +610,7 @@
         .scroll-button-container {
             position: absolute;
             /* Absolute positioning within the section */
-            bottom: 40px;
+            bottom: 60px;
             /* 20px from the bottom */
             left: 50%;
             /* Center horizontally */
@@ -659,7 +686,7 @@
             min-height: 200px;
 
             /* Custom Shadow (Base Shadow) */
-            box-shadow: 4px 4px 0px 0px #e0e0e0;
+            box-shadow: 4px 4px 0px 0px #ffffff;
 
             /* Transition for smoothness */
             transition: box-shadow 0.3s ease-in-out;
@@ -667,7 +694,7 @@
 
         .custom-constainer-shadow:hover {
             /* Optional: Slight shadow on general hover */
-            box-shadow: 10px 10px 0px 0px #e0e0e0;
+            box-shadow: 10px 10px 0px 0px #ffffff;
         }
 
         /* Project Drop Shadow Classes */
@@ -686,62 +713,66 @@
 
         /* 2. Blue Shadow */
         .project-shadow-blue {
-            box-shadow: 5px 5px 0px 0px rgb(173, 216, 230);
-            /* Base shadow */
+            box-shadow: 4px 4px 0px 0px #33adff;
             transition: box-shadow 0.3s ease-in-out;
         }
 
         .project-shadow-blue:hover {
-            box-shadow: 10px 10px 0px 0px rgb(173, 216, 230);
-            /* Blue shadow on hover */
+            box-shadow: 10px 10px 0px 0px #33adff;
         }
 
         /* 3. Green Shadow */
         .project-shadow-green {
-            box-shadow: 4px 4px 0px 0px rgb(144, 238, 144);
-            /* Base shadow */
+            box-shadow: 4px 4px 0px 0px #33FF57;
             transition: box-shadow 0.3s ease-in-out;
         }
 
         .project-shadow-green:hover {
-            box-shadow: 10px 10px 0px 0px rgb(144, 238, 144);
-            /* Green shadow on hover */
+            box-shadow: 10px 10px 0px 0px #33FF57;
         }
 
         /* 4. Yellow Shadow */
         .project-shadow-yellow {
-            box-shadow: 4px 4px 0px 0px rgb(255, 255, 224);
-            /* Base shadow */
+            box-shadow: 4px 4px 0px 0px #F1C40F;
             transition: box-shadow 0.3s ease-in-out;
         }
 
         .project-shadow-yellow:hover {
-            box-shadow: 10px 10px 0px 0px rgb(255, 255, 224);
-            /* Yellow shadow on hover */
+            box-shadow: 10px 10px 0px 0px #F1C40F;
         }
 
         /* 5. Purple Shadow */
         .project-shadow-purple {
-            box-shadow: 4px 4px 0px 0px rgb(216, 191, 216);
-            /* Base shadow */
+            box-shadow: 4px 4px 0px 0px #9B59B6;
             transition: box-shadow 0.3s ease-in-out;
         }
 
         .project-shadow-purple:hover {
-            box-shadow: 10px 10px 0px 0px rgb(216, 191, 216);
-            /* Purple shadow on hover */
+            box-shadow: 10px 10px 0px 0px #9B59B6;
         }
 
-        /* 6. Orange Shadow */
+        /* 6. Orange Shadow (Updated to use red from the navbar) */
         .project-shadow-orange {
-            box-shadow: 4px 4px 0px 0px rgb(255, 218, 185);
-            /* Base shadow */
+            box-shadow: 4px 4px 0px 0px #DC3545;
             transition: box-shadow 0.3s ease-in-out;
         }
 
         .project-shadow-orange:hover {
-            box-shadow: 10px 10px 0px 0px rgb(255, 218, 185);
-            /* Orange shadow on hover */
+            box-shadow: 10px 10px 0px 0px #DC3545;
+        }
+
+        #projects .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            /* 50% opaque black overlay */
+            z-index: 3;
+            /* Positioned above the background image */
         }
     </style>
 </head>
@@ -787,13 +818,19 @@
 
         <!-- Content Wrapper -->
         <div class="container content-wrapper p-0">
+            <style>
+                @media (max-width: 768px) {
+                    .content-wrapper {
+                        margin-top: 50vh;
+                    }
+                }
+            </style>
             <div class="row align-items-center g-0">
                 <div class="col-md-4">
                     <!-- Text Box -->
-
-                    <div class="custom-constainer-shadow text-block"
-                        style="background-color: rgba(0, 0, 0, 0.8); color: #fff; position: relative;">
-                        <h2>Hi, I'm Ben.</h2>
+                    <div class="custom-constainer-shadow text-block mb-4"
+                        style="background-color: rgba(0, 0, 0, 0.8); color: #fff; position: relative; transform: scale(1.3); transform-origin: bottom left;">
+                        <h2 class=" text-danger">Hi, I'm Ben.</h2>
                         <p class="lead">A Software Engineering student based in Adelaide.</p>
                         <p>
                             Previous Career: <br>
@@ -811,31 +848,115 @@
         </div>
     </section>
 
+    <!-- Image Gallery Section -->
+    <section id="about-section"
+        class="py-5 bg-light d-flex min-vh-100 align-items-center justify-content-center position-relative">
+        <div class="container mt-5 mb-5">
+            <div class="row mb-4">
+                <div class="col text-left">
+                    <h2 class="section-title text-uppercase">About Me</h2>
+                    <hr class="mx-auto" style="width: 60px; border-top: 3px solid #212121;">
+                    <p class="mt-3">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-    <!-- Duplicate scroll button removed to prevent jump behavior -->
-    <section id="about-section" class="d-flex vh-100 align-items-center justify-content-center position-relative"
-        style="background-color: #f2f2e9;">
-        <div class="container">
-            <div class="row m-0 d-flex align-items-center bg-transparent justify-content-center">
-                <div class="col-12 col-md-10">
-                    <div class="text-white custom-constainer-shadow text-block mx-auto p-4"
-                        style="background-color: #95C7F2; border-radius: 24px; box-shadow: 4px 4px 0px 0px #1a1a1a;"
-                        onmouseover="this.style.boxShadow='10px 10px 0px 0px #1a1a1a'"
-                        onmouseout="this.style.boxShadow='4px 4px 0px 0px #1a1a1a'">
-                        <h2>A little about me</h2>
-                        <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla quaerat possimus
-                            quibusdam et aliquid recusandae.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.</p>
+
+                    <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo
+                        pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris
+                        eu nibh euismod gravida.</p>
+
+                    <p>Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut
+                        ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam.
+                        Maecenas fermentum consequat mi. Donec fermentum.</p>
+
+                    <p>Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis,
+                        neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada
+                        diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu.</p>
+
+                    <p>Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Vestibulum libero nisl,
+                        porta vel, scelerisque eget, malesuada at, neque. Vivamus eget nibh. Etiam cursus leo vel metus.
+                        Nulla facilisi. Aenean nec eros.</p>
+                </div>
+            </div>
+            <div class="row pb-4">
+                <!-- Repeat this block for each image -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                            data-bs-image="https://html5up.net/uploads/demos/astral/images/pic01.jpg"
+                            data-bs-title="Project Title 1">
+                            <img src="https://html5up.net/uploads/demos/astral/images/pic01.jpg"
+                                class="card-img-top img-fluid" alt="Project 1">
+                        </a>
+                    </div>
+                </div>
+                <!-- End of image block -->
+
+                <!-- Add more image blocks as needed -->
+                <!-- Example for 12 images -->
+                <!-- Image 2 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                            data-bs-image="https://html5up.net/uploads/demos/astral/images/pic02.jpg"
+                            data-bs-title="Project Title 2">
+                            <img src="https://html5up.net/uploads/demos/astral/images/pic02.jpg"
+                                class="card-img-top img-fluid" alt="Project 2">
+                        </a>
+                    </div>
+                </div>
+                <!-- Image 3 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                            data-bs-image="https://html5up.net/uploads/demos/astral/images/pic03.jpg"
+                            data-bs-title="Project Title 3">
+                            <img src="https://html5up.net/uploads/demos/astral/images/pic03.jpg"
+                                class="card-img-top img-fluid" alt="Project 3">
+                        </a>
+                    </div>
+                </div>
+                <!-- Image 4 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                            data-bs-image="https://html5up.net/uploads/demos/astral/images/pic04.jpg"
+                            data-bs-title="Project Title 4">
+                            <img src="https://html5up.net/uploads/demos/astral/images/pic04.jpg"
+                                class="card-img-top img-fluid" alt="Project 4">
+                        </a>
+                    </div>
+                </div>
+                <!-- Continue adding up to 12 images -->
+            </div>
+        </div>
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="imageModalLabel">Project Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="" id="modalImage" class="img-fluid" alt="Project Image">
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="scroll-button-container">
             <a href="#resume-section" class="scroll-button-light" id="scrollToResume">
                 <i class="fas fa-chevron-down"></i>
             </a>
         </div>
     </section>
+
+    <!-- Image Modal -->
+
+
 
     <section id="resume-section" class="position-relative" style="background-color: #f2f2e9;">
         <div class="container pt-5">
@@ -844,18 +965,18 @@
             </div>
         </div>
 
-        <!-- <div class="position-relative"> -->
-        <div class="scroll-button-container">
-            <a href="#projects" class="scroll-button-light" id="scrollToProjects"
-                aria-label="Scroll to Projects Section">
-                <i class="fas fa-chevron-down"></i>
-            </a>
+        <div class="position-relative">
+            <div class="scroll-button-container">
+                <a href="#projects" class="scroll-button-light" id="scrollToProjects"
+                    aria-label="Scroll to Projects Section">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
         </div>
-        <!-- </div> -->
     </section>
 
-    <!-- Duplicate scroll button removed to prevent jump behavior -->
-    <!-- <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
+    <!-- Duplicate scroll button removed to prevent jump behavior
+    <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
         style="background-color: #f2f2e9;">
         style="background-color: rgb(253, 233, 104);">
         <div class="container">
@@ -874,197 +995,242 @@
             </div>
         </div> -->
 
-    <!-- Projects Section -->
-    <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
-        style="
-        position: relative; background-image: url('/static/images/soft_light_blurred_background.jpg'); background-attachment: fixed; z-index: 1;">
-        <div class="container py-5">
-            <!-- Projects Header -->
-            <!-- <div class="row mb-4">
-                <div class="col-12 text-center">
-                    <div class="custom-constainer-shadow text-block bg-white p-4 rounded-4">
-                        <h2>Projects</h2>
-                        <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla quaerat possimus
-                            quibusdam et aliquid recusandae.</p>
+    <!-- Projects Section
+        <section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative"
+            style="background-image: url('/static/images/soft_light_blurred_background.jpg'); background-attachment: fixed; z-index: 1;">
+            <div class="container py-5 d-flex overlay m-0">
+                Projects Header
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="custom-constainer-shadow text-block bg-white p-4 rounded-4">
+                            <h2>Projects</h2>
+                            <p class="lead">Asperiores quos veniam facere odio tenetur assumenda quae nulla quaerat
+                                possimus
+                                quibusdam et aliquid recusandae.</p>
+                        </div>
                     </div>
                 </div>
-            </div> -->
-            <!-- Projects Grid -->
-            <div class="row">
-                <!-- Project 1 -->
-                <div class="col-12 col-md-4 mb-5">
-                    <div class="custom-constainer-shadow text-block project-shadow-red p-3 rounded-4">
-                        <h3>Ecommerce Wine Store</h3>
-                        <p>Built with:</p>
+                Projects Grid
+                <div class="row">
+                    Project 1
+                    <div class="col-12 col-md-4 mb-5">
+                        <div class="custom-constainer-shadow text-block project-shadow-red p-3 rounded-4">
+                            <h3>Ecommerce Wine Store</h3>
+                            <p>Built with:</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="col-12 col-md-4 mb-5">
-                    <div class="custom-constainer-shadow text-block project-shadow-blue p-3 rounded-4">
-                        <h3>Project Coming Soon.</h3>
-                        <p>Project Details.</p>
+                    Project 2
+                    <div class="col-12 col-md-4 mb-5">
+                        <div class="custom-constainer-shadow text-block project-shadow-blue p-3 rounded-4">
+                            <h3>Project Coming Soon.</h3>
+                            <p>Project Details.</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="col-12 col-md-4 mb-5">
-                    <div class="custom-constainer-shadow text-block project-shadow-green p-3 rounded-4">
-                        <h3>Project Coming Soon.</h3>
-                        <p>Project Details.</p>
+                    Project 3
+                    <div class="col-12 col-md-4 mb-5">
+                        <div class="custom-constainer-shadow text-block project-shadow-green p-3 rounded-4">
+                            <h3>Project Coming Soon.</h3>
+                            <p>Project Details.</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 4 -->
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="custom-constainer-shadow text-block project-shadow-yellow p-3 rounded-4">
-                        <h3>Project Coming Soon.</h3>
-                        <p>Project Details.</p>
+                    Project 4
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="custom-constainer-shadow text-block project-shadow-yellow p-3 rounded-4">
+                            <h3>Project Coming Soon.</h3>
+                            <p>Project Details.</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 5 -->
-                <div class="col-12 col-md-4 mb-5">
-                    <div class="custom-constainer-shadow text-block project-shadow-purple p-3 rounded-4">
-                        <h3>Project Coming Soon.</h3>
-                        <p>Project Details.</p>
+                    Project 5
+                    <div class="col-12 col-md-4 mb-5">
+                        <div class="custom-constainer-shadow text-block project-shadow-purple p-3 rounded-4">
+                            <h3>Project Coming Soon.</h3>
+                            <p>Project Details.</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Project 6 -->
-                <div class="col-12 col-md-4 mb-5">
-                    <div class="custom-constainer-shadow text-block project-shadow-orange p-3 rounded-4">
-                        <h3>Project Coming Soon.</h3>
-                        <p>Project Details.</p>
+                    Project 6
+                    <div class="col-12 col-md-4 mb-5">
+                        <div class="custom-constainer-shadow text-block project-shadow-orange p-3 rounded-4">
+                            <h3>Project Coming Soon.</h3>
+                            <p>Project Details.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Scroll Button Positioned at the Bottom Center of the Projects Section -->
-        <div class="scroll-button-container">
-            <a href="#footer" class="scroll-button-light" id="scrollToFooter" aria-label="Scroll to Contact Section">
-                <i class="fas fa-chevron-down fa-lg"></i>
-            </a>
+            Scroll Button Positioned at the Bottom Center of the Projects Section
+            <div class="scroll-button-container">
+                <a href="#footer" class="scroll-button-light" id="scrollToFooter"
+                    aria-label="Scroll to Contact Section">
+                    <i class="fas fa-chevron-down fa-lg"></i>
+                </a>
+            </div>
+        </section> -->
+
+    <!-- background-image: url('/static/images/somm_laptop_cellar.jpeg'); -->
+    <section id="projects"
+        class="d-flex min-vh-100 align-items-center justify-content-center position-relative bg-white">
+        <div class="container" style="padding-bottom: 150px;">
+            <!-- Header above the carousel with some top margin -->
+            <div class="row" style="margin-top: 30px;">
+                <div class="col text-center mt-5 mb-3">
+                    <h2 class="section-title text-uppercase d-flex" style="margin-left: 7%;">Projects</h2>
+                </div>
+            </div>
+
+            <!-- Carousel moved lower in the container -->
+            <div class="row" data-bs-theme="dark">
+                <div id="carouselExampleCaptions" class="carousel slide border border-dark rounded-3 mx-auto"
+                    style="margin-top: 20px; width: 85%;" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/static/images/product_page.jpeg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block"
+                                style="position: static; transform: none; margin-top: 10px;">
+                                <h4>5000 Product Wordpress Online Store</h4>
+                                <p>Woocommerce, Custom CSS/JS, 360° product images</p>
+                            </div>
+                        </div>
+                        <!-- Add more carousel-item sections as needed, each with the same inline style -->
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Scroll Button Positioned at the Bottom Center of the Projects Section -->
+            <div class="scroll-button-container">
+                <a href="#footer" class="scroll-button-light" id="scrollToFooter"
+                    aria-label="Scroll to Contact Section">
+                    <i class="fas fa-chevron-down fa-lg"></i>
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-muted">© 2025 Ben Davidson</span>
-            </div>
 
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3">
-                    <a class="text-muted" href="mailto:example@example.com">
-                        <svg class="bi fa-envelope" width="24" height="24">
-                            <use xlink:href="#email"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="text-muted" href="https://github.com/yourusername" target="_blank" rel="noopener">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#github"></use>
-                        </svg>
-                    </a>
-                </li>
-                <li class="ms-3">
-                    <a class="text-muted" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#linkedin"></use>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </footer>
-    </div> -->
 
-    <!--====== CONTACT ONE PART START ======-->
-    <section id="footer" class="contact-area pt-5 pb-5" style="background-color: #f2f2e9;">
-        <div class="container">
-            <div class="row g-3 d-flex align-content-around"></div>
-            <!-- Changed parent column to span full width -->
-            <div class="col-12">
-                <div class="section-title mt-45">
-                    <h3 class="title">Get in touch</h3>
-                </div>
-                <div class="contact-form form-style-four mt-15">
-                    <form action="#">
-                        <div class="row d-flex justify-content-lg-evenly">
-                            <!-- Left Column: Basic Inputs -->
-                            <div class="col-md-5">
-                                <div class="form-input mt-15">
-                                    <label>Full Name</label>
-                                    <div class="input-items default">
-                                        <i class="lni lni-user"></i>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div>
-                                <div class="form-input mt-15">
-                                    <label>Email Address</label>
-                                    <div class="input-items default">
-                                        <i class="lni lni-envelope"></i>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div>
-                                <div class="form-input mt-15">
-                                    <label>Phone Number</label>
-                                    <div class="input-items default">
-                                        <i class="lni lni-phone"></i>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div>
-                                <div class="form-input mt-15">
-                                    <label>Subject</label>
-                                    <div class="input-items default">
-                                        <i class="lni lni-bubble"></i>
-                                        <input type="text" placeholder="Type here" />
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Right Column: Message and Submit -->
-                            <div class="col-md-5">
-                                <div class="form-input mt-15">
-                                    <label>Your Message</label>
-                                    <div class="input-items default">
-                                        <i class="lni lni-pencil-alt"></i>
-                                        <textarea placeholder="Type your message here"
-                                            style="border: 1px solid black; height: 100px;"></textarea>
-                                    </div>
-                                </div>
-                                <div class="single-form mt-15">
-                                    <div class="input-form rounded-buttons">
-                                        <button class="btn primary-btn rounded-full" type="submit">
-                                            SEND MESSAGE
-                                        </button>
-                                    </div>
+
+    <!-- Contact Section -->
+    <section id="footer" class="min-vh-100 d-flex flex-column" style="background-color: #d7e9e3;">
+        <div class="row flex-grow-1 d-flex align-items-center justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="section-title text-uppercase mb-5">
+                        <h2 class="section-title">Get in touch</h2>
+                    </div>
+                    <!-- Display Success Message -->
+                    {% if success %}
+                    <div class="alert alert-success" role="alert">
+                        {{ success }}
+                    </div>
+                    {% endif %}
+
+                    <!-- Display Error Message -->
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <form id="contactForm" action="/contact" method="post" novalidate>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control border border-dark" id="name" name="name"
+                                    placeholder="Name" required>
+                                <label for="name">Name</label>
+                                <div class="invalid-feedback">
+                                    Please enter your name.
                                 </div>
                             </div>
                         </div>
-                        <!-- row -->
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="email" class="form-control border border-dark" id="email" name="email"
+                                    placeholder="name@example.com" required>
+                                <label for="email">Email Address</label>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-floating">
+                                <textarea class="form-control border border-dark" placeholder="Message" id="message"
+                                    name="message" style="height: 150px" required></textarea>
+                                <label for="message">Message</label>
+                                <div class="invalid-feedback">
+                                    Please enter your message.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-outline-black btn-lg">
+                                <i class="fas fa-solid fa-envelope me-2"></i> Send Message
+                            </button>
+                        </div>
                     </form>
+
                 </div>
-                <!-- contact form -->
             </div>
         </div>
-        <!-- row -->
+        <div class="container d-flex align-items-center justify-content-center">
+            <footer
+                class="col-10 flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                        <svg class="bi" width="30" height="24">
+                            <use xlink:href="#bootstrap"></use>
+                        </svg>
+                    </a>
+                    <span class="mb-3 mb-md-0 text-muted">© 2025 Ben Davidson</span>
+                </div>
+            </footer>
         </div>
-        <!-- container -->
-
-        <!-- Scroll Button -->
-        <!-- <div class="scroll-button-container"> -->
-        <button class="scroll-button-light d-flex align-items-center justify-content-center" id="scrollTopBtn"
-            style="position: fixed; bottom: 40px; right: 40px; z-index: 1000; display: none; padding: 0;">
-            <i class="fas fa-chevron-up" style="font-size: 1.5rem;"></i>
-        </button>
-        <!-- </div> -->
     </section>
-    <!--====== CONTACT ONE PART ENDS ======-->
+
+    <!-- Scroll Button -->
+    <!-- <div class="scroll-button-container"> -->
+    <button class="scroll-button-light" id="scrollTopBtn"
+        style="position: fixed; bottom: 60px; right: 40px; z-index: 1000; display: none; padding: 0;">
+        <i class="fas fa-chevron-up" style="font-size: 1.5rem;"></i>
+    </button>
+    <!-- </div> -->
+
+
 
     <script>
+        window.addEventListener('scroll', () => {
+            const navToggle = document.querySelector('.navbar-toggler');
+            if (window.scrollY > 50) {  // adjust the scroll position as needed
+                navToggle.classList.add('scrolled');
+            } else {
+                navToggle.classList.remove('scrolled');
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.custom-navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         document.addEventListener("DOMContentLoaded", function () {
             // Scroll to About Section
             const scrollToAboutBtn = document.getElementById("scrollToAbout");
@@ -1113,15 +1279,6 @@
 
 
 
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.custom-navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
         // Show button when scrolled down
         window.addEventListener('scroll', function () {
             const scrollBtn = document.getElementById('scrollTopBtn');
@@ -1153,6 +1310,61 @@
                     direction: 'horizontal',
                 }
             }
+        });
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch the form we want to apply custom Bootstrap validation to
+            var form = document.getElementById('contactForm')
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault()
+                event.stopPropagation()
+
+                if (form.checkValidity()) {
+                    // Here you can handle the form submission, e.g., send data via AJAX
+                    // For demonstration, we'll just show the success modal
+                    var successModal = new bootstrap.Modal(document.getElementById('successModal'))
+                    successModal.show()
+
+                    // Reset the form
+                    form.reset()
+                    form.classList.remove('was-validated')
+                } else {
+                    form.classList.add('was-validated')
+                }
+            }, false)
+        })()
+        // Initialize the modal with image and title
+        var imageModal = document.getElementById('imageModal');
+        imageModal.addEventListener('show.bs.modal', function (event) {
+            var triggerElement = event.relatedTarget; // Element that triggered the modal
+            var imageSrc = triggerElement.getAttribute('data-bs-image');
+            var imageTitle = triggerElement.getAttribute('data-bs-title');
+
+            // Update the modal's content
+            var modalTitle = imageModal.querySelector('.modal-title');
+            var modalImage = imageModal.querySelector('#modalImage');
+
+            modalTitle.textContent = imageTitle;
+            modalImage.src = imageSrc;
+            modalImage.alt = imageTitle;
+        });
+        /* JavaScript to auto close the mobile nav when a nav-link is clicked */
+        document.querySelectorAll('.custom-navbar .nav-link').forEach(link => {
+            link.addEventListener('click', function () {
+                const navbarCollapse = document.querySelector('.custom-navbar .navbar-collapse');
+
+                if (navbarCollapse.classList.contains('show')) {
+
+                    // Collapse the menu using Bootstrap's Collapse API
+                    new bootstrap.Collapse(navbarCollapse, {
+                        toggle: false
+                    }).hide();
+                }
+            });
         });
     </script>
 

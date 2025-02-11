@@ -1,11 +1,12 @@
 from pathlib import Path
-from fastapi import FastAPI, Request, Depends
+from fastapi import FastAPI, Request, Depends, Form
 from fastapi.responses import HTMLResponse
-
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from . import models, database
+from . import models, database, schemas
+
+# from fastapi.responses import HTMLResponse, RedirectResponse
 
 models.Base.metadata.create_all(bind=database.engine)
 
@@ -57,3 +58,32 @@ async def read_resume(request: Request):
     """
     context = {"request": request, "resume_title": "My Resume"}
     return templates.TemplateResponse("resume/resume.html", context)
+
+
+@app.post("/contact", response_class=HTMLResponse)
+async def handle_contact(
+    request: Request, name: str = Form(...), email: str = Form(...), message: str = Form(...), db: Session = Depends(get_db)
+):
+    # Validate form data using Pydantic
+    try:
+        contact_data = schemas.ContactForm(name=name, email=email, message=message)
+    except Exception:
+        # Handle validation errors
+        context = {"request": request, "error": "Invalid form data. Please check your inputs."}
+        return templates.TemplateResponse("contact.html", context)
+
+    # Process the data (e.g., save to database)
+    new_message = models.ContactMessage(name=contact_data.name, email=contact_data.email, message=contact_data.message)
+    db.add(new_message)
+    db.commit()
+    db.refresh(new_message)
+
+    # Redirect to a thank you page or render a success message
+    context = {"request": request, "success": "Your message has been sent successfully!"}
+    return templates.TemplateResponse("contact.html", context)
+
+
+@app.get("/contact", response_class=HTMLResponse)
+async def get_contact(request: Request):
+    context = {"request": request}
+    return templates.TemplateResponse("contact.html", context)

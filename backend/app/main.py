@@ -6,9 +6,11 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from . import models, database, schemas
 
+from contextlib import asynccontextmanager
+
 # from fastapi.responses import HTMLResponse, RedirectResponse
 
-models.Base.metadata.create_all(bind=database.engine)
+# models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
 
@@ -33,6 +35,16 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+# Startup event to create tables
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    models.Base.metadata.create_all(bind=database.engine)
+    yield
+
+
+app.router.lifespan_context = lifespan
 
 
 @app.get("/", response_class=HTMLResponse)

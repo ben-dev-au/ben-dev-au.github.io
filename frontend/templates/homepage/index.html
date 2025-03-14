@@ -852,7 +852,7 @@
     <!-- Image Gallery Section -->
     <section id="about-section"
         class="py-5 bg-light d-flex min-vh-100 align-items-center justify-content-center position-relative">
-        <div class="container mt-5 mb-5">
+        <div class="container col-8 mt-5 mb-5">
             <div class="row mb-4">
                 <div class="col text-left">
                     <h2 class="section-title text-uppercase">About Me</h2>
@@ -985,8 +985,8 @@
 
             <!-- Carousel moved lower in the container -->
             <div class="row" data-bs-theme="dark">
-                <div id="carouselProjects" class="carousel slide border border-dark rounded-3 mx-auto"
-                    style="margin-top: 20px; width: 85%;" data-bs-ride="carousel">
+                <div id="carouselProjects" class="col-8 carousel slide border border-dark rounded-3 mx-auto"
+                    style="margin-top: 20px;" data-bs-ride="carousel">
                     <!-- Carousel Indicators -->
                     <div class="carousel-indicators">
                         {% for project in projects %}
@@ -1041,7 +1041,7 @@
     <section id="footer" class="min-vh-100 d-flex flex-column" style="background-color: #d7e9e3;">
         <div class="row flex-grow-1 d-flex align-items-center justify-content-center">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-5">
                     <div class="section-title text-uppercase mb-5">
                         <h2 class="section-title">Get in touch</h2>
                     </div>
@@ -1059,6 +1059,7 @@
                     </div>
                     {% endif %}
                     <form id="contactForm" action="/contact" method="post" novalidate>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                         <div class="mb-3">
                             <div class="form-floating">
                                 <input type="text" class="form-control border border-dark" id="name" name="name"
@@ -1100,8 +1101,7 @@
             </div>
         </div>
         <div class="container d-flex align-items-center justify-content-center">
-            <footer
-                class="col-10 flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
+            <footer class="col-9 flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
                 <div class="col-md-4 d-flex align-items-center">
                     <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
                         <svg class="bi" width="30" height="24">

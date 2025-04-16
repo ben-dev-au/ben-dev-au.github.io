@@ -12,11 +12,12 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from fastapi_csrf_protect import CsrfProtect
 from fastapi_csrf_protect.exceptions import CsrfProtectError
+import ssl
 import redis.asyncio as redis
+from contextlib import asynccontextmanager, contextmanager
 from fastapi_limiter import FastAPILimiter
 from fastapi_limiter.depends import RateLimiter
 
-# import ssl
 
 # Local Imports
 from . import models, database, schemas
@@ -59,19 +60,40 @@ def get_db():
         db.close()
 
 
-# Lifespan function to create tables at startup
+@contextmanager
+def no_ssl_verification():
+    # Save the original ssl.create_default_context
+    original_context = ssl.create_default_context
+
+    # Define a new function that creates an unverified SSL context.
+    def unverified_context(*args, **kwargs):
+        context = original_context(*args, **kwargs)
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+        return context
+
+    # Patch ssl.create_default_context
+    ssl.create_default_context = unverified_context
+    try:
+        yield
+    finally:
+        # Restore the original function
+        ssl.create_default_context = original_context
+
+
 @asynccontextmanager
 async def lifespan(app):
-    # Create database tables if needed.
+    # Create your database tables
     models.Base.metadata.create_all(bind=database.engine)
 
-    # Use Heroku's provided Redis URL (or default to localhost).
+    # Get the Redis URL from the environment (should start with 'rediss://')
     redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
 
-    # Create the connection without extra SSL parameters.
-    redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
+    # Temporarily disable certificate verification only for this connection creation
+    with no_ssl_verification():
+        redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
 
-    # Initialise FastAPILimiter.
+    # Initialize FastAPILimiter with the Redis connection
     await FastAPILimiter.init(redis_connection)
 
     yield

@@ -61,7 +61,8 @@ def get_db():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     models.Base.metadata.create_all(bind=database.engine)
-    redis_connection = await redis.from_url("redis://localhost:6379", encoding="utf-8", decode_responses=True)
+    redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
+    redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
     await FastAPILimiter.init(redis_connection)
     yield
 

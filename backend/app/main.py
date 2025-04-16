@@ -61,39 +61,30 @@ def get_db():
 
 
 @contextmanager
-def no_ssl_verification():
-    # Save the original ssl.create_default_context
-    original_context = ssl.create_default_context
-
-    # Define a new function that creates an unverified SSL context.
-    def unverified_context(*args, **kwargs):
-        context = original_context(*args, **kwargs)
-        context.check_hostname = False
-        context.verify_mode = ssl.CERT_NONE
-        return context
-
-    # Patch ssl.create_default_context
-    ssl.create_default_context = unverified_context
+def disable_https_verification():
+    # Save the original function.
+    original_context_creator = ssl._create_default_https_context
+    # Override with a function that returns an unverified context.
+    ssl._create_default_https_context = ssl._create_unverified_context
     try:
         yield
     finally:
-        # Restore the original function
-        ssl.create_default_context = original_context
+        # Restore the original function.
+        ssl._create_default_https_context = original_context_creator
 
 
 @asynccontextmanager
 async def lifespan(app):
-    # Create your database tables
     models.Base.metadata.create_all(bind=database.engine)
 
-    # Get the Redis URL from the environment (should start with 'rediss://')
+    # Get the Redis URL from environment (should start with "rediss://").
     redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
 
-    # Temporarily disable certificate verification only for this connection creation
-    with no_ssl_verification():
+    # Temporarily disable HTTPS certificate verification during the connection creation.
+    with disable_https_verification():
         redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
 
-    # Initialize FastAPILimiter with the Redis connection
+    # Initialise FastAPILimiter with the Redis connection.
     await FastAPILimiter.init(redis_connection)
 
     yield

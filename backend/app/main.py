@@ -15,7 +15,8 @@ from fastapi_csrf_protect.exceptions import CsrfProtectError
 import redis.asyncio as redis
 from fastapi_limiter import FastAPILimiter
 from fastapi_limiter.depends import RateLimiter
-import ssl
+
+# import ssl
 
 # Local Imports
 from . import models, database, schemas
@@ -67,10 +68,10 @@ async def lifespan(app):
     # Use Heroku's provided Redis URL (or default to localhost).
     redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
 
-    # Connect to Redis with SSL enabled and disable certificate verification.
-    redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True, ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
+    # Create the connection without extra SSL parameters.
+    redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
 
-    # Initialize rate limiting.
+    # Initialise FastAPILimiter.
     await FastAPILimiter.init(redis_connection)
 
     yield

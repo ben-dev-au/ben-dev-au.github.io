@@ -44,7 +44,7 @@ email_conf = ConnectionConfig(
     MAIL_SERVER=os.getenv("MAIL_SERVER"),
     MAIL_STARTTLS=True,
     MAIL_SSL_TLS=False,
-    USE_CREDENTIALS=True,
+    USE_CREDENTIALS=False,
 )
 
 
@@ -61,6 +61,8 @@ def get_db():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     models.Base.metadata.create_all(bind=database.engine)
+    redis_connection = await redis.from_url("redis://localhost:6379", encoding="utf-8", decode_responses=True)
+    await FastAPILimiter.init(redis_connection)
     yield
 
 
@@ -76,7 +78,7 @@ app.mount(
 
 
 class CsrfSettings(BaseModel):
-    secret_key: str = os.getenv("SECRET_KEY", "your-secret-key")
+    secret_key: str = os.getenv("SECRET_KEY")
 
 
 @CsrfProtect.load_config
@@ -87,12 +89,9 @@ def get_csrf_config():
 @app.exception_handler(CsrfProtectError)
 def csrf_protect_exception_handler(request: Request, exc: CsrfProtectError):
     return HTMLResponse("CSRF token missing or invalid", status_code=400)
-
-
-@app.on_event("startup")
-async def startup():
-    redis_connection = await redis.from_url("redis://localhost", encoding="utf-8", decode_responses=True)
-    await FastAPILimiter.init(redis_connection)
+    # # Removed deprecated startup event; logic moved to lifespan handler.
+    # redis_connection = await redis.from_url("redis://localhost", encoding="utf-8", decode_responses=True)
+    # await FastAPILimiter.init(redis_connection)
 
 
 @app.get("/contact", response_class=HTMLResponse)
@@ -107,13 +106,15 @@ async def get_contact(request: Request, csrf_protect: CsrfProtect = Depends()):
 async def handle_contact(
     request: Request,
     csrf_protect: CsrfProtect = Depends(),
+    csrf_token: str = Form(...),
     name: str = Form(...),
     email: str = Form(...),
     message: str = Form(...),
     db: Session = Depends(get_db),
     # prettier-ignore
 ):
-    await csrf_protect.verify_csrf(request)
+
+    csrf_protect.validate_csrf(csrf_token)
 
     # Validate form data using Pydantic
     try:
@@ -155,7 +156,7 @@ Message: {message}""",
         # Log the error, but do not expose internal errors to the user
         print(f"Error sending email: {e}")
 
-    # Redirect to a thank you page or render a success message
+    # Redirect to render a success message.
     context = {"request": request, "success": "Your message has been sent successfully!"}
     return templates.TemplateResponse("homepage/index.html", context)
 

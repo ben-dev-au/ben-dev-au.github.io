@@ -1058,7 +1058,7 @@
                         {{ error }}
                     </div>
                     {% endif %}
-                    <form id="contactForm" action="/contact" method="post" novalidate>
+                    <form id="contactForm" action="/contact" method="post" novalidate onsubmit="submitForm(event)">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                         <div class="mb-3">
                             <div class="form-floating">
@@ -1224,11 +1224,11 @@
             }
         });
 
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        // JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict'
 
-            // Fetch the form we want to apply custom Bootstrap validation to
+            // Fetch the form to apply custom Bootstrap validation to
             var form = document.getElementById('contactForm')
 
             form.addEventListener('submit', function (event) {
@@ -1236,20 +1236,45 @@
                 event.stopPropagation()
 
                 if (form.checkValidity()) {
-                    // Here you can handle the form submission, e.g., send data via AJAX
-                    // For demonstration, we'll just show the success modal
-                    var successModal = new bootstrap.Modal(document.getElementById('successModal'))
-                    successModal.show()
+                    // // Get the CSRF token from the hidden field
+                    // var csrfToken = form.querySelector('input[name="csrf_token"]').value;
 
-                    // Reset the form
-                    form.reset()
-                    form.classList.remove('was-validated')
+                    // Create a FormData object from the form data
+                    var formData = new FormData(form);
+
+                    // Send the form data via AJAX (using fetch) with the CSRF token in the header
+                    fetch(form.action, {
+                        method: 'POST',
+                        // headers: {
+                        //     'X-CSRF-Token': csrfToken
+                        // },
+                        body: formData
+                    })
+                        .then(function (response) {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.text();
+                        })
+                        .then(function (data) {
+                            // On success, show the success modal and reset the form
+                            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                            successModal.show();
+                            form.reset();
+                            form.classList.remove('was-validated');
+                        })
+                        .catch(function (error) {
+                            console.error('There was a problem with the fetch operation:', error);
+                            // You can add additional error handling here if desired
+                        });
                 } else {
-                    form.classList.add('was-validated')
+                    form.classList.add('was-validated');
                 }
-            }, false)
-        })()
-        // Initialize the modal with image and title
+            }, false);
+        })();
+
+
+        // Initialise the modal with image and title
         var imageModal = document.getElementById('imageModal');
         imageModal.addEventListener('show.bs.modal', function (event) {
             var triggerElement = event.relatedTarget; // Element that triggered the modal

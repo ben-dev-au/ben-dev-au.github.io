@@ -22,7 +22,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "ben_dev_au"}]
+packages = [{include = "backend"}]
 
 
 [build-system]

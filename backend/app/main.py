@@ -64,16 +64,13 @@ async def lifespan(app):
     # Create database tables if needed.
     models.Base.metadata.create_all(bind=database.engine)
 
-    # Determine Redis URL from environment.
+    # Use Heroku's provided Redis URL (or default to localhost).
     redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
 
-    # Create an SSL context that disables certificate verification.
-    ssl_context = ssl.create_default_context()
-    ssl_context.check_hostname = False
-    ssl_context.verify_mode = ssl.CERT_NONE
+    # Connect to Redis with SSL enabled and disable certificate verification.
+    redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True, ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
 
-    # Connect to Redis using the custom SSL context.
-    redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True, ssl_context=ssl_context)
+    # Initialize rate limiting.
     await FastAPILimiter.init(redis_connection)
 
     yield

@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, Depends, Form
 from fastapi.responses import HTMLResponse
@@ -12,9 +11,10 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from fastapi_csrf_protect import CsrfProtect
 from fastapi_csrf_protect.exceptions import CsrfProtectError
-import ssl
+
+# import ssl
 import redis.asyncio as redis
-from contextlib import asynccontextmanager, contextmanager
+from contextlib import asynccontextmanager
 from fastapi_limiter import FastAPILimiter
 from fastapi_limiter.depends import RateLimiter
 
@@ -60,31 +60,19 @@ def get_db():
         db.close()
 
 
-@contextmanager
-def disable_https_verification():
-    # Save the original function.
-    original_context_creator = ssl._create_default_https_context
-    # Override with a function that returns an unverified context.
-    ssl._create_default_https_context = ssl._create_unverified_context
-    try:
-        yield
-    finally:
-        # Restore the original function.
-        ssl._create_default_https_context = original_context_creator
-
-
 @asynccontextmanager
 async def lifespan(app):
     models.Base.metadata.create_all(bind=database.engine)
 
-    # Get the Redis URL from environment (should start with "rediss://").
+    # Get the Redis URL from environment
     redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
 
-    # Temporarily disable HTTPS certificate verification during the connection creation.
-    with disable_https_verification():
-        redis_connection = await redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
+    # Connect to Redis with SSL cert verification disabled
+    redis_connection = await redis.from_url(
+        redis_url, encoding="utf-8", decode_responses=True, ssl_cert_reqs=None  # Disable SSL cert verification
+    )
 
-    # Initialise FastAPILimiter with the Redis connection.
+    # Initialise FastAPILimiter with the Redis connection
     await FastAPILimiter.init(redis_connection)
 
     yield

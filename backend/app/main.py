@@ -1,11 +1,12 @@
 from pathlib import Path
 import os
+from pydantic import SecretStr
 
 from fastapi import FastAPI, Request, Depends, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
@@ -17,20 +18,14 @@ import redis.asyncio as redis
 from contextlib import asynccontextmanager
 from fastapi_limiter import FastAPILimiter
 from fastapi_limiter.depends import RateLimiter
+from fastapi.middleware.cors import CORSMiddleware
 
 
 # Local Imports
 from . import models, database, schemas
 
-
-# from fastapi.responses import HTMLResponse, RedirectResponse
-
-# models.Base.metadata.create_all(bind=database.engine)
-
 # Load environment variables
 load_dotenv()
-
-# app = FastAPI()
 
 # Get the absolute path to the directory containing main.py
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -40,11 +35,11 @@ templates = Jinja2Templates(directory=str(PROJECT_ROOT / "frontend" / "templates
 
 # Email configuration
 email_conf = ConnectionConfig(
-    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
-    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
-    MAIL_FROM=os.getenv("MAIL_FROM"),
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME") or "",
+    MAIL_PASSWORD=SecretStr(os.getenv("MAIL_PASSWORD") or ""),
+    MAIL_FROM=os.getenv("MAIL_FROM") or "",
     MAIL_PORT=int(os.getenv("MAIL_PORT", 587)),
-    MAIL_SERVER=os.getenv("MAIL_SERVER"),
+    MAIL_SERVER=os.getenv("MAIL_SERVER") or "",
     MAIL_STARTTLS=True,
     MAIL_SSL_TLS=False,
     USE_CREDENTIALS=False,
@@ -64,22 +59,41 @@ def get_db():
 async def lifespan(app):
     models.Base.metadata.create_all(bind=database.engine)
 
-    # Get the Redis URL from environment
-    redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
+    # Only initialise Redis if we're in production or if Redis is available locally
+    redis_url = os.getenv("REDIS_URL")
+    if redis_url or os.getenv("ENVIRONMENT") == "production":
+        try:
+            # Connect to Redis
+            redis_connection = await redis.from_url(
+                redis_url or "redis://localhost:6379",
+                encoding="utf-8",
+                decode_responses=True,
+                ssl_cert_reqs=None,  # Disable SSL cert verification
+            )
 
-    # Connect to Redis with SSL cert verification disabled
-    redis_connection = await redis.from_url(
-        redis_url, encoding="utf-8", decode_responses=True, ssl_cert_reqs=None  # Disable SSL cert verification
-    )
-
-    # Initialise FastAPILimiter with the Redis connection
-    await FastAPILimiter.init(redis_connection)
+            # Initialise FastAPILimiter
+            await FastAPILimiter.init(redis_connection)
+        except Exception as e:
+            if os.getenv("ENVIRONMENT") == "production":
+                # In production, Redis is required
+                raise e
+            # In development, just log the error and continue without Redis
+            print(f"Redis connection failed: {e}. Continuing without rate limiting.")
 
     yield
 
 
 # Create the FastAPI app with a lifespan
 app = FastAPI(lifespan=lifespan)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Initialise Jinja2Templates with the correct directory
 app.mount(
@@ -90,7 +104,7 @@ app.mount(
 
 
 class CsrfSettings(BaseModel):
-    secret_key: str = os.getenv("SECRET_KEY")
+    secret_key: str = os.getenv("SECRET_KEY") or ""
 
 
 @CsrfProtect.load_config
@@ -101,20 +115,17 @@ def get_csrf_config():
 @app.exception_handler(CsrfProtectError)
 def csrf_protect_exception_handler(request: Request, exc: CsrfProtectError):
     return HTMLResponse("CSRF token missing or invalid", status_code=400)
-    # # Removed deprecated startup event; logic moved to lifespan handler.
-    # redis_connection = await redis.from_url("redis://localhost", encoding="utf-8", decode_responses=True)
-    # await FastAPILimiter.init(redis_connection)
 
 
 @app.get("/contact", response_class=HTMLResponse)
 async def get_contact(request: Request, csrf_protect: CsrfProtect = Depends()):
-    csrf_token = csrf_protect.generate_csrf()
+    csrf_token = csrf_protect.generate_csrf_tokens()
     context = {"request": request, "csrf_token": csrf_token}
     return templates.TemplateResponse("homepage/index.html", context)
 
 
 # Route for getting the contact form page.
-@app.post("/contact", dependencies=[Depends(RateLimiter(times=5, seconds=60))], response_class=HTMLResponse)
+@app.post("/contact", response_class=HTMLResponse)
 async def handle_contact(
     request: Request,
     csrf_protect: CsrfProtect = Depends(),
@@ -123,10 +134,9 @@ async def handle_contact(
     email: str = Form(...),
     message: str = Form(...),
     db: Session = Depends(get_db),
-    # prettier-ignore
+    rate_limiter: RateLimiter = Depends(RateLimiter(times=5, seconds=60)),
 ):
-
-    csrf_protect.validate_csrf(csrf_token)
+    await csrf_protect.validate_csrf(request, csrf_token)
 
     # Validate form data using Pydantic
     try:
@@ -154,16 +164,18 @@ async def handle_contact(
 
     # Send an email notification
     try:
-        email_message = MessageSchema(
-            subject=f"New Contact Form Submission from {name}",
-            recipients=[os.getenv("RECIPIENT_EMAIL")],
-            body=f"""Name: {name}
+        recipient_email = os.getenv("RECIPIENT_EMAIL")
+        if recipient_email:
+            email_message = MessageSchema(
+                subject=f"New Contact Form Submission from {name}",
+                recipients=[recipient_email],
+                body=f"""Name: {name}
 Email: {email}
 Message: {message}""",
-            subtype="plain",
-        )
-        fm = FastMail(email_conf)
-        await fm.send_message(email_message)
+                subtype=MessageType.plain,
+            )
+            fm = FastMail(email_conf)
+            await fm.send_message(email_message)
     except Exception as e:
         # Log the error, but do not expose internal errors to the user
         print(f"Error sending email: {e}")
@@ -177,17 +189,8 @@ Message: {message}""",
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request, db: Session = Depends(get_db)):
     projects = db.query(models.Project).all()
-
     context = {"request": request, "projects": projects}
     return templates.TemplateResponse("homepage/index.html", context)
-
-
-# @app.get("/index2", response_class=HTMLResponse)
-# async def index2(request: Request, db: Session = Depends(get_db)):
-#     projects = db.query(models.Project).all()
-
-#     context = {"request": request, "projects": projects}
-#     return templates.TemplateResponse("homepage/index2.html", context)
 
 
 @app.get("/resume", response_class=HTMLResponse)
@@ -197,3 +200,13 @@ async def read_resume(request: Request):
     """
     context = {"request": request, "resume_title": "My Resume"}
     return templates.TemplateResponse("resume/resume.html", context)
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse(str(PROJECT_ROOT / "frontend" / "static" / "favicon.svg"), media_type="image/svg+xml")
+
+
+@app.get("/favicon.svg", include_in_schema=False)
+async def favicon_svg():
+    return FileResponse(str(PROJECT_ROOT / "frontend" / "static" / "favicon.svg"), media_type="image/svg+xml")

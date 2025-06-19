@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
     <style>
         :root {
             --bs-body-font-family: 'Nunito', sans-serif;
@@ -775,12 +776,45 @@
             z-index: 3;
             /* Positioned above the background image */
         }
+
+        /* Under Development Stamp */
+        .stamp {
+            position: fixed;
+            top: 38%;
+            right: 48px;
+            transform: rotate(12deg) translateY(-50%);
+            color: #D23;
+            font-size: 3rem;
+            font-weight: 700;
+            border: 0.25rem solid #D23;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            text-transform: uppercase;
+            border-radius: 1rem;
+            font-family: 'Courier';
+            mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+            mask-size: 944px 604px;
+            text-align: center;
+            z-index: 999999;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .stamp {
+                font-size: 2rem;
+                right: -40px;
+                padding: 0.2rem 0.8rem;
+            }
+        }
     </style>
 </head>
 
 
 <body class="container-fluid p-0" data-bs-spy="scroll" data-bs-target="#navbarNavAltMarkup" data-bs-offset="100"
     tabindex="0">
+
+    <!-- Development Stamp -->
+    <span class="stamp">Website Under<br>Development</span>
 
     <nav class="navbar navbar-expand-lg fixed-top custom-navbar" id="mainNav">
         <div class="container">

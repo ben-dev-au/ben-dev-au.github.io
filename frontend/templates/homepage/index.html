@@ -16,6 +16,17 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
         <style>
+            html,
+            body {
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
             :root {
                 --bs-body-font-family: 'Nunito', sans-serif;
             }
@@ -1096,59 +1107,6 @@
                         <div class="section-title text-uppercase mb-5">
                             <h2 class="section-title">Get in touch</h2>
                         </div>
-                        <!-- Display Success Message
-                        {% if success %}
-                        <div class="alert alert-success" role="alert">
-                            {{ success }}
-                        </div>
-                        {% endif %} -->
-
-                        <!-- Display Error Message -->
-                        <!-- {% if error %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </div>
-                    {% endif %}
-                    <form id="contactForm" action="/contact" method="post" novalidate onsubmit="submitForm(event)">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control border border-dark" id="name" name="name"
-                                    placeholder="Name" required>
-                                <label for="name">Name</label>
-                                <div class="invalid-feedback">
-                                    Please enter your name.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="email" class="form-control border border-dark" id="email" name="email"
-                                    placeholder="name@example.com" required>
-                                <label for="email">Email Address</label>
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <div class="form-floating">
-                                <textarea class="form-control border border-dark" placeholder="Message" id="message"
-                                    name="message" style="height: 150px" required></textarea>
-                                <label for="message">Message</label>
-                                <div class="invalid-feedback">
-                                    Please enter your message.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-outline-black btn-lg">
-                                <i class="fas fa-solid fa-envelope me-2"></i> Send Message
-                            </button>
-                        </div>
-                    </form> -->
-
-
                         <iframe class="airtable-embed"
                             src="https://airtable.com/embed/appnqCCbKQac7WyI7/pagPtFDO5EnQ4wNTQ/form" frameborder="0"
                             onmousewheel="" width="100%" height="610"

@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from typing import Tuple
 from pydantic import SecretStr
 
 from fastapi import FastAPI, Request, Depends, Form
@@ -19,6 +20,7 @@ from contextlib import asynccontextmanager
 from fastapi_limiter import FastAPILimiter
 from fastapi_limiter.depends import RateLimiter
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.templating import _TemplateResponse
 
 
 # Local Imports
@@ -28,7 +30,7 @@ from . import models, database, schemas
 load_dotenv()
 
 # Get the absolute path to the directory containing main.py
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT: Path = Path(__file__).resolve().parents[2]
 
 # Define the templates directory relative to main.py
 templates = Jinja2Templates(directory=str(PROJECT_ROOT / "frontend" / "templates"))
@@ -48,7 +50,7 @@ email_conf = ConnectionConfig(
 
 # Dependency to get the database session
 def get_db():
-    db = database.SessionLocal()
+    db: Session = database.SessionLocal()
     try:
         yield db
     finally:
@@ -108,20 +110,22 @@ class CsrfSettings(BaseModel):
 
 
 @CsrfProtect.load_config
-def get_csrf_config():
+def get_csrf_config() -> CsrfSettings:
     return CsrfSettings()
 
 
 @app.exception_handler(CsrfProtectError)
-def csrf_protect_exception_handler(request: Request, exc: CsrfProtectError):
+def csrf_protect_exception_handler(request: Request, exc: CsrfProtectError) -> HTMLResponse:
     return HTMLResponse("CSRF token missing or invalid", status_code=400)
 
 
 @app.get("/contact", response_class=HTMLResponse)
-async def get_contact(request: Request, csrf_protect: CsrfProtect = Depends()):
-    csrf_token = csrf_protect.generate_csrf_tokens()
-    context = {"request": request, "csrf_token": csrf_token}
-    return templates.TemplateResponse("homepage/index.html", context)
+async def get_contact(request: Request, csrf_protect: CsrfProtect = Depends()) -> _TemplateResponse:
+    header_token, cookie_token = csrf_protect.generate_csrf_tokens()
+    context = {"request": request, "csrf_token": header_token}
+    response = templates.TemplateResponse("homepage/index.html", context)
+    response.set_cookie(key="csrf_token", value=cookie_token, httponly=True)
+    return response
 
 
 # Route for getting the contact form page.
@@ -187,14 +191,17 @@ Message: {message}""",
 
 # Homepage Routes
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, db: Session = Depends(get_db)):
-    projects = db.query(models.Project).all()
-    context = {"request": request, "projects": projects}
-    return templates.TemplateResponse("homepage/index.html", context)
+async def index(request: Request, db: Session = Depends(get_db), csrf_protect: CsrfProtect = Depends()) -> _TemplateResponse:
+    projects: list[models.Project] = db.query(models.Project).all()
+    header_token, cookie_token = csrf_protect.generate_csrf_tokens()
+    context = {"request": request, "projects": projects, "csrf_token": header_token}
+    response = templates.TemplateResponse("homepage/index.html", context)
+    response.set_cookie(key="csrf_token", value=cookie_token, httponly=True)
+    return response
 
 
 @app.get("/resume", response_class=HTMLResponse)
-async def read_resume(request: Request):
+async def read_resume(request: Request) -> _TemplateResponse:
     """
     Renders the resume.html template, passing data to it.  Separate route.
     """
@@ -203,10 +210,10 @@ async def read_resume(request: Request):
 
 
 @app.get("/favicon.ico", include_in_schema=False)
-async def favicon():
+async def favicon() -> FileResponse:
     return FileResponse(str(PROJECT_ROOT / "frontend" / "static" / "favicon.svg"), media_type="image/svg+xml")
 
 
 @app.get("/favicon.svg", include_in_schema=False)
-async def favicon_svg():
+async def favicon_svg() -> FileResponse:
     return FileResponse(str(PROJECT_ROOT / "frontend" / "static" / "favicon.svg"), media_type="image/svg+xml")

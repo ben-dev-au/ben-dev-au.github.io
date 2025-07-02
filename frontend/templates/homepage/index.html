@@ -1,1093 +1,1110 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ben Davidson's Dev Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ben Davidson's Dev Portfolio</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-    <style>
-        :root {
-            --bs-body-font-family: 'Nunito', sans-serif;
-        }
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+        <style>
+            :root {
+                --bs-body-font-family: 'Nunito', sans-serif;
+            }
 
-        body {
-            background-color: #f8f9fa;
-            /* font-family: 'Roboto', sans-serif; */
-            /*  font-family: 'Roboto Mono';*/
-            /* font-family: 'Nunito', sans-serif;
+            body {
+                background-color: #f8f9fa;
+                /* font-family: 'Roboto', sans-serif; */
+                /*  font-family: 'Roboto Mono';*/
+                /* font-family: 'Nunito', sans-serif;
     */
-            /* Light gray background */
-        }
+                /* Light gray background */
+            }
 
-        .mondrian-container {
-            margin: 0 auto;
-            padding: 20px;
-        }
+            .mondrian-container {
+                margin: 0 auto;
+                padding: 20px;
+            }
 
-        .mondrian-row {
-            margin-bottom: 20px;
-            /* Space between rows */
-        }
+            .mondrian-row {
+                margin-bottom: 20px;
+                /* Space between rows */
+            }
 
-        .mondrian-col {
-            /* border: 4px solid black; */
-            /* Thick black borders */
-            background-color: white;
-            padding: 20px;
-            min-height: 150px;
-            /* Minimum height for columns */
-        }
+            .mondrian-col {
+                /* border: 4px solid black; */
+                /* Thick black borders */
+                background-color: white;
+                padding: 20px;
+                min-height: 150px;
+                /* Minimum height for columns */
+            }
 
-        .no-padding {
-            padding: 0px;
-        }
+            .no-padding {
+                padding: 0px;
+            }
 
-        .mondrian-col-hero {
-            min-height: 300px;
-        }
+            .mondrian-col-hero {
+                min-height: 300px;
+            }
 
-        .mondrian-col-footer {
-            min-height: 75px;
-        }
+            .mondrian-col-footer {
+                min-height: 75px;
+            }
 
-        /* Custom styles for specific sections (you can adjust these) */
-        #hero-section {
-            background-color: #f0f0f0;
-            /* Slightly different background for the hero */
-        }
+            /* Custom styles for specific sections (you can adjust these) */
+            #hero-section {
+                background-color: #f0f0f0;
+                /* Slightly different background for the hero */
+            }
 
-        #projects-section .mondrian-col {
-            background-color: #e0e0e0;
-            /* Different color for project blocks */
-        }
+            #projects-section .mondrian-col {
+                background-color: #e0e0e0;
+                /* Different color for project blocks */
+            }
 
-        /* Nav-Bar: */
-        /* Navbar default state: transparent background with white text */
-        .custom-navbar {
-            background-color: transparent;
-            transition: background-color 0.3s, color 0.3s;
-        }
+            /* Nav-Bar: */
+            /* Navbar default state: transparent background with white text */
+            .custom-navbar {
+                background-color: transparent;
+                transition: background-color 0.3s, color 0.3s;
+            }
 
-        .custom-navbar .nav-link {
-            color: white;
-            display: inline-block;
-            align-items: center;
-            text-align: center;
-            white-space: nowrap;
-            padding: 0px 0px;
-            margin-top: 10px;
-            tab-size: 4;
-            border: 0 solid #000000;
-            border-radius: 0.375rem;
-            text-decoration: none;
-            box-sizing: border-box;
-            transition-duration: 0.3s;
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @media (max-width: 767px) {
             .custom-navbar .nav-link {
-                font-size: 2rem;
-                margin-top: 20px;
-            }
-        }
-
-        /* Different background colors for each menu item using nth-child */
-        .custom-navbar .nav-link:hover:nth-child(1),
-        .custom-navbar .nav-link.active:nth-child(1) {
-            box-shadow: 10px 10px 0px 0px #DC3545;
-            /* reddish */
-        }
-
-        .custom-navbar .nav-link:hover:nth-child(2),
-        .custom-navbar .nav-link.active:nth-child(2) {
-            box-shadow: 10px 10px 0px 0px #33FF57;
-            /* greenish */
-        }
-
-        .custom-navbar .nav-link:hover:nth-child(3),
-        .custom-navbar .nav-link.active:nth-child(3) {
-            box-shadow: 10px 10px 0px 0px #33adff;
-            /* blueish */
-        }
-
-        .custom-navbar .nav-link:hover:nth-child(4),
-        .custom-navbar .nav-link.active:nth-child(4) {
-            box-shadow: 10px 10px 0px 0px #F1C40F;
-            /* yellowish */
-        }
-
-        .custom-navbar .nav-link:hover:nth-child(5),
-        .custom-navbar .nav-link.active:nth-child(5) {
-            box-shadow: 10px 10px 0px 0px #9B59B6;
-            /* purple-ish */
-        }
-
-        .custom-navbar .nav-link:hover {
-            background-color: #fff;
-            border: 2px solid #000000;
-            color: #000;
-        }
-
-        .custom-navbar .nav-link.active {
-            background-color: #fff;
-            border: 2px solid #000000;
-            color: #000;
-        }
-
-        /* Navbar scrolled state: white background with black text */
-        .custom-navbar.scrolled {
-            /* background-color: #ffffffe2; */
-            padding-bottom: 20px;
-        }
-
-        @media (max-width: 767px) {
-
-            /* When mobile navbar is open and unscrolled, apply a black background */
-            .custom-navbar:not(.scrolled) .navbar-collapse.show {
-                background-color: black;
+                color: white;
+                display: inline-block;
+                align-items: center;
+                text-align: center;
+                white-space: nowrap;
+                padding: 0px 0px;
+                margin-top: 10px;
+                tab-size: 4;
+                border: 0 solid #000000;
+                border-radius: 0.375rem;
+                text-decoration: none;
+                box-sizing: border-box;
+                transition-duration: 0.3s;
+                transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             }
 
-            .navbar-toggler.scrolled {
-                background-color: #ffffff;
-                border-color: #000000;
+            @media (max-width: 767px) {
+                .custom-navbar .nav-link {
+                    font-size: 2rem;
+                    margin-top: 20px;
+                }
             }
 
-            button.navbar-toggler:not(.scrolled) {
-                background-color: #000000;
-                border-color: #FFFEFE;
+            /* Different background colors for each menu item using nth-child */
+            .custom-navbar .nav-link:hover:nth-child(1),
+            .custom-navbar .nav-link.active:nth-child(1) {
+                box-shadow: 10px 10px 0px 0px #DC3545;
+                /* reddish */
             }
 
-        }
+            .custom-navbar .nav-link:hover:nth-child(2),
+            .custom-navbar .nav-link.active:nth-child(2) {
+                box-shadow: 10px 10px 0px 0px #33FF57;
+                /* greenish */
+            }
 
-        .custom-navbar.scrolled {
-            background-color: #ffffffe2;
-            min-height: 65px;
-        }
+            .custom-navbar .nav-link:hover:nth-child(3),
+            .custom-navbar .nav-link.active:nth-child(3) {
+                box-shadow: 10px 10px 0px 0px #33adff;
+                /* blueish */
+            }
 
-        .custom-navbar.scrolled .nav-link {
-            color: black;
-        }
+            .custom-navbar .nav-link:hover:nth-child(4),
+            .custom-navbar .nav-link.active:nth-child(4) {
+                box-shadow: 10px 10px 0px 0px #F1C40F;
+                /* yellowish */
+            }
 
-        .custom-navbar.scrolled .nav-link.active {
-            color: black !important;
-        }
+            .custom-navbar .nav-link:hover:nth-child(5),
+            .custom-navbar .nav-link.active:nth-child(5) {
+                box-shadow: 10px 10px 0px 0px #9B59B6;
+                /* purple-ish */
+            }
 
-        /* Mobile nav menu full screen */
-        @media (max-width: 767px) {
+            .custom-navbar .nav-link:hover {
+                background-color: #fff;
+                border: 2px solid #000000;
+                color: #000;
+            }
 
-            /* Mobile nav menu styling */
-            .custom-navbar .navbar-collapse {
-                position: fixed;
+            .custom-navbar .nav-link.active {
+                background-color: #fff;
+                border: 2px solid #000000;
+                color: #000;
+            }
+
+            /* Navbar scrolled state: white background with black text */
+            .custom-navbar.scrolled {
+                /* background-color: #ffffffe2; */
+                padding-bottom: 20px;
+            }
+
+            @media (max-width: 767px) {
+
+                /* When mobile navbar is open and unscrolled, apply a black background */
+                .custom-navbar:not(.scrolled) .navbar-collapse.show {
+                    background-color: black;
+                }
+
+                .navbar-toggler.scrolled {
+                    background-color: #ffffff;
+                    border-color: #000000;
+                }
+
+                button.navbar-toggler:not(.scrolled) {
+                    background-color: #000000;
+                    border-color: #FFFEFE;
+                }
+
+            }
+
+            .custom-navbar.scrolled {
+                background-color: #ffffffe2;
+                min-height: 65px;
+            }
+
+            .custom-navbar.scrolled .nav-link {
+                color: black;
+            }
+
+            .custom-navbar.scrolled .nav-link.active {
+                color: black !important;
+            }
+
+            /* Mobile nav menu full screen */
+            @media (max-width: 767px) {
+
+                /* Mobile nav menu styling */
+                .custom-navbar .navbar-collapse {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100vh;
+                    background-color: #ffffffe2;
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4rem;
+                    z-index: 9999;
+                }
+
+                .custom-navbar .navbar-collapse.show {
+                    display: flex;
+                }
+
+                /* Always show the nav toggler (menu button) with black icon lines when not scrolled */
+                .custom-navbar .navbar-toggler {
+                    display: block !important;
+                    position: fixed;
+                    top: 10px;
+                    left: 10px;
+                    z-index: 10000;
+                    border-radius: 0.5rem;
+                    background-color: rgb(255, 255, 255);
+                    box-shadow: 4px 4px 0px 0px #161616;
+                    transition: box-shadow 0.15s ease-in-out;
+                }
+            }
+
+
+
+            .intro-constainer-shadow:hover {
+                /* A deeper shadow on hover for text blocks */
+                box-shadow: 10px 10px 0px 0px #ffffff;
+            }
+
+            /* Additionally, trigger the hover effect when the parent text block is hovered */
+            .text-block:hover .scroll-button-light,
+            .text-block:hover .scroll-button-dark {
+                box-shadow: 4px 4px 0px 0px rgb(255, 254, 254);
+            }
+
+            /* Trigger the button hover effect when the entire text block is hovered */
+            .text-block:hover .custom-button-shadow {
+                box-shadow: 4px 4px 0px 0px #fffafa;
+            }
+
+            /* ===== Buttons Css ===== */
+            .contact-form .single-form .input-form .primary-btn {
+                background: var(--primary);
+                color: var(--white);
+                box-shadow: var(--shadow-2);
+            }
+
+            .contact-form .single-form .input-form .active.primary-btn,
+            .contact-form .single-form .input-form .primary-btn:hover,
+            .contact-form .single-form .input-form .primary-btn:focus {
+                background: var(--primary-dark);
+                color: var(--white);
+                box-shadow: var(--shadow-4);
+            }
+
+            .contact-form .single-form .input-form .deactive.primary-btn {
+                background: var(--gray-4);
+                color: var(--dark-3);
+                pointer-events: none;
+            }
+
+            /*===========================
+    contact-01 css
+    ===========================*/
+            .contact-area {
+                padding-top: 50px;
+                padding-bottom: 100px;
+            }
+
+            .contact-area .mt-15 {
+                margin-top: 15px;
+            }
+
+            .contact-area .section-title .title {
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 55px;
+            }
+
+            @media (max-width: 767px) {
+                .contact-area .section-title .title {
+                    font-size: 24px;
+                    line-height: 35px;
+                }
+            }
+
+            .contact-form .single-form label {
+                font-size: 12px;
+                color: var(--dark-2);
+                line-height: 18px;
+                margin-left: 44px;
+            }
+
+            .contact-form .single-form .input-form {
+                position: relative;
+            }
+
+            .contact-form .single-form .input-form i {
+                font-size: 24px;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                color: var(--dark-3);
+            }
+
+            .contact-form .single-form .input-form textarea,
+            .contact-form .single-form .input-form input {
+                width: 100%;
+                height: 44px;
+                padding-left: 45px;
+                padding-right: 30px;
+                color: var(--dark-3);
+                font-size: 16px;
+                border: 0;
+                border-bottom: 1px solid var(--gray-4);
+                font-weight: 500;
+            }
+
+
+            .contact-form .single-form .input-form textarea::placeholder,
+            .contact-form .single-form .input-form input::placeholder {
+                opacity: 1;
+                color: var(--dark-3);
+            }
+
+            .contact-form .single-form .input-form textarea {
+                padding-top: 10px;
+            }
+
+            .form-input .help-block {
+                margin-top: 2px;
+            }
+
+            .form-input .help-block .list-unstyled li {
+                font-size: 12px;
+                line-height: 16px;
+                color: var(--error);
+            }
+
+            .form-input label {
+                font-size: 12px;
+                line-height: 18px;
+                color: var(--dark-3);
+                margin-bottom: 8px;
+                display: inline-block;
+            }
+
+            .form-input .input-items {
+                position: relative;
+            }
+
+            .form-input .input-items input,
+            .form-input .input-items textarea {
+                width: 100%;
+                height: 44px;
+                border: 2px solid;
+                padding-left: 44px;
+                padding-right: 12px;
+                position: relative;
+                font-size: 16px;
+                background-color: transparent;
+            }
+
+            .form-input .input-items textarea {
+                padding-top: 8px;
+                height: 130px;
+                resize: none;
+            }
+
+            .form-input .input-items i {
+                position: absolute;
+                top: 11px;
+                left: 13px;
+                font-size: 20px;
+                z-index: 9;
+            }
+
+            .form-input .input-items.default input,
+            .form-input .input-items.default textarea {
+                border-color: var(--gray-4);
+                color: var(--dark-3);
+            }
+
+            .form-input .input-items.default input:focus,
+            .form-input .input-items.default textarea:focus {
+                border-color: var(--primary);
+            }
+
+            .form-input .input-items.default input::placeholder,
+            .form-input .input-items.default textarea::placeholder {
+                color: var(--dark-3);
+                opacity: 1;
+            }
+
+            .form-input .input-items.default i {
+                color: var(--dark-3);
+            }
+
+            .form-input .input-items.active input,
+            .form-input .input-items.active textarea {
+                border-color: var(--primary-dark);
+                color: var(--black);
+            }
+
+            .form-input .input-items.active input::placeholder,
+            .form-input .input-items.active textarea::placeholder {
+                color: var(--black);
+                opacity: 1;
+            }
+
+            .form-input .input-items.active i {
+                color: var(--primary-dark);
+            }
+
+            .form-input .input-items.error input,
+            .form-input .input-items.error textarea {
+                border-color: var(--error);
+                color: var(--error);
+            }
+
+            .form-input .input-items.error input::placeholder,
+            .form-input .input-items.error textarea::placeholder {
+                color: var(--error);
+                opacity: 1;
+            }
+
+            .form-input .input-items.error i {
+                color: var(--error);
+            }
+
+            .form-input .input-items.success input,
+            .form-input .input-items.success textarea {
+                border-color: var(--success);
+                color: var(--success);
+            }
+
+            .form-input .input-items.success input::placeholder,
+            .form-input .input-items.success textarea::placeholder {
+                color: var(--success);
+                opacity: 1;
+            }
+
+            .form-input .input-items.success i {
+                color: var(--success);
+            }
+
+            .form-input .input-items.disabled input,
+            .form-input .input-items.disabled textarea {
+                border-color: var(--dark-2);
+                color: var(--dark-3);
+                background: none;
+            }
+
+            .form-input .input-items.disabled input::placeholder,
+            .form-input .input-items.disabled textarea::placeholder {
+                color: var(--dark-3);
+                opacity: 1;
+            }
+
+            .form-input .input-items.disabled i {
+                color: var(--dark-3);
+            }
+
+            .form-style-four .form-input label {
+                padding-left: 44px;
+                margin-bottom: 0;
+            }
+
+            .form-style-four .form-input .input-items input,
+            .form-style-four .form-input .input-items textarea {
+                border-top: 0;
+                border-left: 0;
+                border-right: 0;
+            }
+
+            .contact-info ul li .single-info {
+                position: relative;
+                margin-top: 19px;
+            }
+
+            .contact-info ul li .single-info .info-icon {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .contact-info ul li .single-info .info-icon i {
+                color: var(--dark-3);
+                font-size: 18px;
+                line-height: 24px;
+            }
+
+            .contact-info ul li .single-info .info-content {
+                padding-left: 30px;
+            }
+
+            .contact-info ul li .single-info .info-content .text {
+                font-size: 16px;
+                line-height: 24px;
+                color: var(--dark-3);
+                font-weight: 500;
+            }
+
+            .contact-info .social li {
+                display: inline-block;
+                margin-right: 12px;
+            }
+
+            .contact-info .social li a {
+                font-size: 20px;
+                height: 40px;
+                width: 40px;
+                line-height: 38px;
+                border: 1px solid rgba(0, 0, 0, 0.096);
+                text-align: center;
+                border-radius: 5px;
+                color: var(--dark-3);
+                -webkit-transition: all 0.3s ease-out 0s;
+                -moz-transition: all 0.3s ease-out 0s;
+                -ms-transition: all 0.3s ease-out 0s;
+                -o-transition: all 0.3s ease-out 0s;
+                transition: all 0.3s ease-out 0s;
+            }
+
+            .contact-info .social li a:hover {
+                color: var(--white);
+                background-color: var(--primary);
+                border-color: transparent;
+            }
+
+            @media (max-width: 767.98px) {
+
+                /* Make the intro text box follow the image on mobile */
+                #intro .text-block {
+                    position: static !important;
+                    transform: none !important;
+                    margin: 1rem 1rem 0 1rem;
+
+                }
+            }
+
+            /* Ensure the intro image never overflows its container */
+            #intro {
+                overflow: hidden;
+            }
+
+            /* Reusable class for fixed background images */
+            /* Reusable class for fixed background images with adjusted size and alignment */
+            .fixed-background-overlay {
+                position: relative;
+                /* Establishes a new stacking context */
+                background-image: url('/static/images/somm_laptop_cellar.jpeg');
+                /* Your background image */
+                background-size: 70% auto;
+                /* Reduce the image size to 50% of the container's width */
+                background-repeat: no-repeat;
+                /* Prevent the image from repeating */
+                background-position: center right;
+                /* Align the image to the center right */
+                background-attachment: fixed;
+                /* Keep the background fixed during scroll */
+                background-color: #000;
+                /* Black background for the rest of the section */
+                min-height: 100vh;
+                /* Ensure the section occupies full viewport height */
+                z-index: 1;
+                /* Base z-index */
+            }
+
+            /* Overlay Styling */
+            .overlay {
+                position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 100vh;
-                background-color: #ffffffe2;
-                display: none;
-                flex-direction: column;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.1);
+                /* 50% opaque black overlay */
+                z-index: 2;
+                /* Positioned above the background image */
+            }
+
+            /* Content Wrapper to ensure content appears above the overlay */
+            .fixed-background-overlay .content-wrapper {
+                position: relative;
+                z-index: 3;
+                /* Positioned above the overlay */
+                color: #fff;
+                /* White text for better contrast */
+            }
+
+            /* Text Box Styling */
+            .text-block {
+                background-color: rgba(0, 0, 0, 0.8);
+                /* White background with 0.8 opacity */
+                padding: 1rem;
+                border-radius: 0.5rem;
+            }
+
+
+
+            .scroll-button:hover {
+                background-color: #fff;
+                /* White background on hover */
+                color: #000;
+                /* Black arrow on hover */
+            }
+
+
+            /* Reusable class for scroll button containers */
+            .scroll-button-container {
+                position: absolute;
+                /* Absolute positioning within the section */
+                bottom: 60px;
+                /* 20px from the bottom */
+                left: 50%;
+                /* Center horizontally */
+                transform: translateX(-50%);
+                /* Adjust for exact centering */
+                z-index: 3;
+                /* Ensure it's above the overlay and content */
+            }
+
+            /* Scroll Button Styling */
+            .scroll-button-light,
+            .scroll-button-dark {
+                padding: 0.5rem 1rem;
+                border-radius: 50%;
+                border: 1px solid;
+                background-color: transparent;
+                /* box-shadow: 2px 2px 0px 0px rgba(252, 248, 248, 1); */
+                transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.15s ease-in-out;
+                text-decoration: none;
+                display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 4rem;
-                z-index: 9999;
+                font-size: 1.5rem;
+                /* Adjust icon size as needed */
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+                /* Change cursor to pointer on hover */
             }
 
-            .custom-navbar .navbar-collapse.show {
-                display: flex;
+            /* Light background: dark outline and icon */
+            .scroll-button-light {
+                border-color: #000;
+                color: #000;
             }
 
-            /* Always show the nav toggler (menu button) with black icon lines when not scrolled */
-            .custom-navbar .navbar-toggler {
-                display: block !important;
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                z-index: 10000;
-                border-radius: 0.5rem;
-                background-color: rgb(255, 255, 255);
-                box-shadow: 4px 4px 0px 0px #161616;
-                transition: box-shadow 0.15s ease-in-out;
+            .scroll-button-light:hover {
+                background-color: #000;
+                border-color: #fff;
+                color: #fff;
             }
-        }
 
-
-
-        .intro-constainer-shadow:hover {
-            /* A deeper shadow on hover for text blocks */
-            box-shadow: 10px 10px 0px 0px #ffffff;
-        }
-
-        /* Additionally, trigger the hover effect when the parent text block is hovered */
-        .text-block:hover .scroll-button-light,
-        .text-block:hover .scroll-button-dark {
-            box-shadow: 4px 4px 0px 0px rgb(255, 254, 254);
-        }
-
-        /* Trigger the button hover effect when the entire text block is hovered */
-        .text-block:hover .custom-button-shadow {
-            box-shadow: 4px 4px 0px 0px #fffafa;
-        }
-
-        /* ===== Buttons Css ===== */
-        .contact-form .single-form .input-form .primary-btn {
-            background: var(--primary);
-            color: var(--white);
-            box-shadow: var(--shadow-2);
-        }
-
-        .contact-form .single-form .input-form .active.primary-btn,
-        .contact-form .single-form .input-form .primary-btn:hover,
-        .contact-form .single-form .input-form .primary-btn:focus {
-            background: var(--primary-dark);
-            color: var(--white);
-            box-shadow: var(--shadow-4);
-        }
-
-        .contact-form .single-form .input-form .deactive.primary-btn {
-            background: var(--gray-4);
-            color: var(--dark-3);
-            pointer-events: none;
-        }
-
-        /*===========================
-    contact-01 css
-    ===========================*/
-        .contact-area {
-            padding-top: 50px;
-            padding-bottom: 100px;
-        }
-
-        .contact-area .mt-15 {
-            margin-top: 15px;
-        }
-
-        .contact-area .section-title .title {
-            font-size: 28px;
-            font-weight: 600;
-            line-height: 55px;
-        }
-
-        @media (max-width: 767px) {
-            .contact-area .section-title .title {
-                font-size: 24px;
-                line-height: 35px;
+            /* Dark background: light outline and icon */
+            .scroll-button-dark {
+                border-color: #fff;
+                color: #fff;
             }
-        }
 
-        .contact-form .single-form label {
-            font-size: 12px;
-            color: var(--dark-2);
-            line-height: 18px;
-            margin-left: 44px;
-        }
-
-        .contact-form .single-form .input-form {
-            position: relative;
-        }
-
-        .contact-form .single-form .input-form i {
-            font-size: 24px;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            color: var(--dark-3);
-        }
-
-        .contact-form .single-form .input-form textarea,
-        .contact-form .single-form .input-form input {
-            width: 100%;
-            height: 44px;
-            padding-left: 45px;
-            padding-right: 30px;
-            color: var(--dark-3);
-            font-size: 16px;
-            border: 0;
-            border-bottom: 1px solid var(--gray-4);
-            font-weight: 500;
-        }
-
-
-        .contact-form .single-form .input-form textarea::placeholder,
-        .contact-form .single-form .input-form input::placeholder {
-            opacity: 1;
-            color: var(--dark-3);
-        }
-
-        .contact-form .single-form .input-form textarea {
-            padding-top: 10px;
-        }
-
-        .form-input .help-block {
-            margin-top: 2px;
-        }
-
-        .form-input .help-block .list-unstyled li {
-            font-size: 12px;
-            line-height: 16px;
-            color: var(--error);
-        }
-
-        .form-input label {
-            font-size: 12px;
-            line-height: 18px;
-            color: var(--dark-3);
-            margin-bottom: 8px;
-            display: inline-block;
-        }
-
-        .form-input .input-items {
-            position: relative;
-        }
-
-        .form-input .input-items input,
-        .form-input .input-items textarea {
-            width: 100%;
-            height: 44px;
-            border: 2px solid;
-            padding-left: 44px;
-            padding-right: 12px;
-            position: relative;
-            font-size: 16px;
-            background-color: transparent;
-        }
-
-        .form-input .input-items textarea {
-            padding-top: 8px;
-            height: 130px;
-            resize: none;
-        }
-
-        .form-input .input-items i {
-            position: absolute;
-            top: 11px;
-            left: 13px;
-            font-size: 20px;
-            z-index: 9;
-        }
-
-        .form-input .input-items.default input,
-        .form-input .input-items.default textarea {
-            border-color: var(--gray-4);
-            color: var(--dark-3);
-        }
-
-        .form-input .input-items.default input:focus,
-        .form-input .input-items.default textarea:focus {
-            border-color: var(--primary);
-        }
-
-        .form-input .input-items.default input::placeholder,
-        .form-input .input-items.default textarea::placeholder {
-            color: var(--dark-3);
-            opacity: 1;
-        }
-
-        .form-input .input-items.default i {
-            color: var(--dark-3);
-        }
-
-        .form-input .input-items.active input,
-        .form-input .input-items.active textarea {
-            border-color: var(--primary-dark);
-            color: var(--black);
-        }
-
-        .form-input .input-items.active input::placeholder,
-        .form-input .input-items.active textarea::placeholder {
-            color: var(--black);
-            opacity: 1;
-        }
-
-        .form-input .input-items.active i {
-            color: var(--primary-dark);
-        }
-
-        .form-input .input-items.error input,
-        .form-input .input-items.error textarea {
-            border-color: var(--error);
-            color: var(--error);
-        }
-
-        .form-input .input-items.error input::placeholder,
-        .form-input .input-items.error textarea::placeholder {
-            color: var(--error);
-            opacity: 1;
-        }
-
-        .form-input .input-items.error i {
-            color: var(--error);
-        }
-
-        .form-input .input-items.success input,
-        .form-input .input-items.success textarea {
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        .form-input .input-items.success input::placeholder,
-        .form-input .input-items.success textarea::placeholder {
-            color: var(--success);
-            opacity: 1;
-        }
-
-        .form-input .input-items.success i {
-            color: var(--success);
-        }
-
-        .form-input .input-items.disabled input,
-        .form-input .input-items.disabled textarea {
-            border-color: var(--dark-2);
-            color: var(--dark-3);
-            background: none;
-        }
-
-        .form-input .input-items.disabled input::placeholder,
-        .form-input .input-items.disabled textarea::placeholder {
-            color: var(--dark-3);
-            opacity: 1;
-        }
-
-        .form-input .input-items.disabled i {
-            color: var(--dark-3);
-        }
-
-        .form-style-four .form-input label {
-            padding-left: 44px;
-            margin-bottom: 0;
-        }
-
-        .form-style-four .form-input .input-items input,
-        .form-style-four .form-input .input-items textarea {
-            border-top: 0;
-            border-left: 0;
-            border-right: 0;
-        }
-
-        .contact-info ul li .single-info {
-            position: relative;
-            margin-top: 19px;
-        }
-
-        .contact-info ul li .single-info .info-icon {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .contact-info ul li .single-info .info-icon i {
-            color: var(--dark-3);
-            font-size: 18px;
-            line-height: 24px;
-        }
-
-        .contact-info ul li .single-info .info-content {
-            padding-left: 30px;
-        }
-
-        .contact-info ul li .single-info .info-content .text {
-            font-size: 16px;
-            line-height: 24px;
-            color: var(--dark-3);
-            font-weight: 500;
-        }
-
-        .contact-info .social li {
-            display: inline-block;
-            margin-right: 12px;
-        }
-
-        .contact-info .social li a {
-            font-size: 20px;
-            height: 40px;
-            width: 40px;
-            line-height: 38px;
-            border: 1px solid rgba(0, 0, 0, 0.096);
-            text-align: center;
-            border-radius: 5px;
-            color: var(--dark-3);
-            -webkit-transition: all 0.3s ease-out 0s;
-            -moz-transition: all 0.3s ease-out 0s;
-            -ms-transition: all 0.3s ease-out 0s;
-            -o-transition: all 0.3s ease-out 0s;
-            transition: all 0.3s ease-out 0s;
-        }
-
-        .contact-info .social li a:hover {
-            color: var(--white);
-            background-color: var(--primary);
-            border-color: transparent;
-        }
-
-        @media (max-width: 767.98px) {
-
-            /* Make the intro text box follow the image on mobile */
-            #intro .text-block {
-                position: static !important;
-                transform: none !important;
-                margin: 1rem 1rem 0 1rem;
-
+            .scroll-button-dark:hover {
+                background-color: #fff;
+                border-color: #000;
+                color: #000;
             }
-        }
 
-        /* Ensure the intro image never overflows its container */
-        #intro {
-            overflow: hidden;
-        }
+            /* Optional: Prevent icon from capturing pointer events */
+            .scroll-button-light i,
+            .scroll-button-dark i {
+                pointer-events: none;
+            }
 
-        /* Reusable class for fixed background images */
-        /* Reusable class for fixed background images with adjusted size and alignment */
-        .fixed-background-overlay {
-            position: relative;
-            /* Establishes a new stacking context */
-            background-image: url('/static/images/somm_laptop_cellar.jpeg');
-            /* Your background image */
-            background-size: 70% auto;
-            /* Reduce the image size to 50% of the container's width */
-            background-repeat: no-repeat;
-            /* Prevent the image from repeating */
-            background-position: center right;
-            /* Align the image to the center right */
-            background-attachment: fixed;
-            /* Keep the background fixed during scroll */
-            background-color: #000;
-            /* Black background for the rest of the section */
-            min-height: 100vh;
-            /* Ensure the section occupies full viewport height */
-            z-index: 1;
-            /* Base z-index */
-        }
+            /* Project Drop Shadow Classes */
 
-        /* Overlay Styling */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            /* 50% opaque black overlay */
-            z-index: 2;
-            /* Positioned above the background image */
-        }
+            .custom-constainer-shadow {
+                /* Bootstrap Classes */
+                padding: 0.75rem 1.25rem;
+                /* py-3 px-5 */
+                border: 1px solid #f7f8fa;
+                /* Light border */
+                background-color: #ffffff;
+                /* White background */
+                color: #000000;
+                /* Black text */
+                min-height: 200px;
 
-        /* Content Wrapper to ensure content appears above the overlay */
-        .fixed-background-overlay .content-wrapper {
-            position: relative;
-            z-index: 3;
-            /* Positioned above the overlay */
-            color: #fff;
-            /* White text for better contrast */
-        }
+                /* Custom Shadow (Base Shadow) */
+                box-shadow: 4px 4px 0px 0px #ffffff;
 
-        /* Text Box Styling */
-        .text-block {
-            background-color: rgba(0, 0, 0, 0.8);
-            /* White background with 0.8 opacity */
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
+                /* Transition for smoothness */
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
+            .custom-constainer-shadow:hover {
+                /* Optional: Slight shadow on general hover */
+                box-shadow: 10px 10px 0px 0px #ffffff;
+            }
 
+            /* Project Drop Shadow Classes */
 
-        .scroll-button:hover {
-            background-color: #fff;
-            /* White background on hover */
-            color: #000;
-            /* Black arrow on hover */
-        }
+            /* 1. Red Shadow */
+            .project-shadow-red {
+                box-shadow: 4px 4px 0px 0px rgb(255, 182, 193);
+                /* Base shadow */
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
+            .project-shadow-red:hover {
+                box-shadow: 10px 10px 0px 0px rgb(255, 182, 193);
+                /* Red shadow on hover */
+            }
 
-        /* Reusable class for scroll button containers */
-        .scroll-button-container {
-            position: absolute;
-            /* Absolute positioning within the section */
-            bottom: 60px;
-            /* 20px from the bottom */
-            left: 50%;
-            /* Center horizontally */
-            transform: translateX(-50%);
-            /* Adjust for exact centering */
-            z-index: 3;
-            /* Ensure it's above the overlay and content */
-        }
+            /* 2. Blue Shadow */
+            .project-shadow-blue {
+                box-shadow: 4px 4px 0px 0px #33adff;
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
-        /* Scroll Button Styling */
-        .scroll-button-light,
-        .scroll-button-dark {
-            padding: 0.5rem 1rem;
-            border-radius: 50%;
-            border: 1px solid;
-            background-color: transparent;
-            /* box-shadow: 2px 2px 0px 0px rgba(252, 248, 248, 1); */
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.15s ease-in-out;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            /* Adjust icon size as needed */
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            /* Change cursor to pointer on hover */
-        }
+            .project-shadow-blue:hover {
+                box-shadow: 10px 10px 0px 0px #33adff;
+            }
 
-        /* Light background: dark outline and icon */
-        .scroll-button-light {
-            border-color: #000;
-            color: #000;
-        }
+            /* 3. Green Shadow */
+            .project-shadow-green {
+                box-shadow: 4px 4px 0px 0px #33FF57;
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
-        .scroll-button-light:hover {
-            background-color: #000;
-            border-color: #fff;
-            color: #fff;
-        }
+            .project-shadow-green:hover {
+                box-shadow: 10px 10px 0px 0px #33FF57;
+            }
 
-        /* Dark background: light outline and icon */
-        .scroll-button-dark {
-            border-color: #fff;
-            color: #fff;
-        }
+            /* 4. Yellow Shadow */
+            .project-shadow-yellow {
+                box-shadow: 4px 4px 0px 0px #F1C40F;
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
-        .scroll-button-dark:hover {
-            background-color: #fff;
-            border-color: #000;
-            color: #000;
-        }
+            .project-shadow-yellow:hover {
+                box-shadow: 10px 10px 0px 0px #F1C40F;
+            }
 
-        /* Optional: Prevent icon from capturing pointer events */
-        .scroll-button-light i,
-        .scroll-button-dark i {
-            pointer-events: none;
-        }
+            /* 5. Purple Shadow */
+            .project-shadow-purple {
+                box-shadow: 4px 4px 0px 0px #9B59B6;
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
-        /* Project Drop Shadow Classes */
+            .project-shadow-purple:hover {
+                box-shadow: 10px 10px 0px 0px #9B59B6;
+            }
 
-        .custom-constainer-shadow {
-            /* Bootstrap Classes */
-            padding: 0.75rem 1.25rem;
-            /* py-3 px-5 */
-            border: 1px solid #f7f8fa;
-            /* Light border */
-            background-color: #ffffff;
-            /* White background */
-            color: #000000;
-            /* Black text */
-            min-height: 200px;
+            /* 6. Orange Shadow (Updated to use red from the navbar) */
+            .project-shadow-orange {
+                box-shadow: 4px 4px 0px 0px #DC3545;
+                transition: box-shadow 0.3s ease-in-out;
+            }
 
-            /* Custom Shadow (Base Shadow) */
-            box-shadow: 4px 4px 0px 0px #ffffff;
+            .project-shadow-orange:hover {
+                box-shadow: 10px 10px 0px 0px #DC3545;
+            }
 
-            /* Transition for smoothness */
-            transition: box-shadow 0.3s ease-in-out;
-        }
+            #projects .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.2);
+                /* 50% opaque black overlay */
+                z-index: 3;
+                /* Positioned above the background image */
+            }
 
-        .custom-constainer-shadow:hover {
-            /* Optional: Slight shadow on general hover */
-            box-shadow: 10px 10px 0px 0px #ffffff;
-        }
-
-        /* Project Drop Shadow Classes */
-
-        /* 1. Red Shadow */
-        .project-shadow-red {
-            box-shadow: 4px 4px 0px 0px rgb(255, 182, 193);
-            /* Base shadow */
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .project-shadow-red:hover {
-            box-shadow: 10px 10px 0px 0px rgb(255, 182, 193);
-            /* Red shadow on hover */
-        }
-
-        /* 2. Blue Shadow */
-        .project-shadow-blue {
-            box-shadow: 4px 4px 0px 0px #33adff;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .project-shadow-blue:hover {
-            box-shadow: 10px 10px 0px 0px #33adff;
-        }
-
-        /* 3. Green Shadow */
-        .project-shadow-green {
-            box-shadow: 4px 4px 0px 0px #33FF57;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .project-shadow-green:hover {
-            box-shadow: 10px 10px 0px 0px #33FF57;
-        }
-
-        /* 4. Yellow Shadow */
-        .project-shadow-yellow {
-            box-shadow: 4px 4px 0px 0px #F1C40F;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .project-shadow-yellow:hover {
-            box-shadow: 10px 10px 0px 0px #F1C40F;
-        }
-
-        /* 5. Purple Shadow */
-        .project-shadow-purple {
-            box-shadow: 4px 4px 0px 0px #9B59B6;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .project-shadow-purple:hover {
-            box-shadow: 10px 10px 0px 0px #9B59B6;
-        }
-
-        /* 6. Orange Shadow (Updated to use red from the navbar) */
-        .project-shadow-orange {
-            box-shadow: 4px 4px 0px 0px #DC3545;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .project-shadow-orange:hover {
-            box-shadow: 10px 10px 0px 0px #DC3545;
-        }
-
-        #projects .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            /* 50% opaque black overlay */
-            z-index: 3;
-            /* Positioned above the background image */
-        }
-
-        /* Under Development Stamp */
-        .stamp {
-            position: fixed;
-            top: 38%;
-            right: 48px;
-            transform: rotate(12deg) translateY(-50%);
-            color: #D23;
-            font-size: 3rem;
-            font-weight: 700;
-            border: 0.25rem solid #D23;
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            text-transform: uppercase;
-            border-radius: 1rem;
-            font-family: 'Courier';
-            mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
-            mask-size: 944px 604px;
-            text-align: center;
-            z-index: 999999;
-            pointer-events: none;
-        }
-
-        @media (max-width: 768px) {
+            /* Under Development Stamp */
             .stamp {
-                font-size: 2rem;
-                right: -40px;
-                padding: 0.2rem 0.8rem;
+                position: fixed;
+                top: 38%;
+                right: 48px;
+                transform: rotate(12deg) translateY(-50%);
+                color: #D23;
+                font-size: 3rem;
+                font-weight: 700;
+                border: 0.25rem solid #D23;
+                display: inline-block;
+                padding: 0.25rem 1rem;
+                text-transform: uppercase;
+                border-radius: 1rem;
+                font-family: 'Courier';
+                mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+                mask-size: 944px 604px;
+                text-align: center;
+                z-index: 999999;
+                pointer-events: none;
             }
-        }
-    </style>
-</head>
 
-
-<body class="container-fluid p-0" data-bs-spy="scroll" data-bs-target="#navbarNavAltMarkup" data-bs-offset="100"
-    tabindex="0">
-
-    <!-- Development Stamp -->
-    <span class="stamp">Website Under<br>Development</span>
-
-    <nav class="navbar navbar-expand-lg fixed-top custom-navbar" id="mainNav">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav fs-4">
-                    <a class="nav-link mx-3 scrollLink" href="#intro">Home</a>
-                    <a class="nav-link mx-3 scrollLink" href="#about-section">About</a>
-                    <a class="nav-link mx-3 scrollLink" href="#resume-section">Resume</a>
-                    <a class="nav-link mx-3 scrollLink" href="#projects">Projects</a>
-                    <a class="nav-link mx-3 scrollLink" href="#footer">Contact</a>
-                </div>
-            </div>
-            <script>
-                document.querySelectorAll('.scrollLink').forEach(link => {
-                    link.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    });
-                });
-            </script>
-        </div>
-        </div>
-    </nav>
-
-    <!-- Intro Section -->
-    <section id="intro" class="fixed-background-overlay d-flex align-items-center">
-        <!-- Overlay Div -->
-        <div class="overlay"></div>
-
-        <!-- Content Wrapper -->
-        <div class="container content-wrapper p-0">
-            <style>
-                @media (max-width: 768px) {
-                    .content-wrapper {
-                        margin-top: 50vh;
-                    }
+            @media (max-width: 768px) {
+                .stamp {
+                    font-size: 2rem;
+                    right: -40px;
+                    padding: 0.2rem 0.8rem;
                 }
-            </style>
-            <div class="row align-items-center g-0">
-                <div class="col-md-4">
-                    <!-- Text Box -->
-                    <div class="custom-constainer-shadow text-block mb-4"
-                        style="background-color: rgba(0, 0, 0, 0.8); color: #fff; position: relative; transform: scale(1.3); transform-origin: bottom left;">
-                        <h2 class=" text-danger">Hi, I'm Ben.</h2>
-                        <p class="lead">A Software Engineering student based in Adelaide.</p>
-                        <p>
-                            Previous Career: <br>
-                            3 Hat Sommelier | Business General Manager
-                        </p>
+            }
+        </style>
+    </head>
+
+
+    <body class="container-fluid p-0" data-bs-spy="scroll" data-bs-target="#navbarNavAltMarkup" data-bs-offset="100"
+        tabindex="0">
+
+        <!-- Development Stamp -->
+        <span class="stamp">Under Casual<br>Development</span>
+
+        <nav class="navbar navbar-expand-lg fixed-top custom-navbar" id="mainNav">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav fs-4">
+                        <a class="nav-link mx-3 scrollLink" href="#intro">Home</a>
+                        <a class="nav-link mx-3 scrollLink" href="#about-section">About</a>
+                        <a class="nav-link mx-3 scrollLink" href="#resume-section">Resume</a>
+                        <a class="nav-link mx-3 scrollLink" href="#projects">Projects</a>
+                        <a class="nav-link mx-3 scrollLink" href="#footer">Contact</a>
                     </div>
                 </div>
+                <script>
+                    document.querySelectorAll('.scrollLink').forEach(link => {
+                        link.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            const target = document.querySelector(this.getAttribute('href'));
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+                    });
+                </script>
             </div>
-        </div>
-        <!-- Scroll Button Positioned Absolutely Relative to the Section -->
-        <div class="scroll-button-container">
-            <a href="#about-section" id="scrollToAbout" class="scroll-button-dark" aria-label="Scroll to About Section">
-                <i class="fas fa-chevron-down"></i>
-            </a>
-        </div>
-    </section>
+            </div>
+        </nav>
 
-    <!-- Image Gallery Section -->
-    <section id="about-section"
-        class="py-5 bg-light d-flex min-vh-100 align-items-center justify-content-center position-relative">
-        <div class="container col-8 mt-5 mb-5">
-            <div class="row mb-4">
-                <div class="col text-left">
-                    <h2 class="section-title text-uppercase">About Me</h2>
-                    <hr class="mx-auto" style="width: 60px; border-top: 3px solid #212121;">
-                    <p class="mt-3">
-                    <p>For the past 20 years, my passion for the wine industry has driven me to explore its many facets,
-                        from vineyard to cellar and beyond. This pursuit has been more than a job; it's been a personal
-                        investment of time, resources, and countless journeys to wine regions worldwide, including
-                        extensive exploration across Australia. My love of motorcycling and photography has often
-                        intersected with these travels, leading to many unforgettable rides through frequently stunning
-                        wine country.</p>
+        <!-- Intro Section -->
+        <section id="intro" class="fixed-background-overlay d-flex align-items-center">
+            <!-- Overlay Div -->
+            <div class="overlay"></div>
 
-                    <p>Throughout my career, I've consistently sought opportunities to leverage technology and custom
-                        systems to address inefficiencies and drive improvements within the wine industry. This
-                        problem-solving mindset has been a constant, from driving and creating databases to digitise and
-                        more efficiently manage some of the world's largest wine cellars to building user interfaces
-                        that cut stocktaking times by nearly a week every month; and through to building a custom
-                        e-commerce platform (complete with 360° bottle images for label viewing—my favorite feature) and
-                        revitalising a struggling independent wine retail business. In this role, I led a complete
-                        business overhaul, modernising operations and ultimately returning the business to profitability
-                        following a long period of losses.</p>
-
-                    <p>My career has also encompassed diverse experiences, from the excitement of working at Glastonbury
-                        Festival to the hands-on work of vintages at various wineries. I've honed my skills as a
-                        Sommelier in renowned 2-3 Hat and World Top 50 restaurants, earning both national and
-                        international accolades. While these experiences were invaluable, some of my fondest memories
-                        come from working in the lesser-known restaurants, often in the middle of nowhere, quietly
-                        delivering authentic magic.</p>
-
-                    <p>This passion for building technology led me to pursue a formal education in software engineering
-                        at the University of South Australia in 2024. Since then, my goal has been to transition my
-                        focus from using technology as a tool within the wine industry to building technology as my core
-                        profession and passion.</p>
-                </div>
-                <div class="row pb-4">
-                    <!-- Repeat this block for each image -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
-                                data-bs-image="https://html5up.net/uploads/demos/astral/images/pic01.jpg"
-                                data-bs-title="Project Title 1">
-                                <img src="https://html5up.net/uploads/demos/astral/images/pic01.jpg"
-                                    class="card-img-top img-fluid" alt="Project 1">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Image 2 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
-                                data-bs-image="https://html5up.net/uploads/demos/astral/images/pic02.jpg"
-                                data-bs-title="Project Title 2">
-                                <img src="https://html5up.net/uploads/demos/astral/images/pic02.jpg"
-                                    class="card-img-top img-fluid" alt="Project 2">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Image 3 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
-                                data-bs-image="https://html5up.net/uploads/demos/astral/images/pic03.jpg"
-                                data-bs-title="Project Title 3">
-                                <img src="https://html5up.net/uploads/demos/astral/images/pic03.jpg"
-                                    class="card-img-top img-fluid" alt="Project 3">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Image 4 -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
-                                data-bs-image="https://html5up.net/uploads/demos/astral/images/pic04.jpg"
-                                data-bs-title="Project Title 4">
-                                <img src="https://html5up.net/uploads/demos/astral/images/pic04.jpg"
-                                    class="card-img-top img-fluid" alt="Project 4">
-                            </a>
+            <!-- Content Wrapper -->
+            <div class="container content-wrapper p-0">
+                <style>
+                    @media (max-width: 768px) {
+                        .content-wrapper {
+                            margin-top: 50vh;
+                        }
+                    }
+                </style>
+                <div class="row align-items-center g-0">
+                    <div class="col-md-4">
+                        <!-- Text Box -->
+                        <div class="custom-constainer-shadow text-block mb-4"
+                            style="background-color: rgba(0, 0, 0, 0.8); color: #fff; position: relative; transform: scale(1.3); transform-origin: bottom left;">
+                            <h2 class=" text-danger">Hi, I'm Ben.</h2>
+                            <p class="lead">A Software Engineering student based in Adelaide.</p>
+                            <p>
+                                Previous Career: <br>
+                                3 Hat Sommelier | Business General Manager
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title fw-bold" id="imageModalLabel">Project Title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <img src="" id="modalImage" class="img-fluid" alt="Project Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Scroll Button Positioned Absolutely Relative to the Section -->
             <div class="scroll-button-container">
-                <a href="#resume-section" class="scroll-button-light" id="scrollToResume">
+                <a href="#about-section" id="scrollToAbout" class="scroll-button-dark"
+                    aria-label="Scroll to About Section">
                     <i class="fas fa-chevron-down"></i>
                 </a>
             </div>
-    </section>
+        </section>
 
-    <section id="resume-section" class="position-relative" style="background-color: #f2f2e9;">
-        <div class="container pt-5">
-            <div class="row m-0 p-0 d-flex min-vh-100 justify-content-center">
-                {% include 'resume/resume.html' %}
-            </div>
-        </div>
+        <!-- Image Gallery Section -->
+        <section id="about-section"
+            class="py-5 bg-light d-flex min-vh-100 align-items-center justify-content-center position-relative">
+            <div class="container col-8 mt-5 mb-5">
+                <div class="row mb-4">
+                    <div class="col text-left">
+                        <h2 class="section-title text-uppercase">About Me</h2>
+                        <hr class="mx-auto" style="width: 60px; border-top: 3px solid #212121;">
+                        <p class="mt-3">
+                        <p>For the past 20 years, my passion for the wine industry has driven me to explore its many
+                            facets,
+                            from vineyard to cellar and beyond. This pursuit has been more than a job; it's been a
+                            personal
+                            investment of time, resources, and countless journeys to wine regions worldwide, including
+                            extensive exploration across Australia. My love of motorcycling and photography has often
+                            intersected with these travels, leading to many unforgettable rides through frequently
+                            stunning
+                            wine country.</p>
 
-        <div class="position-relative">
-            <div class="scroll-button-container">
-                <a href="#projects" class="scroll-button-light" id="scrollToProjects"
-                    aria-label="Scroll to Projects Section">
-                    <i class="fas fa-chevron-down"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+                        <p>Throughout my career, I've consistently sought opportunities to leverage technology and
+                            custom
+                            systems to address inefficiencies and drive improvements within the wine industry. This
+                            problem-solving mindset has been a constant, from driving and creating databases to digitise
+                            and
+                            more efficiently manage some of the world's largest wine cellars to building user interfaces
+                            that cut stocktaking times by nearly a week every month; and through to building a custom
+                            e-commerce platform (complete with 360° bottle images for label viewing—my favorite feature)
+                            and
+                            revitalising a struggling independent wine retail business. In this role, I led a complete
+                            business overhaul, modernising operations and ultimately returning the business to
+                            profitability
+                            following a long period of losses.</p>
 
-    <!-- Projects Section -->
-    <section id="projects"
-        class="d-flex min-vh-100 align-items-center justify-content-center position-relative bg-white">
-        <div class="container" style="padding-bottom: 150px;">
-            <!-- Header above the carousel with some top margin -->
-            <div class="row" style="margin-top: 30px;">
-                <div class="col text-center mt-5 mb-3">
-                    <h2 class="section-title text-uppercase d-flex" style="margin-left: 7%;">Projects</h2>
-                </div>
-            </div>
+                        <p>My career has also encompassed diverse experiences, from the excitement of working at
+                            Glastonbury
+                            Festival to the hands-on work of vintages at various wineries. I've honed my skills as a
+                            Sommelier in renowned 2-3 Hat and World Top 50 restaurants, earning both national and
+                            international accolades. While these experiences were invaluable, some of my fondest
+                            memories
+                            come from working in the lesser-known restaurants, often in the middle of nowhere, quietly
+                            delivering authentic magic.</p>
 
-            <!-- Carousel moved lower in the container -->
-            <div class="row" data-bs-theme="dark">
-                <div id="carouselProjects" class="col-8 carousel slide border border-dark rounded-3 mx-auto"
-                    style="margin-top: 20px;" data-bs-ride="carousel">
-                    <!-- Carousel Indicators -->
-                    <div class="carousel-indicators">
-                        {% for project in projects %}
-                        <button type="button" data-bs-target="#carouselProjects" data-bs-slide-to="{{ loop.index0 }}"
-                            class="{% if loop.first %}active{% endif %}"
-                            aria-current="{% if loop.first %}true{% endif %}"
-                            aria-label="Slide {{ loop.index }}"></button>
-                        {% endfor %}
+                        <p>This passion for building technology led me to pursue a formal education in software
+                            engineering
+                            at the University of South Australia in 2024. Since then, my goal has been to transition my
+                            focus from using technology as a tool within the wine industry to building technology as my
+                            core
+                            profession and passion.</p>
                     </div>
-
-                    <!-- Carousel Items -->
-                    <div class="carousel-inner">
-                        {% for project in projects %}
-                        <div class="carousel-item mt-2 {% if loop.first %}active{% endif %}">
-                            <img src="{{ project.image_path }}" class="d-block w-100" alt="{{ project.title }}"
-                                loading="lazy">
-                            <div class="carousel-caption" style="position: static; transform: none; margin-top: 10px;">
-                                <h4>{{ project.title }}</h4>
-                                <p>{{ project.description }}</p>
-                                {% if project.link %}
-                                <a href="{{ project.link }}" class="btn btn-outline-dark mt-2" target="_blank">View
-                                    Project</a>
-                                {% endif %}
+                    <div class="row pb-4">
+                        <!-- Repeat this block for each image -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                                    data-bs-image="https://html5up.net/uploads/demos/astral/images/pic01.jpg"
+                                    data-bs-title="Project Title 1">
+                                    <img src="https://html5up.net/uploads/demos/astral/images/pic01.jpg"
+                                        class="card-img-top img-fluid" alt="Project 1">
+                                </a>
                             </div>
                         </div>
-                        {% endfor %}
-                    </div>
 
-                    <!-- Carousel Controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselProjects"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselProjects"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                        <!-- Image 2 -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                                    data-bs-image="https://html5up.net/uploads/demos/astral/images/pic02.jpg"
+                                    data-bs-title="Project Title 2">
+                                    <img src="https://html5up.net/uploads/demos/astral/images/pic02.jpg"
+                                        class="card-img-top img-fluid" alt="Project 2">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Image 3 -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                                    data-bs-image="https://html5up.net/uploads/demos/astral/images/pic03.jpg"
+                                    data-bs-title="Project Title 3">
+                                    <img src="https://html5up.net/uploads/demos/astral/images/pic03.jpg"
+                                        class="card-img-top img-fluid" alt="Project 3">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Image 4 -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal"
+                                    data-bs-image="https://html5up.net/uploads/demos/astral/images/pic04.jpg"
+                                    data-bs-title="Project Title 4">
+                                    <img src="https://html5up.net/uploads/demos/astral/images/pic04.jpg"
+                                        class="card-img-top img-fluid" alt="Project 4">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="imageModalLabel">Project Title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <img src="" id="modalImage" class="img-fluid" alt="Project Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-button-container">
+                    <a href="#resume-section" class="scroll-button-light" id="scrollToResume">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+        </section>
+
+        <section id="resume-section" class="position-relative" style="background-color: #f2f2e9;">
+            <div class="container pt-5">
+                <div class="row m-0 p-0 d-flex min-vh-100 justify-content-center">
+                    {% include 'resume/resume.html' %}
                 </div>
             </div>
-        </div>
-        <div class="scroll-button-container">
-            <a href="#footer" class="scroll-button-light" id="scrollToFooter" aria-label="Scroll to Contact Section">
-                <i class="fas fa-chevron-down fa-lg"></i>
-            </a>
-        </div>
-    </section>
 
+            <div class="position-relative">
+                <div class="scroll-button-container">
+                    <a href="#projects" class="scroll-button-light" id="scrollToProjects"
+                        aria-label="Scroll to Projects Section">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="footer" class="min-vh-100 d-flex flex-column" style="background-color: #d7e9e3;">
-        <div class="row flex-grow-1 d-flex align-items-center justify-content-center">
-            <div class="row justify-content-center">
-                <div class="col-md-5">
-                    <div class="section-title text-uppercase mb-5">
-                        <h2 class="section-title">Get in touch</h2>
+        <!-- Projects Section -->
+        <section id="projects"
+            class="d-flex min-vh-100 align-items-center justify-content-center position-relative bg-white">
+            <div class="container" style="padding-bottom: 150px;">
+                <!-- Header above the carousel with some top margin -->
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col text-center mt-5 mb-3">
+                        <h2 class="section-title text-uppercase d-flex" style="margin-left: 7%;">Projects</h2>
                     </div>
-                    <!-- Display Success Message -->
-                    {% if success %}
-                    <div class="alert alert-success" role="alert">
-                        {{ success }}
-                    </div>
-                    {% endif %}
+                </div>
 
-                    <!-- Display Error Message -->
-                    {% if error %}
+                <!-- Carousel moved lower in the container -->
+                <div class="row" data-bs-theme="dark">
+                    <div id="carouselProjects" class="col-8 carousel slide border border-dark rounded-3 mx-auto"
+                        style="margin-top: 20px;" data-bs-ride="carousel">
+                        <!-- Carousel Indicators -->
+                        <div class="carousel-indicators">
+                            {% for project in projects %}
+                            <button type="button" data-bs-target="#carouselProjects"
+                                data-bs-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}"
+                                aria-current="{% if loop.first %}true{% endif %}"
+                                aria-label="Slide {{ loop.index }}"></button>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Carousel Items -->
+                        <div class="carousel-inner">
+                            {% for project in projects %}
+                            <div class="carousel-item mt-2 {% if loop.first %}active{% endif %}">
+                                <img src="{{ project.image_path }}" class="d-block w-100" alt="{{ project.title }}"
+                                    loading="lazy">
+                                <div class="carousel-caption"
+                                    style="position: static; transform: none; margin-top: 10px;">
+                                    <h4>{{ project.title }}</h4>
+                                    <p>{{ project.description }}</p>
+                                    {% if project.link %}
+                                    <a href="{{ project.link }}" class="btn btn-outline-dark mt-2" target="_blank">View
+                                        Project</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Carousel Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProjects"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselProjects"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-button-container">
+                <a href="#footer" class="scroll-button-light" id="scrollToFooter"
+                    aria-label="Scroll to Contact Section">
+                    <i class="fas fa-chevron-down fa-lg"></i>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="footer" class="min-vh-100 d-flex flex-column" style="background-color: #d7e9e3;">
+            <div class="row flex-grow-1 d-flex align-items-center justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="section-title text-uppercase mb-5">
+                            <h2 class="section-title">Get in touch</h2>
+                        </div>
+                        <!-- Display Success Message
+                        {% if success %}
+                        <div class="alert alert-success" role="alert">
+                            {{ success }}
+                        </div>
+                        {% endif %} -->
+
+                        <!-- Display Error Message -->
+                        <!-- {% if error %}
                     <div class="alert alert-danger" role="alert">
                         {{ error }}
                     </div>
@@ -1129,216 +1146,222 @@
                                 <i class="fas fa-solid fa-envelope me-2"></i> Send Message
                             </button>
                         </div>
-                    </form>
+                    </form> -->
 
+
+                        <iframe class="airtable-embed"
+                            src="https://airtable.com/embed/appnqCCbKQac7WyI7/pagPtFDO5EnQ4wNTQ/form" frameborder="0"
+                            onmousewheel="" width="100%" height="610"
+                            style="background: transparent; border: 1px solid #D7E9E3;"></iframe>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container d-flex align-items-center justify-content-center">
-            <footer class="col-9 flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
-                <div class="col-md-4 d-flex align-items-center">
-                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <svg class="bi" width="30" height="24">
-                            <use xlink:href="#bootstrap"></use>
-                        </svg>
-                    </a>
-                    <span class="mb-3 mb-md-0 text-muted">© 2025 Ben Davidson</span>
-                </div>
-            </footer>
-        </div>
-    </section>
+            <div class="container d-flex align-items-center justify-content-center">
+                <footer
+                    class="col-9 flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                            <svg class="bi" width="30" height="24">
+                                <use xlink:href="#bootstrap"></use>
+                            </svg>
+                        </a>
+                        <span class="mb-3 mb-md-0 text-muted">© 2025 Ben Davidson</span>
+                    </div>
+                </footer>
+            </div>
+        </section>
 
-    <!-- Scroll Button -->
-    <!-- <div class="scroll-button-container"> -->
-    <button class="scroll-button-light" id="scrollTopBtn"
-        style="position: fixed; bottom: 60px; right: 40px; z-index: 1000; display: none; padding: 0;">
-        <i class="fas fa-chevron-up" style="font-size: 1.5rem;"></i>
-    </button>
-    <!-- </div> -->
-
-
-
-    <script>
-        window.addEventListener('scroll', () => {
-            const navToggle = document.querySelector('.navbar-toggler');
-            if (window.scrollY > 50) {  // adjust the scroll position as needed
-                navToggle.classList.add('scrolled');
-            } else {
-                navToggle.classList.remove('scrolled');
-            }
-        });
-
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.custom-navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Scroll to About Section
-            const scrollToAboutBtn = document.getElementById("scrollToAbout");
-            if (scrollToAboutBtn) {
-                scrollToAboutBtn.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    document.querySelector("#about-section").scrollIntoView({ behavior: "smooth" });
-                });
-            }
-
-            // Scroll to Resume Section
-            const scrollToResumeBtn = document.getElementById("scrollToResume");
-            if (scrollToResumeBtn) {
-                scrollToResumeBtn.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    document.querySelector("#resume-section").scrollIntoView({ behavior: "smooth" });
-                });
-            }
-            // Scroll to Career History Section
-            const scrollToProjectsBtn = document.getElementById("scrollToProjects");
-            if (scrollToProjectsBtn) {
-                scrollToProjectsBtn.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    document.querySelector("#projects").scrollIntoView({ behavior: "smooth" });
-                });
-            }
-
-            // Scroll to Footer Section
-            const scrollToFooterBtn = document.getElementById("scrollToFooter");
-            if (scrollToFooterBtn) {
-                scrollToFooterBtn.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    document.querySelector("#footer").scrollIntoView({ behavior: "smooth" });
-                });
-            }
-
-            // Scroll to Intro Section from Footer
-            const scrollToIntroBtn = document.getElementById("scrollToIntro");
-            if (scrollToIntroBtn) {
-                scrollToIntroBtn.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    document.querySelector("#intro").scrollIntoView({ behavior: "smooth" });
-                });
-            }
-        });
+        <!-- Scroll Button -->
+        <!-- <div class="scroll-button-container"> -->
+        <button class="scroll-button-light" id="scrollTopBtn"
+            style="position: fixed; bottom: 60px; right: 40px; z-index: 1000; display: none; padding: 0;">
+            <i class="fas fa-chevron-up" style="font-size: 1.5rem;"></i>
+        </button>
+        <!-- </div> -->
 
 
 
-        // Show button when scrolled down
-        window.addEventListener('scroll', function () {
-            const scrollBtn = document.getElementById('scrollTopBtn');
-            scrollBtn.style.display = window.scrollY > 100 ? 'block' : 'none';
-        });
-
-        // Smooth scroll to the top of the page
-        document.getElementById('scrollTopBtn').addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        })
-        // Timeline Swiper:
-        var timelineSwiper = new Swiper('.timeline .swiper-container', {
-            direction: 'vertical',
-            loop: false,
-            speed: 1600,
-            pagination: '.swiper-pagination',
-            paginationBulletRender: function (swiper, index, className) {
-                var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
-                return '<span class="' + className + '">' + year + '</span>';
-            },
-            paginationClickable: true,
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            breakpoints: {
-                768: {
-                    direction: 'horizontal',
-                }
-            }
-        });
-
-        // JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
-
-            // Fetch the form to apply custom Bootstrap validation to
-            var form = document.getElementById('contactForm')
-
-            form.addEventListener('submit', function (event) {
-                event.preventDefault()
-                event.stopPropagation()
-
-                if (form.checkValidity()) {
-                    // // Get the CSRF token from the hidden field
-                    // var csrfToken = form.querySelector('input[name="csrf_token"]').value;
-
-                    // Create a FormData object from the form data
-                    var formData = new FormData(form);
-
-                    // Send the form data via AJAX (using fetch) with the CSRF token in the header
-                    fetch(form.action, {
-                        method: 'POST',
-                        // headers: {
-                        //     'X-CSRF-Token': csrfToken
-                        // },
-                        body: formData
-                    })
-                        .then(function (response) {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.text();
-                        })
-                        .then(function (data) {
-                            // On success, show the success modal and reset the form
-                            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                            successModal.show();
-                            form.reset();
-                            form.classList.remove('was-validated');
-                        })
-                        .catch(function (error) {
-                            console.error('There was a problem with the fetch operation:', error);
-                            // You can add additional error handling here if desired
-                        });
+        <script>
+            window.addEventListener('scroll', () => {
+                const navToggle = document.querySelector('.navbar-toggler');
+                if (window.scrollY > 50) {  // adjust the scroll position as needed
+                    navToggle.classList.add('scrolled');
                 } else {
-                    form.classList.add('was-validated');
-                }
-            }, false);
-        })();
-
-
-        // Initialise the modal with image and title
-        var imageModal = document.getElementById('imageModal');
-        imageModal.addEventListener('show.bs.modal', function (event) {
-            var triggerElement = event.relatedTarget; // Element that triggered the modal
-            var imageSrc = triggerElement.getAttribute('data-bs-image');
-            var imageTitle = triggerElement.getAttribute('data-bs-title');
-
-            // Update the modal's content
-            var modalTitle = imageModal.querySelector('.modal-title');
-            var modalImage = imageModal.querySelector('#modalImage');
-
-            modalTitle.textContent = imageTitle;
-            modalImage.src = imageSrc;
-            modalImage.alt = imageTitle;
-        });
-        /* JavaScript to auto close the mobile nav when a nav-link is clicked */
-        document.querySelectorAll('.custom-navbar .nav-link').forEach(link => {
-            link.addEventListener('click', function () {
-                const navbarCollapse = document.querySelector('.custom-navbar .navbar-collapse');
-
-                if (navbarCollapse.classList.contains('show')) {
-
-                    // Collapse the menu using Bootstrap's Collapse API
-                    new bootstrap.Collapse(navbarCollapse, {
-                        toggle: false
-                    }).hide();
+                    navToggle.classList.remove('scrolled');
                 }
             });
-        });
-    </script>
 
-</body>
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.custom-navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                // Scroll to About Section
+                const scrollToAboutBtn = document.getElementById("scrollToAbout");
+                if (scrollToAboutBtn) {
+                    scrollToAboutBtn.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        document.querySelector("#about-section").scrollIntoView({ behavior: "smooth" });
+                    });
+                }
+
+                // Scroll to Resume Section
+                const scrollToResumeBtn = document.getElementById("scrollToResume");
+                if (scrollToResumeBtn) {
+                    scrollToResumeBtn.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        document.querySelector("#resume-section").scrollIntoView({ behavior: "smooth" });
+                    });
+                }
+                // Scroll to Career History Section
+                const scrollToProjectsBtn = document.getElementById("scrollToProjects");
+                if (scrollToProjectsBtn) {
+                    scrollToProjectsBtn.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        document.querySelector("#projects").scrollIntoView({ behavior: "smooth" });
+                    });
+                }
+
+                // Scroll to Footer Section
+                const scrollToFooterBtn = document.getElementById("scrollToFooter");
+                if (scrollToFooterBtn) {
+                    scrollToFooterBtn.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        document.querySelector("#footer").scrollIntoView({ behavior: "smooth" });
+                    });
+                }
+
+                // Scroll to Intro Section from Footer
+                const scrollToIntroBtn = document.getElementById("scrollToIntro");
+                if (scrollToIntroBtn) {
+                    scrollToIntroBtn.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        document.querySelector("#intro").scrollIntoView({ behavior: "smooth" });
+                    });
+                }
+            });
+
+
+
+            // Show button when scrolled down
+            window.addEventListener('scroll', function () {
+                const scrollBtn = document.getElementById('scrollTopBtn');
+                scrollBtn.style.display = window.scrollY > 100 ? 'block' : 'none';
+            });
+
+            // Smooth scroll to the top of the page
+            document.getElementById('scrollTopBtn').addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            })
+            // Timeline Swiper:
+            var timelineSwiper = new Swiper('.timeline .swiper-container', {
+                direction: 'vertical',
+                loop: false,
+                speed: 1600,
+                pagination: '.swiper-pagination',
+                paginationBulletRender: function (swiper, index, className) {
+                    var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
+                    return '<span class="' + className + '">' + year + '</span>';
+                },
+                paginationClickable: true,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                breakpoints: {
+                    768: {
+                        direction: 'horizontal',
+                    }
+                }
+            });
+
+            // JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
+
+                // Fetch the form to apply custom Bootstrap validation to
+                var form = document.getElementById('contactForm')
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault()
+                    event.stopPropagation()
+
+                    if (form.checkValidity()) {
+                        // // Get the CSRF token from the hidden field
+                        // var csrfToken = form.querySelector('input[name="csrf_token"]').value;
+
+                        // Create a FormData object from the form data
+                        var formData = new FormData(form);
+
+                        // Send the form data via AJAX (using fetch) with the CSRF token in the header
+                        fetch(form.action, {
+                            method: 'POST',
+                            // headers: {
+                            //     'X-CSRF-Token': csrfToken
+                            // },
+                            body: formData
+                        })
+                            .then(function (response) {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.text();
+                            })
+                            .then(function (data) {
+                                // On success, show the success modal and reset the form
+                                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                                successModal.show();
+                                form.reset();
+                                form.classList.remove('was-validated');
+                            })
+                            .catch(function (error) {
+                                console.error('There was a problem with the fetch operation:', error);
+                                // You can add additional error handling here if desired
+                            });
+                    } else {
+                        form.classList.add('was-validated');
+                    }
+                }, false);
+            })();
+
+
+            // Initialise the modal with image and title
+            var imageModal = document.getElementById('imageModal');
+            imageModal.addEventListener('show.bs.modal', function (event) {
+                var triggerElement = event.relatedTarget; // Element that triggered the modal
+                var imageSrc = triggerElement.getAttribute('data-bs-image');
+                var imageTitle = triggerElement.getAttribute('data-bs-title');
+
+                // Update the modal's content
+                var modalTitle = imageModal.querySelector('.modal-title');
+                var modalImage = imageModal.querySelector('#modalImage');
+
+                modalTitle.textContent = imageTitle;
+                modalImage.src = imageSrc;
+                modalImage.alt = imageTitle;
+            });
+            /* JavaScript to auto close the mobile nav when a nav-link is clicked */
+            document.querySelectorAll('.custom-navbar .nav-link').forEach(link => {
+                link.addEventListener('click', function () {
+                    const navbarCollapse = document.querySelector('.custom-navbar .navbar-collapse');
+
+                    if (navbarCollapse.classList.contains('show')) {
+
+                        // Collapse the menu using Bootstrap's Collapse API
+                        new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        }).hide();
+                    }
+                });
+            });
+        </script>
+
+    </body>
 
 </html>

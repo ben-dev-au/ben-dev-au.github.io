@@ -1,0 +1,89 @@
+/* Projects Section Styles */
+
+/* Project Drop Shadow Classes */
+.custom-constainer-shadow {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #f7f8fa;
+    background-color: #ffffff;
+    color: #000000;
+    min-height: 200px;
+    box-shadow: 4px 4px 0px 0px #ffffff;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.custom-constainer-shadow:hover {
+    box-shadow: 10px 10px 0px 0px #ffffff;
+}
+
+/* 1. Red Shadow */
+.project-shadow-red {
+    box-shadow: 4px 4px 0px 0px rgb(255, 182, 193);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project-shadow-red:hover {
+    box-shadow: 10px 10px 0px 0px rgb(255, 182, 193);
+}
+
+/* 2. Blue Shadow */
+.project-shadow-blue {
+    box-shadow: 4px 4px 0px 0px #33adff;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project-shadow-blue:hover {
+    box-shadow: 10px 10px 0px 0px #33adff;
+}
+
+/* 3. Green Shadow */
+.project-shadow-green {
+    box-shadow: 4px 4px 0px 0px #33ff57;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project-shadow-green:hover {
+    box-shadow: 10px 10px 0px 0px #33ff57;
+}
+
+/* 4. Yellow Shadow */
+.project-shadow-yellow {
+    box-shadow: 4px 4px 0px 0px #f1c40f;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project-shadow-yellow:hover {
+    box-shadow: 10px 10px 0px 0px #f1c40f;
+}
+
+/* 5. Purple Shadow */
+.project-shadow-purple {
+    box-shadow: 4px 4px 0px 0px #9b59b6;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project-shadow-purple:hover {
+    box-shadow: 10px 10px 0px 0px #9b59b6;
+}
+
+/* 6. Orange Shadow */
+.project-shadow-orange {
+    box-shadow: 4px 4px 0px 0px #dc3545;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project-shadow-orange:hover {
+    box-shadow: 10px 10px 0px 0px #dc3545;
+}
+
+/* Projects overlay */
+#projects .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 3;
+}

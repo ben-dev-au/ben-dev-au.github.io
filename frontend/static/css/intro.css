@@ -1,0 +1,70 @@
+/* Intro Section Styles */
+.fixed-background-overlay {
+    position: relative;
+    background-image: url("/static/images/somm_laptop_cellar.jpeg");
+    background-size: 70% auto;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-attachment: fixed;
+    background-color: #000;
+    min-height: 100vh;
+    z-index: 1;
+}
+
+/* Overlay Styling */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+/* Content Wrapper */
+.fixed-background-overlay .content-wrapper {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+}
+
+/* Text Box Styling */
+.text-block {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.intro-constainer-shadow:hover {
+    box-shadow: 10px 10px 0px 0px #ffffff;
+}
+
+/* Trigger hover effects when parent text block is hovered */
+.text-block:hover .scroll-button-light,
+.text-block:hover .scroll-button-dark {
+    box-shadow: 4px 4px 0px 0px rgb(255, 254, 254);
+}
+
+.text-block:hover .custom-button-shadow {
+    box-shadow: 4px 4px 0px 0px #fffafa;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin-top: 50vh;
+    }
+
+    /* Make the intro text box follow the image on mobile */
+    #intro .text-block {
+        position: static !important;
+        transform: none !important;
+        margin: 1rem 1rem 0 1rem;
+    }
+}
+
+/* Ensure the intro image never overflows its container */
+#intro {
+    overflow: hidden;
+}

@@ -1,0 +1,117 @@
+/* Base CSS - Global styles and CSS variables */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bs-body-font-family: "Nunito", sans-serif;
+    --primary: #007bff;
+    --primary-dark: #0056b3;
+    --white: #ffffff;
+    --black: #000000;
+    --dark-2: #333333;
+    --dark-3: #666666;
+    --gray-4: #e9ecef;
+    --error: #dc3545;
+    --success: #28a745;
+    --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-4: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: var(--bs-body-font-family);
+}
+
+/* Utility Classes */
+.no-padding {
+    padding: 0px;
+}
+
+/* Scroll Button Container */
+.scroll-button-container {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+/* Scroll Button Styling */
+.scroll-button-light,
+.scroll-button-dark {
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+    border: 1px solid;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease,
+        box-shadow 0.15s ease-in-out;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+/* Light background: dark outline and icon */
+.scroll-button-light {
+    border-color: #000;
+    color: #000;
+}
+
+.scroll-button-light:hover {
+    background-color: #000;
+    border-color: #fff;
+    color: #fff;
+}
+
+/* Dark background: light outline and icon */
+.scroll-button-dark {
+    border-color: #fff;
+    color: #fff;
+}
+
+.scroll-button-dark:hover {
+    background-color: #fff;
+    border-color: #000;
+    color: #000;
+}
+
+/* Prevent icon from capturing pointer events */
+.scroll-button-light i,
+.scroll-button-dark i {
+    pointer-events: none;
+}
+
+/* Development Stamp */
+.stamp {
+    position: fixed;
+    top: 38%;
+    right: 48px;
+    transform: rotate(12deg) translateY(-50%);
+    color: #d23;
+    font-size: 3rem;
+    font-weight: 700;
+    border: 0.25rem solid #d23;
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    font-family: "Courier";
+    mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+    mask-size: 944px 604px;
+    text-align: center;
+    z-index: 999999;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .stamp {
+        font-size: 2rem;
+        right: -40px;
+        padding: 0.2rem 0.8rem;
+    }
+}

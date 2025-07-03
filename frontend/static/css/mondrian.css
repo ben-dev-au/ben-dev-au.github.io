@@ -1,0 +1,32 @@
+/* Mondrian Layout Styles */
+.mondrian-container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.mondrian-row {
+    margin-bottom: 20px;
+}
+
+.mondrian-col {
+    background-color: white;
+    padding: 20px;
+    min-height: 150px;
+}
+
+.mondrian-col-hero {
+    min-height: 300px;
+}
+
+.mondrian-col-footer {
+    min-height: 75px;
+}
+
+/* Custom styles for specific sections */
+#hero-section {
+    background-color: #f0f0f0;
+}
+
+#projects-section .mondrian-col {
+    background-color: #e0e0e0;
+}

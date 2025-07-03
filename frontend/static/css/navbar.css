@@ -1,0 +1,141 @@
+/* Navbar Styles */
+.custom-navbar {
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-navbar .nav-link {
+    color: white;
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0px 0px;
+    margin-top: 10px;
+    tab-size: 4;
+    border: 0 solid #000000;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition-duration: 0.3s;
+    transition-property: color, background-color, border-color,
+        text-decoration-color, fill, stroke, opacity, box-shadow, transform,
+        filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 767px) {
+    .custom-navbar .nav-link {
+        font-size: 2rem;
+        margin-top: 20px;
+    }
+}
+
+/* Different background colors for each menu item using nth-child */
+.custom-navbar .nav-link:hover:nth-child(1),
+.custom-navbar .nav-link.active:nth-child(1) {
+    box-shadow: 10px 10px 0px 0px #dc3545;
+}
+
+.custom-navbar .nav-link:hover:nth-child(2),
+.custom-navbar .nav-link.active:nth-child(2) {
+    box-shadow: 10px 10px 0px 0px #33ff57;
+}
+
+.custom-navbar .nav-link:hover:nth-child(3),
+.custom-navbar .nav-link.active:nth-child(3) {
+    box-shadow: 10px 10px 0px 0px #33adff;
+}
+
+.custom-navbar .nav-link:hover:nth-child(4),
+.custom-navbar .nav-link.active:nth-child(4) {
+    box-shadow: 10px 10px 0px 0px #f1c40f;
+}
+
+.custom-navbar .nav-link:hover:nth-child(5),
+.custom-navbar .nav-link.active:nth-child(5) {
+    box-shadow: 10px 10px 0px 0px #9b59b6;
+}
+
+.custom-navbar .nav-link:hover {
+    background-color: #fff;
+    border: 2px solid #000000;
+    color: #000;
+}
+
+.custom-navbar .nav-link.active {
+    background-color: #fff;
+    border: 2px solid #000000;
+    color: #000;
+}
+
+/* Navbar scrolled state */
+.custom-navbar.scrolled {
+    padding-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+    /* When mobile navbar is open and unscrolled, apply a black background */
+    .custom-navbar:not(.scrolled) .navbar-collapse.show {
+        background-color: black;
+    }
+
+    .navbar-toggler.scrolled {
+        background-color: #ffffff;
+        border-color: #000000;
+    }
+
+    button.navbar-toggler:not(.scrolled) {
+        background-color: #000000;
+        border-color: #fffefe;
+    }
+}
+
+.custom-navbar.scrolled {
+    background-color: #ffffffe2;
+    min-height: 65px;
+}
+
+.custom-navbar.scrolled .nav-link {
+    color: black;
+}
+
+.custom-navbar.scrolled .nav-link.active {
+    color: black !important;
+}
+
+/* Mobile nav menu full screen */
+@media (max-width: 767px) {
+    /* Mobile nav menu styling */
+    .custom-navbar .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #ffffffe2;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem;
+        z-index: 9999;
+    }
+
+    .custom-navbar .navbar-collapse.show {
+        display: flex;
+    }
+
+    /* Always show the nav toggler (menu button) with black icon lines when not scrolled */
+    .custom-navbar .navbar-toggler {
+        display: block !important;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 10000;
+        border-radius: 0.5rem;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 4px 4px 0px 0px #161616;
+        transition: box-shadow 0.15s ease-in-out;
+    }
+}

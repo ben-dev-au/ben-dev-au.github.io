@@ -101,7 +101,9 @@ body {
     text-transform: uppercase;
     border-radius: 1rem;
     font-family: "Courier";
-    mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+    -webkit-mask-image: url("/static/images/grunge.png");
+    mask-image: url("/static/images/grunge.png");
+    -webkit-mask-size: 944px 604px;
     mask-size: 944px 604px;
     text-align: center;
     z-index: 999999;

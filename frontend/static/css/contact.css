@@ -285,3 +285,7 @@
     background-color: var(--primary);
     border-color: transparent;
 }
+
+.top-margin7 {
+    margin-top: 7rem !important;
+}

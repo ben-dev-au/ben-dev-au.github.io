@@ -1,57 +1,70 @@
-<!-- Projects Section Component -->
-<section id="projects" class="d-flex min-vh-100 align-items-center justify-content-center position-relative bg-white">
-    <div class="container" style="padding-bottom: 150px;">
-        <!-- Header above the carousel with some top margin -->
-        <div class="row" style="margin-top: 30px;">
-            <div class="col text-center mt-5 mb-3">
-                <h2 class="section-title text-uppercase d-flex" style="margin-left: 7%;">Projects</h2>
-            </div>
-        </div>
+<!-- Projects Section Component — Featured Hero + Card Grid -->
+<section id="projects" class="d-flex align-items-center justify-content-center position-relative projects-section"
+    style="min-height: 100vh;">
+    <div class="container projects-container">
 
-        <!-- Carousel moved lower in the container -->
-        <div class="row" data-bs-theme="dark">
-            <div id="carouselProjects" class="col-8 carousel slide border border-dark rounded-3 mx-auto"
-                style="margin-top: 20px;" data-bs-ride="carousel">
-                <!-- Carousel Indicators -->
-                <div class="carousel-indicators">
-                    {% for project in projects %}
-                    <button type="button" data-bs-target="#carouselProjects" data-bs-slide-to="{{ loop.index0 }}"
-                        class="{% if loop.first %}active{% endif %}" aria-current="{% if loop.first %}true{% endif %}"
-                        aria-label="Slide {{ loop.index }}"></button>
+        <h2 class="section-title text-uppercase projects-heading">Projects</h2>
+        <hr class="projects-hr">
+
+        {% if featured_project %}
+        <!-- Featured Project Hero -->
+        <div class="featured-hero">
+            <div class="featured-content">
+                <span class="featured-badge">Featured Project</span>
+                <h3 class="featured-title">{{ featured_project.title }}</h3>
+                <p class="featured-desc">{{ featured_project.description }}</p>
+
+                {% if featured_project.tech_stack %}
+                <div class="featured-tech">
+                    {% for tech in featured_project.tech_stack.split(',') %}
+                    <span class="tech-badge">{{ tech.strip() }}</span>
                     {% endfor %}
                 </div>
+                {% endif %}
 
-                <!-- Carousel Items -->
-                <div class="carousel-inner">
-                    {% for project in projects %}
-                    <div class="carousel-item mt-2 {% if loop.first %}active{% endif %}">
-                        <img src="{{ project.image_path }}" class="d-block w-100" alt="{{ project.title }}"
-                            loading="lazy">
-                        <div class="carousel-caption" style="position: static; transform: none; margin-top: 10px;">
-                            <h4>{{ project.title }}</h4>
-                            <p>{{ project.description }}</p>
-                            {% if project.link %}
-                            <a href="{{ project.link }}" class="btn btn-outline-dark mt-2" target="_blank">View
-                                Project</a>
-                            {% endif %}
-                        </div>
+                {% if featured_project.link %}
+                <a href="{{ featured_project.link }}" class="featured-cta" target="_blank">
+                    View Project <i class="fas fa-arrow-right"></i>
+                </a>
+                {% endif %}
+            </div>
+            <div class="featured-image">
+                <img src="{{ featured_project.image_path }}" alt="{{ featured_project.title }}" loading="lazy">
+            </div>
+        </div>
+        {% endif %}
+
+        {% if projects %}
+        <!-- Other Projects Grid -->
+        <h4 class="other-projects-heading">Other Work</h4>
+        <div class="projects-grid">
+            {% set shadow_colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'] %}
+            {% for project in projects %}
+            <div class="project-card project-shadow-{{ shadow_colors[loop.index0 % shadow_colors|length] }}">
+                <div class="project-card-image">
+                    <img src="{{ project.image_path }}" alt="{{ project.title }}" loading="lazy">
+                </div>
+                <div class="project-card-body">
+                    <h5 class="project-card-title">{{ project.title }}</h5>
+                    <p class="project-card-desc">{{ project.description }}</p>
+                    {% if project.tech_stack %}
+                    <div class="project-card-tech">
+                        {% for tech in project.tech_stack.split(',') %}
+                        <span class="tech-badge-sm">{{ tech.strip() }}</span>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    {% endif %}
+                    {% if project.link %}
+                    <a href="{{ project.link }}" class="project-card-link" target="_blank">
+                        View <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    {% endif %}
                 </div>
-
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProjects"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselProjects"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
+            {% endfor %}
         </div>
+        {% endif %}
+
     </div>
     <div class="scroll-button-container">
         <a href="#footer" class="scroll-button-light" id="scrollToFooter" aria-label="Scroll to Contact Section">

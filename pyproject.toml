@@ -18,7 +18,7 @@ dependencies = [
     "python-dotenv (>=1.0.1,<2.0.0)",
     "fastapi-csrf-protect (>=1.0.2,<2.0.0)",
     "fastapi-limiter (>=0.1.6,<0.2.0)",
-    "redis (>=5.2.1,<6.0.0)"
+    "redis (>=5.2.1,<6.0.0)",
 ]
 
 [tool.poetry]

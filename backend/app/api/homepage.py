@@ -16,8 +16,20 @@ router = APIRouter()
 
 
 @router.get("/", response_class=HTMLResponse)
-async def index(request: Request, db: Session = Depends(get_db)) -> _TemplateResponse:
-    projects: List[Project] = db.query(Project).all()
-    print(f"[DEBUG] Projects from DB: {projects}")
-    context = {"request": request, "projects": projects}
-    return templates.TemplateResponse("homepage/index.html", context)
+async def index(
+    request: Request, db: Session = Depends(get_db)
+) -> _TemplateResponse:
+    featured_project = (
+        db.query(Project).filter(Project.featured.is_(True)).first()
+    )
+    projects: List[Project] = (
+        db.query(Project).filter(Project.featured.is_(False)).all()
+    )
+    context = {
+        "request": request,
+        "featured_project": featured_project,
+        "projects": projects,
+    }
+    return templates.TemplateResponse(
+        "homepage/index.html", context
+    )

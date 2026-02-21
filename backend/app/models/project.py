@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, func
+from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, func
 from backend.app.database import Base
 
 
@@ -11,4 +11,6 @@ class Project(Base):
     description = Column(Text, nullable=False)
     image_path = Column(String(255), nullable=False)
     link = Column(String(255), nullable=True)
+    featured = Column(Boolean, default=False)
+    tech_stack = Column(String(500), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

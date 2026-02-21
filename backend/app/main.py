@@ -7,7 +7,6 @@ from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.api.homepage import router as homepage_router
-from backend.app.api.resume import router as resume_router
 
 # Load environment variables
 load_dotenv()
@@ -34,7 +33,6 @@ def create_app() -> FastAPI:
         name="static",
     )
     app.include_router(homepage_router)
-    app.include_router(resume_router)
     return app
 
 

@@ -1,17 +1,15 @@
 <!-- Resume Section Component -->
-<section id="resume-section" class="position-relative" style="background-color: #f2f2e9;">
-    <div class="container pt-5">
-        <div class="row m-0 p-0 d-flex min-vh-100 justify-content-center">
-            {% include 'resume/resume.html' %}
-        </div>
+<section id="resume-section" class="position-relative min-vh-100 d-flex align-items-center resume-section">
+    <div class="container w-100 py-5">
+        {% include 'resume/resume.html' %}
     </div>
 
-    <div class="position-relative">
+    <!-- <div class="position-relative"> -->
         <div class="scroll-button-container">
             <a href="#projects" class="scroll-button-light" id="scrollToProjects"
                 aria-label="Scroll to Projects Section">
                 <i class="fas fa-chevron-down"></i>
             </a>
         </div>
-    </div>
+    <!-- </div> -->
 </section>

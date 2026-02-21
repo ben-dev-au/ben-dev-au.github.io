@@ -1,0 +1,198 @@
+/* About Section — Polaroid Scatter Gallery */
+
+.about-section {
+    min-height: 100vh;
+    background-color: var(--warm-bg);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(144, 169, 85, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(193, 215, 174, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(144, 169, 85, 0.06) 0%, transparent 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.about-inner {
+    width: 100%;
+    max-width: 1100px;
+    padding: 80px 40px 120px;
+    margin: 0 auto;
+}
+
+.about-hook {
+    font-family: "Nunito", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--dark-earth);
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+/* Polaroid Gallery */
+.polaroid-gallery {
+    position: relative;
+    width: 100%;
+    height: 520px;
+}
+
+.polaroid {
+    position: absolute;
+    left: var(--x, 0);
+    top: var(--y, 0);
+    width: 200px;
+    background: #fff;
+    padding: 10px 10px 32px;
+    box-shadow: 2px 3px 12px rgba(36, 38, 15, 0.15);
+    transform: rotate(var(--rotation, 0deg));
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+    z-index: 1;
+    user-select: none;
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.08);
+    box-shadow: 4px 8px 24px rgba(36, 38, 15, 0.25);
+    z-index: 10;
+}
+
+.polaroid.is-dragging {
+    transition: box-shadow 0.2s ease;
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 6px 12px 30px rgba(36, 38, 15, 0.3);
+    z-index: 100;
+    cursor: grabbing;
+}
+
+.polaroid-image {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    background: var(--warm-cream);
+}
+
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.polaroid-label {
+    display: block;
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+    font-size: 0.8rem;
+    color: var(--dark-earth);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+}
+
+/* Custom Lightbox */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(36, 38, 15, 0.92);
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 100001;
+}
+
+.lightbox-close:hover {
+    color: var(--sage-light);
+}
+
+.lightbox-image {
+    max-width: 85vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-caption {
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+    font-size: 1.1rem;
+    margin-top: 16px;
+    letter-spacing: 0.03em;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .polaroid-gallery {
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 28px;
+        padding-top: 24px;
+    }
+
+    .polaroid {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: 170px;
+    }
+
+    .polaroid-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .about-hook {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-inner {
+        padding: 60px 20px 100px;
+    }
+
+    .about-hook {
+        font-size: 1.1rem;
+        margin-bottom: 36px;
+    }
+
+    .polaroid {
+        width: 140px;
+        padding: 8px 8px 28px;
+    }
+
+    .polaroid-image {
+        width: 124px;
+        height: 124px;
+    }
+
+    .polaroid-label {
+        font-size: 0.7rem;
+    }
+}

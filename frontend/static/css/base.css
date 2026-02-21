@@ -16,6 +16,11 @@
     --success: #28a745;
     --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-4: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --warm-cream: #f2f2e9;
+    --warm-bg: #f5f0e8;
+    --dark-earth: #24260f;
+    --sage: #90a955;
+    --sage-light: #c1d7ae;
 }
 
 body {
@@ -117,3 +122,4 @@ body {
         padding: 0.2rem 0.8rem;
     }
 }
+

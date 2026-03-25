@@ -1,18 +1,11 @@
 /* Resume Section — Interactive Swiper Timeline */
 
 .resume-section {
-    background-color: #f7d3b5;
+    background-color: var(--warm-bg);
     background-image:
-        radial-gradient(
-            ellipse at 18% 24%,
-            rgba(255, 255, 255, 0.45) 0%,
-            transparent 52%
-        ),
-        radial-gradient(
-            ellipse at 82% 72%,
-            rgba(193, 215, 174, 0.36) 0%,
-            transparent 52%
-        );
+        radial-gradient(ellipse at 20% 50%, rgba(144, 169, 85, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(193, 215, 174, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(144, 169, 85, 0.06) 0%, transparent 50%);
 }
 
 .timeline-wrapper {
@@ -22,12 +15,19 @@
     padding: 40px 20px 60px;
 }
 
-.timeline-title {
-    font-family: "Nunito", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
+.resume-section .section-title {
     color: var(--dark-earth);
     margin-bottom: 4px;
+}
+
+.about-hook {
+    font-family: "Nunito", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-earth);
+    font-style: italic;
+    margin-bottom: 4px;
+    opacity: 0.75;
 }
 
 .timeline-hr {
@@ -37,7 +37,7 @@
     opacity: 1;
 }
 
-/* Swiper container */
+/* ===== Swiper ===== */
 .timeline-swiper {
     overflow: hidden;
     position: relative;
@@ -47,9 +47,7 @@
 .timeline-swiper .swiper-slide {
     opacity: 0.4;
     transform: scale(0.88);
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
     height: auto;
 }
 
@@ -64,97 +62,150 @@
     transform: scale(0.92);
 }
 
-/* Milestone animations */
-@keyframes milestone-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
+/* Animations */
+@keyframes polaroid-float {
+    0%, 100% { transform: rotate(var(--rotation, 0deg)) translateY(0); }
+    50% { transform: rotate(var(--rotation, 0deg)) translateY(-3px); }
 }
 
-@keyframes icon-breathe {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(144, 169, 85, 0); }
-    50% { transform: scale(1.06); box-shadow: 0 0 0 5px rgba(144, 169, 85, 0.12); }
+@keyframes polaroid-float-slow {
+    0%, 100% { transform: rotate(var(--rotation, 0deg)) translateY(0); }
+    50% { transform: rotate(var(--rotation, 0deg)) translateY(-2px); }
 }
 
-/* Milestone card — white for contrast on peach background */
-.milestone-card {
+/* ===== Polaroid Card — the whole card IS the polaroid ===== */
+.polaroid-card {
     background: #fff;
-    border-left: 4px solid var(--sage);
-    border-radius: 8px;
-    padding: 32px 28px;
-    min-height: 260px;
-    box-shadow: 0 3px 16px rgba(36, 38, 15, 0.08);
+    padding: 10px 10px 20px;
+    box-shadow: 2px 3px 14px rgba(36, 38, 15, 0.16);
+    transform: rotate(var(--rotation, 0deg));
+    cursor: default;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    transition: translate 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
-.milestone-card:hover {
-    translate: 0 -5px;
-    box-shadow: 0 8px 28px rgba(36, 38, 15, 0.14);
+.polaroid-card:hover {
+    box-shadow: 4px 8px 28px rgba(36, 38, 15, 0.24);
 }
 
-/* Active card floats gently */
-.timeline-swiper .swiper-slide-active .milestone-card {
-    animation: milestone-float 3.5s ease-in-out infinite;
+.timeline-swiper .swiper-slide-active .polaroid-card {
+    animation: polaroid-float 3.5s ease-in-out infinite;
 }
 
-/* Adjacent cards float more slowly */
-.timeline-swiper .swiper-slide-prev .milestone-card,
-.timeline-swiper .swiper-slide-next .milestone-card {
-    animation: milestone-float 5s ease-in-out infinite;
+.timeline-swiper .swiper-slide-prev .polaroid-card,
+.timeline-swiper .swiper-slide-next .polaroid-card {
+    animation: polaroid-float-slow 5s ease-in-out infinite;
 }
 
-.milestone-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--sage-light);
+/* Photo area — top of the polaroid */
+.polaroid-photo {
+    width: 100%;
+    height: 170px;
+    overflow: hidden;
+    background: var(--warm-cream, #f5f0e8);
+    position: relative;
+    cursor: pointer;
+}
+
+.polaroid-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.polaroid-photo:hover img:not(.polaroid-rotate),
+.polaroid-photo:hover img.polaroid-rotate.active {
+    transform: scale(1.05);
+}
+
+/* Rotating images — crossfade */
+.polaroid-photo img.polaroid-rotate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.polaroid-photo img.polaroid-rotate.active {
+    opacity: 1;
+}
+
+.polaroid-photo img.polaroid-rotate:first-child {
+    position: relative;
+}
+
+/* Icon fallback for no-photo cards */
+.polaroid-no-photo .polaroid-icon {
+    width: 100%;
+    height: 170px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
+    background: var(--warm-cream, #f5f0e8);
 }
 
-/* Active icon breathes with sage glow */
-.timeline-swiper .swiper-slide-active .milestone-icon {
-    animation: icon-breathe 3s ease-in-out infinite;
+.polaroid-icon i {
+    font-size: 3rem;
+    color: var(--sage);
+    opacity: 0.6;
 }
 
-.milestone-icon i {
-    font-size: 1.2rem;
+/* Body area — the white space below the photo */
+.polaroid-body {
+    padding: 10px 4px 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Handwriting label — like a real polaroid caption */
+.polaroid-label {
+    font-family: "Caveat", cursive;
+    font-size: 1.15rem;
+    font-weight: 600;
     color: var(--dark-earth);
+    margin-bottom: 8px;
+    line-height: 1.2;
 }
 
-.milestone-year {
+/* Year badge */
+.polaroid-year {
     display: inline-block;
     font-family: "Nunito", sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--sage);
     letter-spacing: 0.05em;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
-.milestone-title {
+/* Title */
+.polaroid-title {
     font-family: "Nunito", sans-serif;
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--dark-earth);
-    margin: 0 0 10px;
+    margin: 0 0 6px;
     line-height: 1.3;
 }
 
-.milestone-desc {
+/* Description */
+.polaroid-desc {
     font-family: "Nunito", sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.8rem;
     color: var(--dark-earth);
-    line-height: 1.6;
+    line-height: 1.55;
     margin: 0;
-    opacity: 0.85;
+    opacity: 0.8;
 }
 
-/* Navigation arrows */
+/* ===== Navigation arrows ===== */
 .timeline-nav-btn {
     color: var(--dark-earth);
     width: 40px;
@@ -170,15 +221,10 @@
     font-weight: 900;
 }
 
-.swiper-button-prev.timeline-nav-btn {
-    left: 0;
-}
+.swiper-button-prev.timeline-nav-btn { left: 0; }
+.swiper-button-next.timeline-nav-btn { right: 0; }
 
-.swiper-button-next.timeline-nav-btn {
-    right: 0;
-}
-
-/* Year dot pagination */
+/* ===== Pagination dots ===== */
 .timeline-pagination {
     display: flex;
     justify-content: center;
@@ -197,9 +243,7 @@
     opacity: 0.5;
 }
 
-.timeline-dot.active {
-    opacity: 1;
-}
+.timeline-dot.active { opacity: 1; }
 
 .timeline-dot-circle {
     width: 10px;
@@ -207,9 +251,7 @@
     border-radius: 50%;
     background: rgba(36, 38, 15, 0.2);
     margin-bottom: 4px;
-    transition:
-        background 0.3s ease,
-        transform 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .timeline-dot.active .timeline-dot-circle {
@@ -219,12 +261,12 @@
 
 .timeline-dot-year {
     font-family: "Nunito", sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: var(--dark-earth);
 }
 
-/* Progress bar */
+/* ===== Progress bar ===== */
 .timeline-progress-track {
     width: 100%;
     height: 3px;
@@ -242,34 +284,122 @@
     transition: width 0.4s ease;
 }
 
-/* Accessibility */
+/* ===== Lightbox ===== */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(36, 38, 15, 0.92);
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 100001;
+}
+
+.lightbox-close:hover { color: var(--sage-light); }
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 100001;
+}
+
+.lightbox-overlay.has-gallery .lightbox-nav {
+    opacity: 0.6;
+    pointer-events: all;
+}
+
+.lightbox-nav:hover { opacity: 1; }
+
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+
+.lightbox-image {
+    max-width: 85vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-caption {
+    color: #fff;
+    font-family: "Caveat", cursive;
+    font-size: 1.4rem;
+    margin-top: 16px;
+    letter-spacing: 0.03em;
+}
+
+/* ===== Accessibility ===== */
 @media (prefers-reduced-motion: reduce) {
-    .milestone-card,
-    .milestone-icon {
+    .polaroid-card {
         animation: none !important;
+    }
+    .polaroid-photo img.polaroid-rotate {
+        transition: none;
     }
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
     .timeline-wrapper {
         padding: 24px 12px 40px;
     }
 
-    .milestone-card {
-        padding: 24px 20px;
-        min-height: 220px;
+    .polaroid-photo,
+    .polaroid-no-photo .polaroid-icon {
+        height: 200px;
     }
 
-    .milestone-title {
-        font-size: 1.05rem;
+    .polaroid-photo img.polaroid-rotate {
+        height: 200px;
     }
 
-    .milestone-desc {
-        font-size: 0.85rem;
+    .polaroid-title { font-size: 0.9rem; }
+    .polaroid-desc { font-size: 0.78rem; }
+    .about-hook { font-size: 0.95rem; }
+
+    .timeline-nav-btn { display: none; }
+}
+
+@media (min-width: 1024px) {
+    .polaroid-photo,
+    .polaroid-no-photo .polaroid-icon {
+        height: 160px;
     }
 
-    .timeline-nav-btn {
-        display: none;
+    .polaroid-photo img.polaroid-rotate {
+        height: 160px;
     }
 }

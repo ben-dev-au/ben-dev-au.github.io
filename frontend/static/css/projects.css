@@ -1,9 +1,9 @@
 /* Projects Section Styles */
 
 .projects-section {
-    --accent: #9a7520;
-    --accent-light: #f0e6ce;
-    --accent-border: #ddd0a8;
+    --accent: #0d9488;
+    --accent-light: #e0f5f3;
+    --accent-border: #a7d8d2;
     background-color: #c6c0e7 !important;
     background-image:
         radial-gradient(
@@ -94,7 +94,7 @@
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--dark-earth);
-    background: #f5edd6;
+    background: #e0f5f3;
     padding: 4px 10px;
     border-radius: 4px;
     border: 1px solid var(--accent-border);

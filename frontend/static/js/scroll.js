@@ -1,6 +1,6 @@
 // Scroll functionality
 document.addEventListener("DOMContentLoaded", function () {
-    const sections = ["intro", "about-section", "resume-section", "projects", "footer"];
+    const sections = ["intro", "resume-section", "projects", "footer"];
     let currentSectionIndex = 0;
     let isScrolling = false;
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Scroll to About Section
+    // Scroll to My Journey Section
     const scrollToAboutBtn = document.getElementById("scrollToAbout");
     if (scrollToAboutBtn) {
         scrollToAboutBtn.addEventListener("click", function (event) {
@@ -46,21 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Scroll to Resume Section
-    const scrollToResumeBtn = document.getElementById("scrollToResume");
-    if (scrollToResumeBtn) {
-        scrollToResumeBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            scrollToSection(2);
-        });
-    }
-
     // Scroll to Projects Section
     const scrollToProjectsBtn = document.getElementById("scrollToProjects");
     if (scrollToProjectsBtn) {
         scrollToProjectsBtn.addEventListener("click", function (event) {
             event.preventDefault();
-            scrollToSection(3);
+            scrollToSection(2);
         });
     }
 
@@ -69,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (scrollToFooterBtn) {
         scrollToFooterBtn.addEventListener("click", function (event) {
             event.preventDefault();
-            scrollToSection(4);
+            scrollToSection(3);
         });
     }
 

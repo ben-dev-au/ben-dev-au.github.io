@@ -64,6 +64,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updatePagination(0);
 
+    // Keyboard navigation — arrow keys control the timeline when the section is in view
+    var resumeSection = document.getElementById("resume-section");
+    var timelineInView = false;
+
+    if (resumeSection && window.IntersectionObserver) {
+        var observer = new IntersectionObserver(function (entries) {
+            timelineInView = entries[0].isIntersecting;
+        }, { threshold: 0.3 });
+        observer.observe(resumeSection);
+    }
+
+    document.addEventListener("keydown", function (e) {
+        if (!timelineInView) return;
+        if (overlay && overlay.classList.contains("active")) return;
+        if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            swiper.slidePrev();
+        } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            swiper.slideNext();
+        } else if (e.key === "Enter") {
+            e.preventDefault();
+            var activeSlide = swiper.slides[swiper.activeIndex];
+            if (activeSlide) {
+                var photo = activeSlide.querySelector(".polaroid-photo");
+                if (photo) photo.click();
+            }
+        }
+    });
+
     // Rotating images — crossfade between multiple images
     var rotatingCards = document.querySelectorAll(".polaroid-card[data-images]");
     rotatingCards.forEach(function (card) {

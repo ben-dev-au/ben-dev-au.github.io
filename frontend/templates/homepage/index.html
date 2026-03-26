@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="{{ url_for('static', path='/css/projects.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', path='/css/contact.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', path='/css/timeline.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', path='/css/key-hints.css') }}">
     </head>
 
     <body class="container-fluid p-0" data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100"
@@ -47,6 +48,9 @@
         <!-- Contact Section Component -->
         {% include 'components/contact.html' %}
 
+        <!-- Keyboard Shortcut Hints Component -->
+        {% include 'components/key-hints.html' %}
+
         <!-- Scroll to Top Button Component -->
         {% include 'components/scroll-top.html' %}
 
@@ -58,6 +62,7 @@
         <script src="{{ url_for('static', path='/js/navbar.js') }}"></script>
         <script src="{{ url_for('static', path='/js/scroll.js') }}"></script>
         <script src="{{ url_for('static', path='/js/timeline.js') }}"></script>
+        <script src="{{ url_for('static', path='/js/key-hints.js') }}"></script>
 
     </body>
 

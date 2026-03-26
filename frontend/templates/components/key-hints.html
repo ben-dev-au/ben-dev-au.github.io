@@ -1,0 +1,68 @@
+<!-- Keyboard Shortcut Hints Component -->
+<div class="key-hints" id="keyHints" aria-hidden="true">
+
+    <!-- Bottom-left corner: all hints in one location -->
+    <div class="key-hints__group key-hints__group--left" id="keyHintsLeft">
+        <!-- Global nav hint (up/down) -->
+        <div class="key-hints__hint" data-hint="nav">
+            <div class="key-hints__keys">
+                <kbd class="key-hints__key key-hints__key--arrow">
+                    <i class="fas fa-arrow-up"></i>
+                </kbd>
+                <kbd class="key-hints__key key-hints__key--arrow">
+                    <i class="fas fa-arrow-down"></i>
+                </kbd>
+            </div>
+            <span class="key-hints__label">navigate</span>
+        </div>
+
+        <!-- Timeline slide hint (left/right) -->
+        <div class="key-hints__hint" data-hint="slides">
+            <div class="key-hints__keys">
+                <kbd class="key-hints__key key-hints__key--arrow">
+                    <i class="fas fa-arrow-left"></i>
+                </kbd>
+                <kbd class="key-hints__key key-hints__key--arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </kbd>
+            </div>
+            <span class="key-hints__label">slides</span>
+        </div>
+
+        <!-- Enter to open photo -->
+        <div class="key-hints__hint" data-hint="enter">
+            <div class="key-hints__keys">
+                <kbd class="key-hints__key key-hints__key--wide">enter</kbd>
+            </div>
+            <span class="key-hints__label">view photos</span>
+        </div>
+
+        <!-- Lightbox gallery hint (left/right) -->
+        <div class="key-hints__hint" data-hint="gallery">
+            <div class="key-hints__keys">
+                <kbd class="key-hints__key key-hints__key--arrow">
+                    <i class="fas fa-arrow-left"></i>
+                </kbd>
+                <kbd class="key-hints__key key-hints__key--arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </kbd>
+            </div>
+            <span class="key-hints__label">gallery</span>
+        </div>
+
+        <!-- Escape to close lightbox -->
+        <div class="key-hints__hint" data-hint="close">
+            <div class="key-hints__keys">
+                <kbd class="key-hints__key key-hints__key--wide">esc</kbd>
+            </div>
+            <span class="key-hints__label">close</span>
+        </div>
+    </div>
+
+    <!-- Idle toggle button -->
+    <button class="key-hints__toggle" id="keyHintsToggle"
+        aria-label="Show keyboard shortcuts"
+        title="Keyboard shortcuts">
+        <i class="fas fa-keyboard"></i>
+    </button>
+</div>

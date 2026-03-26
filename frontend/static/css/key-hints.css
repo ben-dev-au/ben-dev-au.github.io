@@ -1,0 +1,157 @@
+/* Keyboard Shortcut Hints — Sketch-style contextual hints */
+
+/* ===== Hide on touch / mobile devices ===== */
+@media (hover: none) and (pointer: coarse) {
+    .key-hints { display: none !important; }
+}
+@media (max-width: 768px) {
+    .key-hints { display: none !important; }
+}
+
+/* ===== Container ===== */
+.key-hints {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 9990;
+}
+
+.key-hints--lightbox {
+    z-index: 100002;
+}
+
+/* ===== Hint Groups — positioned in corners ===== */
+.key-hints__group {
+    position: fixed;
+    bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.key-hints__group--left {
+    left: 34px;
+    align-items: flex-start;
+}
+
+/* ===== Individual Hint ===== */
+.key-hints__hint {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+}
+
+.key-hints__hint--visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0) rotate(var(--hint-tilt, 0deg));
+    pointer-events: auto;
+    animation: key-hint-enter 0.4s ease-out;
+}
+
+@keyframes key-hint-enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Sketchy Key Cap ===== */
+.key-hints__key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 4px 6px;
+    background: var(--warm-cream, #f2f2e9);
+    border: 2px solid var(--dark-earth, #24260f);
+    border-radius: 4px 6px 5px 7px;
+    box-shadow: 2px 2px 0px 0px var(--sage, #90a955);
+    font-family: "Caveat", cursive;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-earth, #24260f);
+    transform: rotate(var(--key-tilt, 0deg));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.key-hints__key i {
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+
+/* Wide keys (Enter, Esc) */
+.key-hints__key--wide {
+    padding: 4px 12px;
+    min-width: auto;
+    font-size: 0.95rem;
+    text-transform: lowercase;
+}
+
+/* Key container */
+.key-hints__keys {
+    display: flex;
+    gap: 4px;
+}
+
+/* Slight tilt variations for hand-placed feel */
+.key-hints__keys .key-hints__key:nth-child(1) { --key-tilt: -2deg; }
+.key-hints__keys .key-hints__key:nth-child(2) { --key-tilt: 1.5deg; }
+
+/* ===== Label text ===== */
+.key-hints__label {
+    font-family: "Caveat", cursive;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--dark-earth, #24260f);
+    opacity: 0.55;
+    white-space: nowrap;
+}
+
+/* ===== Toggle button (idle state) ===== */
+.key-hints__toggle {
+    position: fixed;
+    bottom: 44px;
+    left: 34px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px 7px 6px 8px;
+    background: var(--warm-cream, #f2f2e9);
+    border: 2px solid var(--dark-earth, #24260f);
+    box-shadow: 2px 2px 0px 0px var(--sage, #90a955);
+    color: var(--dark-earth, #24260f);
+    font-size: 1rem;
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, box-shadow 0.2s ease;
+    z-index: 9991;
+}
+
+.key-hints__toggle--visible {
+    display: flex;
+}
+
+.key-hints__toggle:hover {
+    opacity: 1;
+    box-shadow: 3px 3px 0px 0px var(--sage, #90a955);
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    .key-hints__hint,
+    .key-hints__hint--visible,
+    .key-hints__toggle,
+    .key-hints__toggle--visible {
+        animation: none !important;
+        transition: none !important;
+    }
+}

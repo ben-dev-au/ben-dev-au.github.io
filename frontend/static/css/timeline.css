@@ -41,7 +41,7 @@
 .timeline-swiper {
     overflow: hidden;
     position: relative;
-    padding: 10px 0 20px;
+    padding: 10px 16px 20px;
 }
 
 .timeline-swiper .swiper-slide {
@@ -402,4 +402,5 @@
     .polaroid-photo img.polaroid-rotate {
         height: 160px;
     }
+
 }

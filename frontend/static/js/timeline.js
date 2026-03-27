@@ -64,6 +64,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updatePagination(0);
 
+    // Desktop: slide 0 shows ~2.5 cards left-aligned instead of centered.
+    // Uses requestAnimationFrame for initial position (survives Swiper's
+    // post-init recalculations) and transitionStart to override whenever
+    // Swiper navigates back to slide 0, so the position is always consistent.
+    var slide0Offset = 0;
+
+    if (window.innerWidth >= 1024 && swiper.slides.length >= 3) {
+        slide0Offset = Math.round(
+            (swiper.slidesSizesGrid[0] + swiper.params.spaceBetween) * 0.7
+        );
+
+        // Deferred so it isn't overwritten by Swiper's post-init cycle
+        requestAnimationFrame(function () {
+            var target = -swiper.snapGrid[0] - slide0Offset;
+            swiper.wrapperEl.style.transitionDuration = "0ms";
+            swiper.wrapperEl.style.transform =
+                "translate3d(" + target + "px, 0px, 0px)";
+        });
+
+        // Re-apply whenever Swiper transitions to slide 0
+        swiper.on("transitionStart", function () {
+            if (this.activeIndex === 0 && slide0Offset > 0) {
+                var target = -this.snapGrid[0] - slide0Offset;
+                this.wrapperEl.style.transform =
+                    "translate3d(" + target + "px, 0px, 0px)";
+            }
+        });
+    }
+
     // Keyboard navigation — arrow keys control the timeline when the section is in view
     var resumeSection = document.getElementById("resume-section");
     var timelineInView = false;

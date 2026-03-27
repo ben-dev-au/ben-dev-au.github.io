@@ -293,9 +293,24 @@
         gap: 24px;
     }
 
+    .featured-content {
+        text-align: center;
+    }
+
+    .featured-tech {
+        justify-content: center;
+    }
+
+    .featured-cta {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
     .featured-image {
         flex: none;
         max-width: 100%;
+        order: -1;
     }
 
     .featured-title {

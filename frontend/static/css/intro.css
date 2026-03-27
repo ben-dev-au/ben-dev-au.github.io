@@ -52,6 +52,13 @@
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
+    /* Fix: background-attachment: fixed not supported on iOS Safari */
+    .fixed-background-overlay {
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center;
+    }
+
     .content-wrapper {
         margin-top: 50vh;
     }

@@ -26,10 +26,10 @@ async def index(
         db.query(Project).filter(Project.featured.is_(False)).all()
     )
     context = {
-        "request": request,
         "featured_project": featured_project,
         "projects": projects,
     }
+    # Starlette 1.x requires the request as the first positional argument.
     return templates.TemplateResponse(
-        "homepage/index.html", context
+        request, "homepage/index.html", context
     )

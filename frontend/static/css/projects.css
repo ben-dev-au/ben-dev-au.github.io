@@ -37,9 +37,6 @@
 
 /* Featured Project Hero */
 .featured-hero {
-    display: flex;
-    gap: 40px;
-    align-items: center;
     background: #fff;
     border-radius: 12px;
     padding: 40px;
@@ -47,9 +44,10 @@
     box-shadow: 0 2px 16px rgba(36, 38, 15, 0.08);
 }
 
-.featured-content {
-    flex: 1;
-    min-width: 0;
+.featured-hero::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .featured-badge {
@@ -80,6 +78,7 @@
     color: #444;
     line-height: 1.6;
     margin-bottom: 16px;
+    white-space: pre-line;
 }
 
 .featured-tech {
@@ -124,13 +123,31 @@
 }
 
 .featured-image {
-    flex: 0 0 380px;
+    float: right;
+    width: 380px;
     max-width: 380px;
+    margin: 0 0 24px 40px;
+    cursor: pointer;
+}
+
+.featured-image:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 8px;
 }
 
 .featured-image img {
     width: 100%;
     height: auto;
+    display: block;
+    /* Floated beside the text the image sits proud of the container edge, so
+       its corners need softening; the stacked layout below resets this. */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.featured-image:hover img {
+    transform: scale(1.02);
 }
 
 /* Other Projects */
@@ -196,6 +213,7 @@
     color: #666;
     line-height: 1.5;
     margin-bottom: 12px;
+    white-space: pre-line;
 }
 
 .project-card-tech {
@@ -288,12 +306,7 @@
 /* Responsive */
 @media (max-width: 768px) {
     .featured-hero {
-        flex-direction: column;
         padding: 24px;
-        gap: 24px;
-    }
-
-    .featured-content {
         text-align: center;
     }
 
@@ -308,9 +321,14 @@
     }
 
     .featured-image {
-        flex: none;
+        float: none;
+        width: 100%;
         max-width: 100%;
-        order: -1;
+        margin: 0 0 20px;
+    }
+
+    .featured-image img {
+        border-radius: 0;
     }
 
     .featured-title {
@@ -319,5 +337,16 @@
 
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .featured-image img {
+        transition: none;
+    }
+
+    .featured-image:hover img {
+        transform: none;
     }
 }

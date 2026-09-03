@@ -203,6 +203,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function navigateGallery(direction) {
+        // Only multi-image cards are navigable — guard against stale gallery
+        // state when the shared lightbox is opened by another section.
+        if (!overlay.classList.contains("has-gallery")) return;
         if (galleryImages.length < 2) return;
         var next = (galleryIndex + direction + galleryImages.length) % galleryImages.length;
         showGalleryImage(next);

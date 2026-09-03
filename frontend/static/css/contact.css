@@ -1,5 +1,30 @@
 /* Contact Form Styles */
 
+/* Airtable embed container — matches the project card styling */
+.airtable-embed-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(36, 38, 15, 0.08);
+    background: var(--white);
+    line-height: 0;
+}
+
+.airtable-embed-wrap #airtable-form {
+    display: block;
+    width: 100%;
+    /* Narrow/tablet widths stack the name fields, so the form needs ~746px.
+       Sized to fit the whole form and remove the inner scrollbar. */
+    height: 780px;
+    border: 0;
+}
+
+/* On wide screens the name fields sit side by side, so the form is shorter. */
+@media (min-width: 1200px) {
+    .airtable-embed-wrap #airtable-form {
+        height: 700px;
+    }
+}
+
 .contact-form .single-form .input-form .primary-btn {
     background: var(--primary);
     color: var(--white);
